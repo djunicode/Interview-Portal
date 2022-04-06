@@ -8,23 +8,24 @@ from rest_framework.authtoken.models import Token
 
 class UserManager(BaseUserManager):
     """
-    Custom user model manager where email is the unique identifier
+    Custom user model manager where sapid is the unique identifier
     for authentication instead of usernames.
     """
     def create_user(self, sapid, password, **extra_fields):
         """
-        Create and save a User with the given email and password instead of username.
+        Create and save a User with the given sapid and password instead of username.
         """
         if not sapid:
             raise ValueError('SAPID must be set')
         user = self.model(sapid, **extra_fields)
-        user.set_password(password)
+        if user.password is None:
+            user.set_password(password)
         user.save()
         return user
 
     def create_superuser(self, sapid, password, **extra_fields):
         """
-        Create and save a superuser with the given email and password.
+        Create and save a superuser with the given sapid and password.
         """
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
@@ -40,7 +41,7 @@ class User(AbstractUser):
     username=None
 
     # extra fields
-    sapid = models.CharField(max_length = 11, primary_key=True)
+    sapid = models.CharField(max_length = 11, primary_key=True, unique=True)
     email = models.EmailField(("Email Address"), blank=True)
     name = models.CharField(max_length = 30, blank=True)
     grad_year = models.IntegerField(blank=True, null =True)
@@ -58,11 +59,14 @@ class User(AbstractUser):
         token = Token.objects.get(user=User.objects.get(self.id))
         return token
 
-class Interviewer(User):
+class Interviewer(models.Model):
 
+    user = models.ForeignKey(User, on_delete= models.CASCADE)
     role = models.CharField(max_length=3, choices=[('BE','BE'), ('TE','TE')], blank=True)
 
-class Interviewee(User):
+class Interviewee(models.Model):
+
+    user = models.ForeignKey(User, on_delete= models.CASCADE)
     
     def get_links(self):
         return self.links_set.values_list('link', flat=True)

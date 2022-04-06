@@ -26,23 +26,15 @@ class UserAdmin(BaseUserAdmin):
 
 class InterviewerAdmin(BaseUserAdmin):
     model = Interviewer
-    list_display = ['email', 'name','sapid', 'grad_year', 'role','is_staff','is_active','is_superuser']
-    list_filter = ['email','name','sapid', 'grad_year', 'role','is_staff','is_active','is_superuser']
+    list_display = ['user', 'role']
+    list_filter = ['user', 'role']
 
-    fieldsets = (
-        (None, {'fields': ('sapid', 'password')}),
-        ('Personal info', {'fields': ('name', 'email', 'role')}),
-        ('Permissions', {'fields': ('is_active','is_staff','is_client','is_vendor','is_superuser')}),
-    )
+    fieldsets = [
+        (None, {'fields': ('user', 'role')})
+    ]
 
-    add_fieldsets = (
-        (None, {
-            'classes': ('wide,'),
-            'fields': ('email', 'password1', 'password2', 'name','is_staff','is_active','sapid', 'grad_year', 'role'),
-        }),
-    )
-    search_fields = ('sapid',)
-    ordering = ('sapid',)
+    search_fields = ['role']
+    ordering = ['user']
     filter_horizontal = ()
 
 admin.site.register(User, UserAdmin)
