@@ -1,5 +1,7 @@
-__pycache__
+__pycache__/
 db.sqlite3
 .env
 Pipfile
 Pipfile.lock
+venv/
+erd.png
