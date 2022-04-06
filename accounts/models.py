@@ -11,16 +11,29 @@ class UserManager(BaseUserManager):
     Custom user model manager where sapid is the unique identifier
     for authentication instead of usernames.
     """
+    # def create_user(self, sapid, password, **extra_fields):
+    #     """
+    #     Create and save a User with the given sapid and password instead of username.
+    #     """
+    #     if not sapid:
+    #         raise ValueError('SAPID must be set')
+    #     user = self.model(sapid, **extra_fields)
+    #     if user.password is None:
+    #         user.set_password(password)
+    #     user.save()
+    #     return user
+
     def create_user(self, sapid, password, **extra_fields):
-        """
-        Create and save a User with the given sapid and password instead of username.
-        """
+
         if not sapid:
-            raise ValueError('SAPID must be set')
-        user = self.model(sapid, **extra_fields)
-        if user.password is None:
-            user.set_password(password)
-        user.save()
+            raise ValueError('Users must have an email address')
+
+        user = self.model(
+            sapid = sapid, **extra_fields
+        )
+        user.set_password(password)
+        user.save(using=self._db)
+        token = Token.objects.get_or_create(user = user)
         return user
 
     def create_superuser(self, sapid, password, **extra_fields):

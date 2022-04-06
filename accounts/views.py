@@ -42,7 +42,7 @@ class LoginAPI(GenericAPIView):
 		sapid = request.data.get('sapid',None)
 		password = request.data.get('password',None)
 		user = authenticate(username = sapid, password = password)
-		print(User.objects.get(sapid = 60004200108).password)
+		# print(User.objects.get(sapid = 60004200108).password)
 		if user:
 			login(request,user)
 			token = Token.objects.get(user=user)
@@ -68,7 +68,6 @@ class LinksAPI(GenericAPIView):
 		data = self.queryset
 		serializer = LinksSerializer(data, many = True)
 		return Response(serializer.data, status= status.HTTP_200_OK)
-
 
 	def get_queryset(self):
 		user = self.request.user
