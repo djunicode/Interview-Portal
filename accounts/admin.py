@@ -37,5 +37,20 @@ class InterviewerAdmin(BaseUserAdmin):
     ordering = ['user']
     filter_horizontal = ()
 
+
+class IntervieweeAdmin(BaseUserAdmin):
+    model = Interviewee
+    list_display = ['user']
+    list_filter = ['user']
+
+    fieldsets = [
+        (None, {'fields': ('user',)})
+    ]
+
+    # search_fields = ['role']
+    ordering = ['user']
+    filter_horizontal = ()
+
 admin.site.register(User, UserAdmin)
 admin.site.register(Interviewer, InterviewerAdmin)
+admin.site.register(Interviewee, IntervieweeAdmin)

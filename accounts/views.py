@@ -1,12 +1,15 @@
+import email
 from django.shortcuts import render
 from rest_framework.generics import GenericAPIView
 from rest_framework.authtoken.models import Token
+
+from accounts.utils import send_mail
 from .serializers import *
 from django.contrib.sites.shortcuts import get_current_site
 from django.urls import reverse
 from django.contrib.auth import authenticate,login
 from rest_framework.response import Response
-from rest_framework import status,permissions
+from rest_framework import status,permissions,generics
 
 # Create your views here.
 
@@ -30,7 +33,13 @@ class IntervieweeRegisterAPI(GenericAPIView):
 		data = request.data
 		serializer = self.serializer_class(data=data)
 		serializer.is_valid(raise_exception = True)
-		user = serializer.save()
+		interviewee = serializer.save()
+		user = User.objects.get(interviewee = interviewee)
+		send_mail(user=user,html='',
+                text='Account Created Successfully',
+                subject='User Verification',
+                from_email='djangorest3@gmail.com',
+                to_emails=[user.email])
 		return Response({'Success':'Your account is successfully created'},status=status.HTTP_201_CREATED)
 
 
