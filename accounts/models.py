@@ -36,6 +36,8 @@ class Interviewer(models.Model):
     user = models.ForeignKey(User, on_delete= models.CASCADE)
     role = models.CharField(max_length=3, choices=[('BE','BE'), ('TE','TE')], blank=True)
 
+    USERNAME_FIELD = 'username'
+
 class Interviewee(models.Model):
 
     user = models.ForeignKey(User, on_delete= models.CASCADE)
@@ -71,9 +73,11 @@ class Interview(models.Model):
     status = models.BooleanField(default=False)
     meet_link = models.SlugField(max_length=255, blank=True)
     time = models.TimeField()
+    questionnaire = models.ForeignKey(Questionnaire, on_delete=models.CASCADE)
 
 class Task(models.Model):
 
     task_id = models.IntegerField(primary_key=True)
     task_question = models.TextField(max_length=255)
     resources = models.SlugField(max_length=100, blank=True)
+    stack = models.ForeignKey(Stack, on_delete=models.CASCADE)
