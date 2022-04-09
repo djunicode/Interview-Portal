@@ -11,7 +11,7 @@ class UserAdmin(BaseUserAdmin):
     fieldsets = (
         (None, {'fields': ('sapid', 'password')}),
         ('Personal info', {'fields': ('name', 'email')}),
-        ('Permissions', {'fields': ('is_active','is_staff','is_client','is_vendor','is_superuser')}),
+        ('Permissions', {'fields': ('is_active','is_staff','is_superuser')}),
     )
 
     add_fieldsets = (
@@ -30,7 +30,7 @@ class InterviewerAdmin(BaseUserAdmin):
     list_filter = ['user', 'role']
 
     fieldsets = [
-        (None, {'fields': ('user', 'role')})
+        (None, {'fields': ('user', 'role', 'username')})
     ]
 
     search_fields = ['role']
@@ -54,3 +54,7 @@ class IntervieweeAdmin(BaseUserAdmin):
 admin.site.register(User, UserAdmin)
 admin.site.register(Interviewer, InterviewerAdmin)
 admin.site.register(Interviewee, IntervieweeAdmin)
+admin.site.register(Stack)
+admin.site.register(Task)
+admin.site.register(Questionnaire)
+admin.site.register(Interview)
