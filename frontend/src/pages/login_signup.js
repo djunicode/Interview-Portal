@@ -3,7 +3,7 @@ import Login from "../components/login";
 import "../styles/login_signup.css";
 import useMediaQuery from "@mui/material/useMediaQuery";
 const Login_signup = () => {
-  const matches = useMediaQuery("(max-width:600px)");
+  const matches = useMediaQuery("(max-width:500px)");
   return (
     <div className="outerDiv">
       {!matches && <div className="gradientDiv"></div>}
