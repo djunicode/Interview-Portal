@@ -17,12 +17,13 @@ function App() {
 				<Routes>
 					// open routes
 					<Route path="/login" element={<Login_signup />} />
+          <Route path="/signup" element={<SignupPage />} />
 					<Route path="/" element={<PrivateRoute />}>
 						<Route path="/" element={<Login_signup />} />
 					</Route>
-					<Route path="/signup" element={<PrivateRoute />}>
+					{/* <Route path="/signup" element={<PrivateRoute />}>
 						<Route path="/signup" element={<SignupPage />} />
-					</Route>
+					</Route> */}
           <Route path="/details" element={<PrivateRoute />}>
 						<Route path="/details" element={<Details />} />
 					</Route>
