@@ -4,6 +4,7 @@ import Login_signup from "../src/pages/login_signup";
 import "./App.css";
 import { Route, Routes } from "react-router";
 import { BrowserRouter as Router, Outlet, Navigate } from "react-router-dom";
+import Details from "./pages/Details";
 
 function App() {
 	const PrivateRoute = () => {
@@ -11,21 +12,23 @@ function App() {
 		return token ? <Outlet /> : <Navigate to="/login" />;
 	};
 	return (
-    <Router>
-		<div className="App">
-			<Routes>
-				<Route exact path="/login " element={<Login_signup />} />
-
-				<Route path="/" element={<PrivateRoute />}>
-					<Route path="/" element={<Login_signup />} />
-				</Route>
-        <Route path="/signup" element={<PrivateRoute />}>
-					<Route path="/signup" element={<SignupPage />} />
-				</Route>
-			</Routes>
-			
-		</div>
-    </Router>
+		<Router>
+			<div className="App">
+				<Routes>
+					// open routes
+					<Route path="/login" element={<Login_signup />} />
+					<Route path="/" element={<PrivateRoute />}>
+						<Route path="/" element={<Login_signup />} />
+					</Route>
+					<Route path="/signup" element={<PrivateRoute />}>
+						<Route path="/signup" element={<SignupPage />} />
+					</Route>
+          <Route path="/details" element={<PrivateRoute />}>
+						<Route path="/details" element={<Details />} />
+					</Route>
+				</Routes>
+			</div>
+		</Router>
 	);
 }
 
