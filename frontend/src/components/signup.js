@@ -3,14 +3,20 @@ import TextField from "@mui/material/TextField";
 import { Typography } from "@mui/material";
 import Button from "@mui/material/Button";
 import * as Yup from "yup";
-import { useFormik } from "formik";
 import { makeStyles } from "@mui/styles";
+import { useFormik } from "formik";
 import "../styles/login.css";
 import { useNavigate } from "react-router-dom";
-const useStyles = makeStyles({});
+import { red } from "@mui/material/colors";
+const useStyles = makeStyles((theme) => ({
+  error: {
+    color: "red",
+    display: "flex",
+    fontSize: "small",
+  },
+}));
 const Signup = () => {
   const classes = useStyles();
-
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -53,7 +59,7 @@ const Signup = () => {
           value={formik.values.email}
         />
         {formik.touched.email && formik.errors.email ? (
-          <p className="error">{formik.errors.email}</p>
+          <p className={classes.error}>{formik.errors.email}</p>
         ) : null}
         <div className="userPass"> username</div>
         <TextField
@@ -98,7 +104,9 @@ const Signup = () => {
           <div className="dhaaText1">Already have an account?</div>
           <div className="dhaaText2">login</div>
         </div>
-        <Button variant="contained" onClick={() => navigate("/login")}>SIGN UP</Button>
+        <Button variant="contained" onClick={() => navigate("/login")}>
+          SIGN UP
+        </Button>
       </div>
     </div>
   );

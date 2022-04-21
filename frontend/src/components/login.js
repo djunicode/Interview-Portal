@@ -3,6 +3,7 @@ import TextField from "@mui/material/TextField";
 import { Typography } from "@mui/material";
 import Button from "@mui/material/Button";
 import { useFormik } from "formik";
+import axios from "axios";
 import * as Yup from "yup";
 import "../styles/login.css";
 const Login = () => {
@@ -17,9 +18,36 @@ const Login = () => {
     }),
     onSubmit: (values) => {
       console.log(values);
+
+      var FormData = require("form-data");
+      var data = new FormData();
+      data.append("sapid", values.username);
+      data.append("password", values.password);
+
+      var config = {
+        method: "post",
+        url: "https://unicodeinterview.pythonanywhere.com/accounts/login/",
+        headers: {
+          Cookie:
+            "csrftoken=lYS6Ws57155J4Ki9iYZz1x2w0PpUe2Sr4mb8R44e1lgymx2kHYNywUJX8bubAK9C; sessionid=kwn1usqi04ydrdpe9x1iolrzx4xo10qg",
+          // ...data.getHeaders(),
+        },
+        data: data,
+      };
+
+      axios(config)
+        .then(function (response) {
+          console.log(response.data);
+          console.log(response.data.token);
+          localStorage.setItem("token", response.data.token);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
     },
   });
   console.log(formik.errors);
+
   return (
     <div className="outerDiv2">
       <div className="innerDiv2">
