@@ -18,7 +18,7 @@ const Login = () => {
     }),
     onSubmit: (values) => {
       console.log(values);
-      var axios = require("axios");
+
       var FormData = require("form-data");
       var data = new FormData();
       data.append("sapid", values.username);
