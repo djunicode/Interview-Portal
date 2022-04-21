@@ -6,6 +6,7 @@ import * as Yup from "yup";
 import { makeStyles } from "@mui/styles";
 import { useFormik } from "formik";
 import "../styles/login.css";
+import { useNavigate } from "react-router-dom";
 import { red } from "@mui/material/colors";
 const useStyles = makeStyles((theme) => ({
   error: {
@@ -42,6 +43,7 @@ const Signup = () => {
       console.log(values);
     },
   });
+  let navigate = useNavigate();
   return (
     <div className="outerDiv2">
       <div className="innerDiv2">
@@ -102,7 +104,9 @@ const Signup = () => {
           <div className="dhaaText1">Already have an account?</div>
           <div className="dhaaText2">login</div>
         </div>
-        <Button variant="contained">SIGN UP</Button>
+        <Button variant="contained" onClick={() => navigate("/login")}>
+          SIGN UP
+        </Button>
       </div>
     </div>
   );
