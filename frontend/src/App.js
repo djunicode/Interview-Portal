@@ -5,6 +5,7 @@ import "./App.css";
 import { Route, Routes } from "react-router";
 import { BrowserRouter as Router, Outlet, Navigate } from "react-router-dom";
 import Details from "./pages/Details";
+import Dashboard from "./pages/Dashboard";
 
 function App() {
 	const PrivateRoute = () => {
@@ -26,6 +27,9 @@ function App() {
 					</Route> */}
           <Route path="/details" element={<PrivateRoute />}>
 						<Route path="/details" element={<Details />} />
+					</Route>
+          <Route path="/dashboard" element={<PrivateRoute />}>
+						<Route path="/dashboard" element={<Dashboard />} />
 					</Route>
 				</Routes>
 			</div>

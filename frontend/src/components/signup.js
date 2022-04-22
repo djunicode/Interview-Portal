@@ -44,17 +44,32 @@ const Signup = () => {
 				.required("Required"),
 		}),
 		onSubmit: (values) => {
-      
+      console.log(values);
+      // var FormData = require("form-data");
+      // var data = new FormData();
       var data = JSON.stringify({ 
+        
         "user": {
-          "name": "greha",
-          "sapid": "60004200038",
-          "password": "grehashah",
-          "confirm_password": "grehashah",
-          "grad_year": 2024
+          "name": values.username,
+          "sapid": values.sapid,
+          "password":values.setPassword,
+          "confirm_password": values.confirmPassword,
+          "grad_year": values.grad_year,
+          "email": "grehashah6@gmail.com"
         }
+        
+        // data.append("user", ("sapid", values.sapid),
+        // ("password", values.setPassword),
+        // ("confirm_password", values.confirmPassword),
+        // ("grad_year", values.grad_year),
+        // ("name", values.username ));
+        // data.append("sapid", values.sapid);
+        // data.append("password", values.password);
+        // data.append("confirm_password", values.confirmPassword);
+        // data.append("grad_year", values.grad_year);
+        // data.append("name", values.username )
       });
-      
+      console.log(data);
       var config = {
         method: 'post',
         url: 'https://unicodeinterview.pythonanywhere.com/accounts/interviewee_register/',
@@ -166,7 +181,10 @@ const Signup = () => {
 					<div className="dhaaText1">Already have an account?</div>
 					<div className="dhaaText2">login</div>
 				</div>
-				<Button variant="contained" onClick={() => navigate("/login")}>
+				<Button variant="contained"
+         onClick={formik.handleSubmit}
+        //  onClick={() => navigate("/login")}
+         >
 					SIGN UP
 				</Button>
 			</div>
