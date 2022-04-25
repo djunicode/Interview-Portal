@@ -40,7 +40,9 @@ class IntervieweeRegisterAPI(GenericAPIView):
                 subject='User Verification',
                 from_email='djangorest3@gmail.com',
                 to_emails=[user.email])
-		return Response({'Success':'Your account is successfully created'},status=status.HTTP_201_CREATED)
+		details_dict = {'name':user.name,'sapid':user.sapid,'email':user.email}
+		# print(IntervieweeRegisterSerializer(serializer))
+		return Response(details_dict,status=status.HTTP_201_CREATED)
 
 
 class LoginAPI(GenericAPIView):
@@ -60,26 +62,26 @@ class LoginAPI(GenericAPIView):
 		return Response('Invalid Credentials',status = status.HTTP_404_NOT_FOUND)
 
 
-class LinksAPI(GenericAPIView):
-	permission_classes = [permissions.IsAuthenticated]
-	serializer_class = LinksSerializer
+# class LinksAPI(GenericAPIView):
+# 	permission_classes = [permissions.IsAuthenticated]
+# 	serializer_class = LinksSerializer
 
-	def post(self,request,*args,**kwargs ):
-		user = request.user
-		interviewee = Interviewee.objects.get(user = user)
-		data = request.data
-		serializer = self.serializer_class(data=data)
-		serializer.is_valid(raise_exception = True)
-		serializer.save(interviewee = interviewee)
-		return Response(serializer.validated_data, status= status.HTTP_200_OK)
+# 	def post(self,request,*args,**kwargs ):
+# 		user = request.user
+# 		interviewee = Interviewee.objects.get(user = user)
+# 		data = request.data
+# 		serializer = self.serializer_class(data=data)
+# 		serializer.is_valid(raise_exception = True)
+# 		serializer.save(interviewee = interviewee)
+# 		return Response(serializer.validated_data, status= status.HTTP_200_OK)
 
-	def get(self,request,*args,**kwargs):
-		data = self.queryset
-		serializer = LinksSerializer(data, many = True)
-		return Response(serializer.data, status= status.HTTP_200_OK)
+# 	def get(self,request,*args,**kwargs):
+# 		data = self.queryset
+# 		serializer = LinksSerializer(data, many = True)
+# 		return Response(serializer.data, status= status.HTTP_200_OK)
 
-	def get_queryset(self):
-		user = self.request.user
-		interviewee = Interviewee.objects.get(user = user)
-		queryset = Links.objects.filter(interviewee = interviewee)
-		return queryset
+# 	def get_queryset(self):
+# 		user = self.request.user
+# 		interviewee = Interviewee.objects.get(user = user)
+# 		queryset = Links.objects.filter(interviewee = interviewee)
+# 		return queryset
