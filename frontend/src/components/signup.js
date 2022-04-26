@@ -104,9 +104,7 @@ const Signup = () => {
           <div className="dhaaText1">Already have an account?</div>
           <div className="dhaaText2">login</div>
         </div>
-        <Button variant="contained" onClick={() => navigate("/login")}>
-          SIGN UP
-        </Button>
+        <Button variant="contained">SIGN UP</Button>
       </div>
     </div>
   );
