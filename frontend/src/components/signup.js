@@ -45,48 +45,35 @@ const Signup = () => {
 		}),
 		onSubmit: (values) => {
       console.log(values);
-      // var FormData = require("form-data");
-      // var data = new FormData();
-      var data = JSON.stringify({ 
-        
-        "user": {
-          "name": values.username,
-          "sapid": values.sapid,
-          "password":values.setPassword,
-          "confirm_password": values.confirmPassword,
-          "grad_year": values.grad_year,
-          "email": "grehashah6@gmail.com"
-        }
-        
-        // data.append("user", ("sapid", values.sapid),
-        // ("password", values.setPassword),
-        // ("confirm_password", values.confirmPassword),
-        // ("grad_year", values.grad_year),
-        // ("name", values.username ));
-        // data.append("sapid", values.sapid);
-        // data.append("password", values.password);
-        // data.append("confirm_password", values.confirmPassword);
-        // data.append("grad_year", values.grad_year);
-        // data.append("name", values.username )
-      });
-      console.log(data);
-      var config = {
-        method: 'post',
-        url: 'https://unicodeinterview.pythonanywhere.com/accounts/interviewee_register/',
-        headers: { 
-          'Content-Type': 'application/json'
-        },
-        data : data
-      };
-      
-      axios(config)
-      .then(function (response) {
-        console.log(response.data);
-      })
-      .catch(function (error) {
-        
-        console.log(error);
-      });
+      var axios = require('axios');
+var data = JSON.stringify({
+  "user": {
+    "name": values.username,
+    "sapid": values.sapid,
+    "password": values.setPassword,
+    "confirm_password": values.confirmPassword,
+    "grad_year": values.grad_year,
+    "email": values.email
+  }
+});
+
+var config = {
+  method: 'post',
+  url: 'https://unicodeinterview.pythonanywhere.com/accounts/interviewee_register/',
+  headers: { 
+    'Content-Type': 'application/json'
+  },
+  data : data
+};
+
+axios(config)
+.then(function (response) {
+  console.log(JSON.stringify(response.data));
+})
+.catch(function (error) {
+  console.log(error);
+});
+
 		},
     
 	});
