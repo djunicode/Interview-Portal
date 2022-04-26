@@ -8,4 +8,10 @@ export const theme = createTheme({
   gradient: "linear-gradient(138.72deg, #5154CE -0.66%, #7B5BBC 86.47%)",
   heading2: "#333333",
   heading1: "#000000",
+  typography: {
+    h3: {
+      fontWeight: "700",
+      fontSize: "30px",
+    },
+  },
 });
