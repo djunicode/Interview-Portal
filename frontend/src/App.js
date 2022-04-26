@@ -10,6 +10,7 @@ import Timeline from "./components/Timeline";
 import TimeLine from "./components/Timeline";
 import Time from "./components/Time/Time";
 import ApplyForIntreview from "./components/ApplyForIntreview";
+import SideNavbar from "./components/SideNavbar";
 
 function App() {
 	const PrivateRoute = () => {
@@ -25,6 +26,7 @@ function App() {
 					<Route path="/signup" element={<SignupPage />} />
 					<Route path="/timeline" element={<TimeLine />} />
 					<Route path="/time" element={<Time />} />
+					<Route path="/sidenavbar" element={<SideNavbar />} />
 					<Route path="/apply" element={<ApplyForIntreview />} />
 					<Route path="/" element={<PrivateRoute />}>
 						<Route path="/" element={<Login_signup />} />
