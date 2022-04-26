@@ -5,6 +5,11 @@ import "./App.css";
 import { Route, Routes } from "react-router";
 import { BrowserRouter as Router, Outlet, Navigate } from "react-router-dom";
 import Details from "./pages/Details";
+import Dashboard from "./pages/Dashboard";
+import Timeline from "./components/Timeline";
+import TimeLine from "./components/Timeline";
+import Time from "./components/Time/Time";
+import ApplyForIntreview from "./components/ApplyForIntreview";
 
 function App() {
 	const PrivateRoute = () => {
@@ -17,14 +22,21 @@ function App() {
 				<Routes>
 					// open routes
 					<Route path="/login" element={<Login_signup />} />
+					<Route path="/signup" element={<SignupPage />} />
+					<Route path="/timeline" element={<TimeLine />} />
+					<Route path="/time" element={<Time />} />
+					<Route path="/apply" element={<ApplyForIntreview />} />
 					<Route path="/" element={<PrivateRoute />}>
 						<Route path="/" element={<Login_signup />} />
 					</Route>
-					<Route path="/signup" element={<PrivateRoute />}>
+					{/* <Route path="/signup" element={<PrivateRoute />}>
 						<Route path="/signup" element={<SignupPage />} />
-					</Route>
-          <Route path="/details" element={<PrivateRoute />}>
+					</Route> */}
+					<Route path="/details" element={<PrivateRoute />}>
 						<Route path="/details" element={<Details />} />
+					</Route>
+					<Route path="/dashboard" element={<PrivateRoute />}>
+						<Route path="/dashboard" element={<Dashboard />} />
 					</Route>
 				</Routes>
 			</div>
