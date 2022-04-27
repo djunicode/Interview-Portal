@@ -45,9 +45,9 @@ class Interviewee(models.Model):
     def get_links(self):
         return self.links_set.values_list('link', flat=True)
 
-class Links(models.Model):
-    interviewee = models.ForeignKey(Interviewee, on_delete= models.CASCADE)
-    link = models.CharField(max_length=200, blank=True)
+# class Links(models.Model):
+#     interviewee = models.ForeignKey(Interviewee, on_delete= models.CASCADE)
+#     link = models.CharField(max_length=200, blank=True)
 
 class Stack(models.Model):
 

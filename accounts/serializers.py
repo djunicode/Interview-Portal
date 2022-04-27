@@ -1,4 +1,4 @@
-from coreapi import Link
+# from coreapi import Link
 from rest_framework import serializers
 from .models import *
 import re
@@ -59,12 +59,12 @@ class LoginSerializer(serializers.ModelSerializer):
         fields = ['sapid','password']
 
 
-class LinksSerializer(serializers.ModelSerializer):
+# class LinksSerializer(serializers.ModelSerializer):
     
-    class Meta:
-        model = Links
-        fields = ['id','link']
-        read_only_fields = ['interviewee']
+#     class Meta:
+#         model = Links
+#         fields = ['id','link']
+#         read_only_fields = ['interviewee']
 
 
 class IntervieweeRegisterSerializer(serializers.ModelSerializer):
