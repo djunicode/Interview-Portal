@@ -13,37 +13,37 @@ import ApplyForIntreview from "./components/ApplyForIntreview";
 import SideNavbar from "./components/SideNavbar";
 
 function App() {
-	const PrivateRoute = () => {
-		const token = localStorage.getItem("token");
-		return token ? <Outlet /> : <Navigate to="/login" />;
-	};
-	return (
-		<Router>
-			<div className="App">
-				<Routes>
-					// open routes
-					<Route path="/login" element={<Login_signup />} />
-					<Route path="/signup" element={<SignupPage />} />
-					<Route path="/timeline" element={<TimeLine />} />
-					<Route path="/time" element={<Time />} />
-					<Route path="/sidenavbar" element={<SideNavbar />} />
-					<Route path="/apply" element={<ApplyForIntreview />} />
-					<Route path="/" element={<PrivateRoute />}>
-						<Route path="/" element={<Login_signup />} />
-					</Route>
-					{/* <Route path="/signup" element={<PrivateRoute />}>
+  const PrivateRoute = () => {
+    const token = localStorage.getItem("token");
+    return token ? <Outlet /> : <Navigate to="/login" />;
+  };
+  return (
+    <Router>
+      <div className="App">
+        <Routes>
+          // open routes
+          <Route path="/login" element={<Login_signup />} />
+          <Route path="/signup" element={<SignupPage />} />
+          <Route path="/timeline" element={<TimeLine />} />
+          <Route path="/time" element={<Time />} />
+          <Route path="/sidenavbar" element={<SideNavbar />} />
+          <Route path="/apply" element={<ApplyForIntreview />} />
+          <Route path="/" element={<PrivateRoute />}>
+            <Route path="/" element={<Login_signup />} />
+          </Route>
+          {/* <Route path="/signup" element={<PrivateRoute />}>
 						<Route path="/signup" element={<SignupPage />} />
 					</Route> */}
-					<Route path="/details" element={<PrivateRoute />}>
-						<Route path="/details" element={<Details />} />
-					</Route>
-					<Route path="/dashboard" element={<PrivateRoute />}>
-						<Route path="/dashboard" element={<Dashboard />} />
-					</Route>
-				</Routes>
-			</div>
-		</Router>
-	);
+          <Route path="/details" element={<PrivateRoute />}>
+            <Route path="/details" element={<Details />} />
+          </Route>
+          <Route path="/dashboard" element={<PrivateRoute />}>
+            <Route path="/dashboard" element={<Dashboard />} />
+          </Route>
+        </Routes>
+      </div>
+    </Router>
+  );
 }
 
 export default App;
