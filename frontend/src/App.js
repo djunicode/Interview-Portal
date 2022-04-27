@@ -8,7 +8,7 @@ import Details from "./pages/Details";
 import Dashboard from "./pages/Dashboard";
 import Timeline from "./components/Timeline";
 import TimeLine from "./components/Timeline";
-import Time from "./components/Time/Time";
+import Time from "./components/Time";
 import ApplyForIntreview from "./components/ApplyForIntreview";
 import SideNavbar from "./components/SideNavbar";
 

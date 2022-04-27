@@ -21,8 +21,11 @@ const useStyles = makeStyles((theme) => ({
     color: " #4F4F4F",
   },
   card1: {
-    width: "30%",
     padding: "1%",
+    boxShadow: "1px 1px 6px rgba(0, 0, 0, 0.25)",
+    borderRadius: "10px",
+    paddingTop: "6%",
+    paddingBottom: "6%",
   },
 }));
 const ProfileProgress = (props) => {
