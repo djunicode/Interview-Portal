@@ -24,7 +24,7 @@ class UserAdmin(BaseUserAdmin):
     ordering = ('sapid',)
     filter_horizontal = ()
 
-class InterviewerAdmin(BaseUserAdmin):
+class InterviewerAdmin(admin.ModelAdmin):
     model = Interviewer
     list_display = ['user', 'role']
     list_filter = ['user', 'role']
@@ -38,7 +38,7 @@ class InterviewerAdmin(BaseUserAdmin):
     filter_horizontal = ()
 
 
-class IntervieweeAdmin(BaseUserAdmin):
+class IntervieweeAdmin(admin.ModelAdmin):
     model = Interviewee
     list_display = ['user']
     list_filter = ['user']

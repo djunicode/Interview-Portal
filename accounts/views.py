@@ -1,6 +1,6 @@
 import email
 from django.shortcuts import render
-from rest_framework.generics import GenericAPIView
+from rest_framework.generics import GenericAPIView, ListAPIView
 from rest_framework.authtoken.models import Token
 
 from accounts.utils import send_mail
@@ -82,4 +82,13 @@ class LinksAPI(GenericAPIView):
 		user = self.request.user
 		interviewee = Interviewee.objects.get(user = user)
 		queryset = Links.objects.filter(interviewee = interviewee)
+		return queryset
+
+class TaskAPI(ListAPIView):
+	permission_classes = [permissions.IsAuthenticated]
+	serializer_class = TasksSerializer
+	model = serializer_class.Meta.model
+
+	def get_queryset(self):
+		queryset = Task.objects.all()
 		return queryset

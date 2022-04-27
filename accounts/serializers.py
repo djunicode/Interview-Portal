@@ -83,3 +83,9 @@ class IntervieweeRegisterSerializer(serializers.ModelSerializer):
         Token.objects.create(user=user)  
         interviewee = Interviewee.objects.create(user = user, **validated_data)
         return interviewee
+
+class TasksSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = Task
+        fields = '__all__'

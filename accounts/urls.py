@@ -6,4 +6,5 @@ urlpatterns = [
     path('interviewer_register/', views.InterviewerRegisterAPI.as_view(), name = 'Interviewer Registration'),
     path('login/', views.LoginAPI.as_view(), name = 'login'),
     path('links/', views.LinksAPI.as_view(), name = 'links'),
+    path('tasks/', views.TaskAPI.as_view(), name = 'tasks'),
 ]
