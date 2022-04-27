@@ -1,9 +1,11 @@
 from inspect import stack
 from os import link
 from tkinter import CASCADE
+import django
 from django.contrib.auth.models import AbstractUser
 
 from django.db import models
+from requests import delete
 from rest_framework.authtoken.models import Token
 
 from accounts.manager import UserManager
@@ -43,14 +45,10 @@ class Interviewer(models.Model):
 class Interviewee(models.Model):
 
     user = models.ForeignKey(User, on_delete= models.CASCADE)
-    resume_link = models.CharField(max_length=50, blank = True, default = "")
     
     def get_links(self):
         return self.links_set.values_list('link', flat=True)
 
-class Links(models.Model):
-    interviewee = models.ForeignKey(Interviewee, on_delete= models.CASCADE)
-    link = models.CharField(max_length=200, blank=True)
 
 class Stack(models.Model):
 
@@ -63,7 +61,6 @@ class Stack(models.Model):
               ('Fullstack Django', 'Fullstack Django'))
 
     name = models.CharField(max_length=20, choices=stacks, blank=True)
-    interviewer = models.ForeignKey(Interviewer, on_delete=models.CASCADE)
     link       = models.CharField(max_length=50, default="")
 
 class Questionnaire(models.Model):
@@ -87,7 +84,21 @@ class Task(models.Model):
     stack = models.ForeignKey(Stack, on_delete=models.CASCADE)
 
 
+class ApplicationStack(models.Model):
+    interviewee = models.ForeignKey(Interviewee, on_delete= models.CASCADE)
+    stacks = (('Frontend', 'Frontend'),
+              ('Django', 'Django'),
+              ('Node', 'Node'),
+              ('React Native', 'React Native'),
+              ('Fullstack Node', 'Fullstack Node'), 
+              ('Flutter', 'Flutter'),
+              ('Fullstack Django', 'Fullstack Django'))
+
+    name = models.CharField(max_length=20, choices=stacks, blank=True)
+    repo_link = models.CharField(max_length=50,blank=True)
+
 class Application(models.Model):
     interviewee = models.ForeignKey(Interviewee, on_delete= models.CASCADE)
-    stack       = models.ForeignKey(Stack,null=True,on_delete=models.SET_NULL)
+    stack       = models.ForeignKey(ApplicationStack,null=True,on_delete=models.SET_NULL)
+    resume_link = models.CharField(max_length=50, blank = True, default = "")
     status      = models.BooleanField(default=False)

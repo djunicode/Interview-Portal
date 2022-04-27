@@ -24,37 +24,38 @@ class UserAdmin(BaseUserAdmin):
     ordering = ('sapid',)
     filter_horizontal = ()
 
-class InterviewerAdmin(BaseUserAdmin):
-    model = Interviewer
-    list_display = ['user', 'role']
-    list_filter = ['user', 'role']
+# class InterviewerAdmin(BaseUserAdmin):
+#     model = Interviewer
+#     list_display = ['user', 'role']
+#     list_filter = ['user', 'role']
 
-    fieldsets = [
-        (None, {'fields': ('user', 'role', 'username')})
-    ]
+#     fieldsets = [
+#         (None, {'fields': ('user', 'role', 'username')})
+#     ]
 
-    search_fields = ['role']
-    ordering = ['user']
-    filter_horizontal = ()
+#     search_fields = ['role']
+#     ordering = ['user']
+#     filter_horizontal = ()
 
 
-class IntervieweeAdmin(BaseUserAdmin):
-    model = Interviewee
-    list_display = ['user']
-    list_filter = ['user']
+# class IntervieweeAdmin(BaseUserAdmin):
+#     model = Interviewee
+#     list_display = ['user']
+#     list_filter = ['user']
 
-    fieldsets = [
-        (None, {'fields': ('user',)})
-    ]
+#     fieldsets = [
+#         (None, {'fields': ('user',)})
+#     ]
 
-    # search_fields = ['role']
-    ordering = ['user']
-    filter_horizontal = ()
+#     # search_fields = ['role']
+#     ordering = ['user']
+#     filter_horizontal = ()
 
 admin.site.register(User, UserAdmin)
-admin.site.register(Interviewer, InterviewerAdmin)
-admin.site.register(Interviewee, IntervieweeAdmin)
+admin.site.register(Interviewer)
+admin.site.register(Interviewee)
 admin.site.register(Stack)
 admin.site.register(Task)
 admin.site.register(Questionnaire)
 admin.site.register(Interview)
+admin.site.register(Application)

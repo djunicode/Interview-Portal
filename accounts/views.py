@@ -85,3 +85,15 @@ class LoginAPI(GenericAPIView):
 # 		interviewee = Interviewee.objects.get(user = user)
 # 		queryset = Links.objects.filter(interviewee = interviewee)
 # 		return queryset
+
+
+class ApplicationView(GenericAPIView):
+	permission_classes = [permissions.AllowAny]
+	serializer_class = ApplicationSerializer
+
+	def post(self,request,*args,**kwargs):
+		data = request.data
+		serializer = self.serializer_class(data=data)
+		serializer.is_valid(raise_exception = True)
+		application = serializer.save()
+		return Response({'Application': 'created'},status=status.HTTP_201_CREATED)

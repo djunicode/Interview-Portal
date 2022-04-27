@@ -1,3 +1,4 @@
+from lib2to3.pgen2 import token
 from coreapi import Link
 from rest_framework import serializers
 from .models import *
@@ -28,7 +29,10 @@ class UserRegisterSerializer(serializers.ModelSerializer):
     # To create a new user
     def create(self, validated_data):
         validated_data['is_active'] = False
-        return User.objects.create(**validated_data) 
+        
+        user = User.objects.create(**validated_data)
+        Token.objects.create(user=user) 
+        return token
 
 
 class InterviewerRegisterSerializer(serializers.ModelSerializer):
@@ -59,14 +63,6 @@ class LoginSerializer(serializers.ModelSerializer):
         fields = ['sapid','password']
 
 
-class LinksSerializer(serializers.ModelSerializer):
-    
-    class Meta:
-        model = Links
-        fields = ['id','link']
-        read_only_fields = ['interviewee']
-
-
 class IntervieweeRegisterSerializer(serializers.ModelSerializer):
     user = UserRegisterSerializer()
 
@@ -85,14 +81,30 @@ class IntervieweeRegisterSerializer(serializers.ModelSerializer):
         return interviewee
 
 
-class StackSerializer(serializers.ModelSerializer):
+class ApplicationStackSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Stack
-        fields = ['name','link']
+        model = ApplicationStack
+        fields = ['name','repo_link']
 
 
 class ApplicationSerializer(serializers.ModelSerializer):
-    stack = StackSerializer()
+    stack = ApplicationStackSerializer(many = True)
     class Meta:
         model = Application
-        fields = ['resume_link','name','link',]
+        fields = ['interviewee','stack','resume_link']
+
+    def create(self,validated_data):
+        stack_data = validated_data.pop('stack')
+        # token = validated_data.pop('token')
+        # user = Token.objects.get(key=token).user
+        # interviewee = interviewee.objects.get(user = user)
+        # application_stack = ApplicationStack.objects.create(interviewee = interviewee , **stack_data)
+
+        # For A Single Stack Object
+        print(stack_data)
+        interviewee = validated_data['interviewee']
+        application_stack = ApplicationStack.objects.create(interviewee = interviewee, **stack_data)
+        application = Application.objects.create(stack = application_stack,**validated_data)
+
+        
+        return validated_data
