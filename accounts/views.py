@@ -1,6 +1,6 @@
 # import email
 # from django.shortcuts import render
-from rest_framework.generics import GenericAPIView
+from rest_framework.generics import GenericAPIView, RetrieveUpdateAPIView
 from rest_framework.authtoken.models import Token
 
 from accounts.utils import send_mail
@@ -10,7 +10,6 @@ from .serializers import *
 from django.contrib.auth import authenticate,login
 from rest_framework.response import Response
 from rest_framework import status,permissions,generics
-
 # Create your views here.
 
 class IntervieweeRegisterAPI(GenericAPIView):
@@ -29,6 +28,25 @@ class IntervieweeRegisterAPI(GenericAPIView):
                 from_email='djangorest3@gmail.com',
                 to_emails=[user.email])
 		return Response({'Success':'Your account is successfully created'},status=status.HTTP_201_CREATED)
+
+class IntervieweeUpdateAPI(RetrieveUpdateAPIView):
+	serializer_class = IntervieweeRegisterSerializer
+	lookup_field = 'pk'
+
+	def get_queryset(self):
+		user = self.request.data
+		print(user)
+		queryset = User.objects.all()
+		print(queryset.all())
+		return queryset
+
+	def perform_update(self, request, *args, **kwargs):
+		data = request.data
+		serializer = self.serializer_class(data=data)
+		serializer.is_valid(raise_exception=True)
+		serializer.save()
+		return Response({'Success':'User updated'})
+
 
 
 class LoginAPI(GenericAPIView):

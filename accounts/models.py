@@ -41,6 +41,8 @@ class Interviewer(models.Model):
 class Interviewee(models.Model):
 
     user = models.ForeignKey(User, on_delete= models.CASCADE)
+
+    # USERNAME_FIELD = ''
     
     def get_links(self):
         return self.links_set.values_list('link', flat=True)
