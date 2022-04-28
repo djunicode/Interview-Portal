@@ -59,8 +59,8 @@ class Stack(models.Model):
               ('Flutter', 'Flutter'),
               ('Fullstack Django', 'Fullstack Django'))
 
-    name = models.CharField(max_length=20, choices=stacks, blank=True)
-    interviewer = models.ForeignKey(Interviewer, on_delete=models.CASCADE)
+    name = models.CharField(max_length=20, choices=stacks, blank=True, primary_key=True)
+    #interviewer = models.ForeignKey(Interviewer, on_delete=models.CASCADE)
 
 class Questionnaire(models.Model):
 
@@ -79,5 +79,5 @@ class Task(models.Model):
 
     task_id = models.IntegerField(primary_key=True)
     task_question = models.TextField(max_length=255)
-    resources = models.SlugField(max_length=100, blank=True)
+    resources = models.URLField(max_length=200, blank=True)
     stack = models.ForeignKey(Stack, on_delete=models.CASCADE)
