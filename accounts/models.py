@@ -1,4 +1,3 @@
-from tkinter import CASCADE
 from django.contrib.auth.models import AbstractUser
 
 from django.db import models
@@ -41,15 +40,9 @@ class Interviewer(models.Model):
 class Interviewee(models.Model):
 
     user = models.ForeignKey(User, on_delete= models.CASCADE)
-
-    # USERNAME_FIELD = ''
     
     def get_links(self):
         return self.links_set.values_list('link', flat=True)
-
-# class Links(models.Model):
-#     interviewee = models.ForeignKey(Interviewee, on_delete= models.CASCADE)
-#     link = models.CharField(max_length=200, blank=True)
 
 class Stack(models.Model):
 
@@ -61,8 +54,7 @@ class Stack(models.Model):
               ('Flutter', 'Flutter'),
               ('Fullstack Django', 'Fullstack Django'))
 
-    name = models.CharField(max_length=20, choices=stacks, blank=True)
-    interviewer = models.ForeignKey(Interviewer, on_delete=models.CASCADE)
+    name = models.CharField(max_length=20, choices=stacks, blank=True, primary_key=True)
 
 class Questionnaire(models.Model):
 
@@ -81,5 +73,5 @@ class Task(models.Model):
 
     task_id = models.IntegerField(primary_key=True)
     task_question = models.TextField(max_length=255)
-    resources = models.SlugField(max_length=100, blank=True)
+    resources = models.URLField(max_length=200, blank=True)
     stack = models.ForeignKey(Stack, on_delete=models.CASCADE)

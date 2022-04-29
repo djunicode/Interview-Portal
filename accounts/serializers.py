@@ -69,7 +69,7 @@ class LoginSerializer(serializers.ModelSerializer):
 
 class IntervieweeRegisterSerializer(serializers.ModelSerializer):
     user = UserRegisterSerializer()
-
+    read_only = True
     class Meta:
         model = Interviewee
         fields = ['user']
@@ -83,3 +83,19 @@ class IntervieweeRegisterSerializer(serializers.ModelSerializer):
         Token.objects.create(user=user)  
         interviewee = Interviewee.objects.create(user = user, **validated_data)
         return interviewee
+
+    def update(self, instance, validated_data):
+        new_user=validated_data['user']
+        instance.name = new_user['name']
+        instance.email = new_user['email']
+        instance.sapid = instance.sapid
+        # instance.sapid = validated_data.get('sapid', instance.sapid)
+        instance.grad_year = new_user['grad_year']
+        instance.save()
+        return instance
+
+class TasksSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = Task
+        fields = '__all__'
