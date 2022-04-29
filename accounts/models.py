@@ -84,8 +84,14 @@ class Task(models.Model):
     stack = models.ForeignKey(Stack, on_delete=models.CASCADE)
 
 
-class ApplicationStack(models.Model):
+class Application(models.Model):
     interviewee = models.ForeignKey(Interviewee, on_delete= models.CASCADE)
+    # stack       = models.ForeignKey(ApplicationStack,null=True,on_delete=models.SET_NULL)
+    resume_link = models.CharField(max_length=50, blank = True, default = "")
+    status      = models.BooleanField(default=False)
+
+class ApplicationStack(models.Model):
+    application = models.ForeignKey(Application, on_delete= models.CASCADE,default=2)
     stacks = (('Frontend', 'Frontend'),
               ('Django', 'Django'),
               ('Node', 'Node'),
@@ -97,8 +103,3 @@ class ApplicationStack(models.Model):
     name = models.CharField(max_length=20, choices=stacks, blank=True)
     repo_link = models.CharField(max_length=50,blank=True)
 
-class Application(models.Model):
-    interviewee = models.ForeignKey(Interviewee, on_delete= models.CASCADE)
-    stack       = models.ForeignKey(ApplicationStack,null=True,on_delete=models.SET_NULL)
-    resume_link = models.CharField(max_length=50, blank = True, default = "")
-    status      = models.BooleanField(default=False)

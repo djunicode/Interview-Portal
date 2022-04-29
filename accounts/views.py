@@ -1,4 +1,6 @@
 import email
+from email.mime import application
+from django.http import HttpResponse
 from django.shortcuts import render
 from rest_framework.generics import GenericAPIView
 from rest_framework.authtoken.models import Token
@@ -91,9 +93,23 @@ class ApplicationView(GenericAPIView):
 	permission_classes = [permissions.AllowAny]
 	serializer_class = ApplicationSerializer
 
+	def get(self,request):
+		user = request.user
+		print(user)
+		interviewee = Interviewee.objects.get(user = request.user)
+		application = Application.objects.get(interviewee = interviewee)
+		print(application)
+		serializer = ApplicationStackSerializer(application)
+		return Response(serializer.data)
+
 	def post(self,request,*args,**kwargs):
 		data = request.data
-		serializer = self.serializer_class(data=data)
+		user = request.user
+		serializer = self.serializer_class(data=data, context={'request': request})
 		serializer.is_valid(raise_exception = True)
 		application = serializer.save()
-		return Response({'Application': 'created'},status=status.HTTP_201_CREATED)
+		return Response({"Application":"Created"},status=status.HTTP_201_CREATED)
+
+	def put(self,request,*args,**kwargs):
+		data = request.data
+		serializer = self.serializer_class()
