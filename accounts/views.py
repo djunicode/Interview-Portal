@@ -1,47 +1,54 @@
-import email
-from django.shortcuts import render
-from rest_framework.generics import GenericAPIView, ListAPIView
+# import email
+# from django.shortcuts import render
+from django.http.response import JsonResponse
+from rest_framework.generics import GenericAPIView, RetrieveUpdateAPIView, ListAPIView
 from rest_framework.authtoken.models import Token
+from rest_framework.views import APIView
 
 from accounts.utils import send_mail
 from .serializers import *
-from django.contrib.sites.shortcuts import get_current_site
-from django.urls import reverse
-from django.contrib.auth import authenticate,login
+# from django.contrib.sites.shortcuts import get_current_site
+# from django.urls import reverse
+from django.contrib.auth import authenticate, login
 from rest_framework.response import Response
-from rest_framework import status,permissions,generics
-
+from rest_framework import status, permissions
 # Create your views here.
-
-class InterviewerRegisterAPI(GenericAPIView):
-	permission_classes = [permissions.AllowAny]
-	serializer_class = InterviewerRegisterSerializer
-	
-	def post(self,request,*args,**kwargs):
-		data = request.data
-		serializer = self.serializer_class(data=data)
-		serializer.is_valid(raise_exception = True)
-		user = serializer.save()
-		return Response({'Success':'Your account is successfully created'},status=status.HTTP_201_CREATED)
 
 
 class IntervieweeRegisterAPI(GenericAPIView):
 	permission_classes = [permissions.AllowAny]
 	serializer_class = IntervieweeRegisterSerializer
-	
-	def post(self,request,*args,**kwargs):
+
+	def post(self, request, *args, **kwargs):
 		data = request.data
 		serializer = self.serializer_class(data=data)
-		serializer.is_valid(raise_exception = True)
+		serializer.is_valid(raise_exception=True)
 		interviewee = serializer.save()
-		user = User.objects.get(interviewee = interviewee)
-		send_mail(user=user,html='',
+		user = User.objects.get(interviewee=interviewee)
+		send_mail(user=user, html='',
                 text='Account Created Successfully',
                 subject='User Verification',
                 from_email='djangorest3@gmail.com',
                 to_emails=[user.email])
-		return Response({'Success':'Your account is successfully created'},status=status.HTTP_201_CREATED)
+		return Response({'Success': 'Your account is successfully created'}, status=status.HTTP_201_CREATED)
 
+
+class IntervieweeAPI(APIView):
+	serializer_class = IntervieweeRegisterSerializer
+	permission_classes = [permissions.IsAuthenticated]
+
+	def get(self, request, pk):
+		interviewee = Interviewee.objects.get(id=pk)
+		# print(interviewee)
+		serializer = self.serializer_class(interviewee)
+		print(serializer)
+		return JsonResponse(serializer.data, safe=False)
+
+	def put(self, request, pk):
+		serializer = self.serializer_class(data=request.data)
+		serializer.is_valid(raise_exception=True)
+		serializer.update(request.user, request.data)
+		return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
 
 class LoginAPI(GenericAPIView):
 	permission_classes = [permissions.AllowAny]
@@ -51,7 +58,6 @@ class LoginAPI(GenericAPIView):
 		sapid = request.data.get('sapid',None)
 		password = request.data.get('password',None)
 		user = authenticate(username = sapid, password = password)
-		# print(User.objects.get(sapid = 60004200108).password)
 		if user:
 			login(request,user)
 			token = Token.objects.get(user=user)
@@ -59,30 +65,6 @@ class LoginAPI(GenericAPIView):
 			
 		return Response('Invalid Credentials',status = status.HTTP_404_NOT_FOUND)
 
-
-class LinksAPI(GenericAPIView):
-	permission_classes = [permissions.IsAuthenticated]
-	serializer_class = LinksSerializer
-
-	def post(self,request,*args,**kwargs ):
-		user = request.user
-		interviewee = Interviewee.objects.get(user = user)
-		data = request.data
-		serializer = self.serializer_class(data=data)
-		serializer.is_valid(raise_exception = True)
-		serializer.save(interviewee = interviewee)
-		return Response(serializer.validated_data, status= status.HTTP_200_OK)
-
-	def get(self,request,*args,**kwargs):
-		data = self.queryset
-		serializer = LinksSerializer(data, many = True)
-		return Response(serializer.data, status= status.HTTP_200_OK)
-
-	def get_queryset(self):
-		user = self.request.user
-		interviewee = Interviewee.objects.get(user = user)
-		queryset = Links.objects.filter(interviewee = interviewee)
-		return queryset
 
 class TaskAPI(ListAPIView):
 	permission_classes = [permissions.IsAuthenticated]
