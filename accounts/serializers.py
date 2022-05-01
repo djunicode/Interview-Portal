@@ -1,3 +1,4 @@
+from asyncio.windows_events import NULL
 from email.mime import application
 from lib2to3.pgen2 import token
 from coreapi import Link
@@ -90,18 +91,28 @@ class ApplicationStackSerializer(serializers.ModelSerializer):
 
 
 class ApplicationSerializer(serializers.ModelSerializer):
-    stack = ApplicationStackSerializer(many = True)
+    stack = ApplicationStackSerializer(many = True, required = False)
     class Meta:
         model = Application
         fields = ['stack','resume_link']
 
     def create(self,validated_data):
-
         stack_data = validated_data.pop('stack')
         user = self.context.get("request").user
         interviewee = Interviewee.objects.get(user = user)
         application = Application.objects.create(interviewee = interviewee, **validated_data)
         for stack in stack_data:
             ApplicationStack.objects.create(application = application, **stack)
+
+        return validated_data
+
+    def update(self,validated_data,instance):
+        new_stack_data = validated_data.pop('stack')
+        instance.resume_link = validated_data['resume_link']
+        instance.save()
+
+        ApplicationStack.objects.filter(application = instance).delete()
+        for stack in new_stack_data:
+            ApplicationStack.objects.create(application=instance, **stack)
 
         return validated_data

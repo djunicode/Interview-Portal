@@ -91,7 +91,7 @@ class Application(models.Model):
     status      = models.BooleanField(default=False)
 
 class ApplicationStack(models.Model):
-    application = models.ForeignKey(Application, on_delete= models.CASCADE,default=2)
+    application = models.ForeignKey(Application, on_delete= models.CASCADE,related_name='stack')
     stacks = (('Frontend', 'Frontend'),
               ('Django', 'Django'),
               ('Node', 'Node'),
