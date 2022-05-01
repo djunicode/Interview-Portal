@@ -49,7 +49,6 @@ class Interviewee(models.Model):
     def get_links(self):
         return self.links_set.values_list('link', flat=True)
 
-
 class Stack(models.Model):
 
     stacks = (('Frontend', 'Frontend'),
@@ -103,3 +102,5 @@ class ApplicationStack(models.Model):
     name = models.CharField(max_length=20, choices=stacks, blank=True)
     repo_link = models.CharField(max_length=50,blank=True)
 
+    resources = models.URLField(max_length=200, blank=True)
+    stack = models.ForeignKey(Stack, on_delete=models.CASCADE)
