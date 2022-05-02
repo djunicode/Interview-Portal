@@ -1,10 +1,6 @@
-from asyncio.windows_events import NULL
-from email.mime import application
 from lib2to3.pgen2 import token
-from coreapi import Link
-# from coreapi import Link
 from rest_framework import serializers
-from .models import *
+from .models import * 
 import re
 from rest_framework.exceptions import ValidationError
 

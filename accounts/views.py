@@ -1,19 +1,14 @@
-import email
-from email.mime import application
-from django.http import HttpResponse
-from django.shortcuts import render
+
 from rest_framework.generics import GenericAPIView
-# import email
-# from django.shortcuts import render
+
 from django.http.response import JsonResponse
-from rest_framework.generics import GenericAPIView, RetrieveUpdateAPIView, ListAPIView
+from rest_framework.generics import GenericAPIView, ListAPIView
 from rest_framework.authtoken.models import Token
 from rest_framework.views import APIView
 
 from accounts.utils import send_mail
 from .serializers import *
-# from django.contrib.sites.shortcuts import get_current_site
-# from django.urls import reverse
+
 from django.contrib.auth import authenticate, login
 from rest_framework.response import Response
 from rest_framework import status, permissions

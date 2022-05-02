@@ -1,11 +1,7 @@
-from inspect import stack
-from os import link
-from tkinter import CASCADE
-import django
-from django.contrib.auth.models import AbstractUser
 
+from tkinter import CASCADE
+from django.contrib.auth.models import AbstractUser
 from django.db import models
-from requests import delete
 from rest_framework.authtoken.models import Token
 
 from accounts.manager import UserManager
