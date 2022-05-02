@@ -1,4 +1,3 @@
-import logo from "./logo.svg";
 import SignupPage from "../src/pages/signupPage";
 import Login_signup from "../src/pages/login_signup";
 import "./App.css";
@@ -6,7 +5,6 @@ import { Route, Routes } from "react-router";
 import { BrowserRouter as Router, Outlet, Navigate } from "react-router-dom";
 import Details from "./pages/Details";
 import Dashboard from "./pages/Dashboard";
-import Timeline from "./components/Timeline";
 import TimeLine from "./components/Timeline";
 import Time from "./components/Time/Time";
 import ApplyForIntreview from "./components/ApplyForIntreview";
