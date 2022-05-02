@@ -130,3 +130,10 @@ class TasksSerializer(serializers.ModelSerializer):
     class Meta:
         model = Task
         fields = '__all__'
+
+
+class StackSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Stack
+        fields = '__all__'

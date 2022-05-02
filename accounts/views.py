@@ -102,3 +102,11 @@ class TaskAPI(ListAPIView):
 	def get_queryset(self):
 		queryset = Task.objects.all()
 		return queryset
+
+class ResourcesAPI(ListAPIView):
+	permission_classes = [permissions.IsAuthenticated]
+	serializer_class = StackSerializer
+
+	def get_queryset(self):
+		queryset = Stack.objects.all()
+		return queryset

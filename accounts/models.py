@@ -56,7 +56,7 @@ class Stack(models.Model):
               ('Fullstack Django', 'Fullstack Django'))
 
     name = models.CharField(max_length=20, choices=stacks, blank=True)
-    link       = models.CharField(max_length=50, default="")
+    resources = models.FileField(max_length=200, blank=True)
 
 class Questionnaire(models.Model):
 
@@ -81,7 +81,6 @@ class Task(models.Model):
 
 class Application(models.Model):
     interviewee = models.ForeignKey(Interviewee, on_delete= models.CASCADE)
-    # stack       = models.ForeignKey(ApplicationStack,null=True,on_delete=models.SET_NULL)
     resume_link = models.CharField(max_length=50, blank = True, default = "")
     status      = models.BooleanField(default=False)
 
@@ -97,6 +96,3 @@ class ApplicationStack(models.Model):
 
     name = models.CharField(max_length=20, choices=stacks, blank=True)
     repo_link = models.CharField(max_length=50,blank=True)
-
-    resources = models.URLField(max_length=200, blank=True)
-    stack = models.ForeignKey(Stack, on_delete=models.CASCADE)
