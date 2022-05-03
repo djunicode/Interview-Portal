@@ -1,6 +1,6 @@
-# from coreapi import Link
+from lib2to3.pgen2 import token
 from rest_framework import serializers
-from .models import *
+from .models import * 
 import re
 from rest_framework.exceptions import ValidationError
 
@@ -28,7 +28,10 @@ class UserRegisterSerializer(serializers.ModelSerializer):
     # To create a new user
     def create(self, validated_data):
         validated_data['is_active'] = False
-        return User.objects.create(**validated_data) 
+        
+        user = User.objects.create(**validated_data)
+        Token.objects.create(user=user) 
+        return token
 
 
 class InterviewerRegisterSerializer(serializers.ModelSerializer):
@@ -59,14 +62,6 @@ class LoginSerializer(serializers.ModelSerializer):
         fields = ['sapid','password']
 
 
-# class LinksSerializer(serializers.ModelSerializer):
-    
-#     class Meta:
-#         model = Links
-#         fields = ['id','link']
-#         read_only_fields = ['interviewee']
-
-
 class IntervieweeRegisterSerializer(serializers.ModelSerializer):
     user = UserRegisterSerializer()
     read_only = True
@@ -94,8 +89,51 @@ class IntervieweeRegisterSerializer(serializers.ModelSerializer):
         instance.save()
         return instance
 
+
+class ApplicationStackSerializer(serializers.ModelSerializer):
+    # application = serializers.ReadOnlyField(source='application.interviewee')
+    class Meta:
+        model = ApplicationStack
+        fields = ['name','repo_link']
+
+
+class ApplicationSerializer(serializers.ModelSerializer):
+    stack = ApplicationStackSerializer(many = True, required = False)
+    class Meta:
+        model = Application
+        fields = ['stack','resume_link']
+
+    def create(self,validated_data):
+        stack_data = validated_data.pop('stack')
+        user = self.context.get("request").user
+        interviewee = Interviewee.objects.get(user = user)
+        application = Application.objects.create(interviewee = interviewee, **validated_data)
+        for stack in stack_data:
+            ApplicationStack.objects.create(application = application, **stack)
+
+        return validated_data
+
+    def update(self,validated_data,instance):
+        new_stack_data = validated_data.pop('stack')
+        instance.resume_link = validated_data['resume_link']
+        instance.save()
+
+        ApplicationStack.objects.filter(application = instance).delete()
+        for stack in new_stack_data:
+            ApplicationStack.objects.create(application=instance, **stack)
+
+        return validated_data
+
+
 class TasksSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Task
+        fields = '__all__'
+
+
+class StackSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Stack
         fields = '__all__'

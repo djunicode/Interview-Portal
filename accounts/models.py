@@ -1,5 +1,6 @@
-from django.contrib.auth.models import AbstractUser
 
+from tkinter import CASCADE
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 from rest_framework.authtoken.models import Token
 
@@ -54,7 +55,8 @@ class Stack(models.Model):
               ('Flutter', 'Flutter'),
               ('Fullstack Django', 'Fullstack Django'))
 
-    name = models.CharField(max_length=20, choices=stacks, blank=True, primary_key=True)
+    name = models.CharField(max_length=20, choices=stacks, blank=True)
+    resources = models.FileField(max_length=200, blank=True)
 
 class Questionnaire(models.Model):
 
@@ -73,5 +75,24 @@ class Task(models.Model):
 
     task_id = models.IntegerField(primary_key=True)
     task_question = models.TextField(max_length=255)
-    resources = models.URLField(max_length=200, blank=True)
+    resources = models.SlugField(max_length=100, blank=True)
     stack = models.ForeignKey(Stack, on_delete=models.CASCADE)
+
+
+class Application(models.Model):
+    interviewee = models.ForeignKey(Interviewee, on_delete= models.CASCADE)
+    resume_link = models.CharField(max_length=50, blank = True, default = "")
+    status      = models.BooleanField(default=False)
+
+class ApplicationStack(models.Model):
+    application = models.ForeignKey(Application, on_delete= models.CASCADE,related_name='stack')
+    stacks = (('Frontend', 'Frontend'),
+              ('Django', 'Django'),
+              ('Node', 'Node'),
+              ('React Native', 'React Native'),
+              ('Fullstack Node', 'Fullstack Node'), 
+              ('Flutter', 'Flutter'),
+              ('Fullstack Django', 'Fullstack Django'))
+
+    name = models.CharField(max_length=20, choices=stacks, blank=True)
+    repo_link = models.CharField(max_length=50,blank=True)

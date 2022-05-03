@@ -24,10 +24,10 @@ class UserAdmin(BaseUserAdmin):
     ordering = ('sapid',)
     filter_horizontal = ()
 
-class InterviewerAdmin(admin.ModelAdmin):
-    model = Interviewer
-    list_display = ['user', 'role']
-    list_filter = ['user', 'role']
+# class InterviewerAdmin(BaseUserAdmin):
+#     model = Interviewer
+#     list_display = ['user', 'role']
+#     list_filter = ['user', 'role']
 
 #     fieldsets = [
 #         (None, {'fields': ('user', 'role', 'username')})
@@ -38,10 +38,10 @@ class InterviewerAdmin(admin.ModelAdmin):
 #     filter_horizontal = ()
 
 
-class IntervieweeAdmin(admin.ModelAdmin):
-    model = Interviewee
-    list_display = ['user']
-    list_filter = ['user']
+# class IntervieweeAdmin(BaseUserAdmin):
+#     model = Interviewee
+#     list_display = ['user']
+#     list_filter = ['user']
 
 #     fieldsets = [
 #         (None, {'fields': ('user',)})
@@ -58,3 +58,5 @@ admin.site.register(Stack)
 admin.site.register(Task)
 admin.site.register(Questionnaire)
 admin.site.register(Interview)
+admin.site.register(Application)
+admin.site.register(ApplicationStack)
