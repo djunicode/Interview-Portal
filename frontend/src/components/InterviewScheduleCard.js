@@ -8,10 +8,10 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "space-around",
   },
   card1: {
-    padding: "3%",
+    padding: "6%",
     height: "28vh",
-    boxShadow: "1px 1px 6px rgba(0, 0, 0, 0.25)",
-    borderRadius: "10px",
+    boxShadow: "1px 1px 6px rgba(0, 0, 0, 0.25)!important",
+    borderRadius: "10px!important",
   },
   divider: {
     width: "100%",
@@ -19,6 +19,9 @@ const useStyles = makeStyles((theme) => ({
   header: {
     display: "flex",
     justifyContent: "flex-start",
+  },
+  text: {
+    fontSize: "14px!important",
   },
 }));
 
@@ -36,7 +39,7 @@ const InterviewScheduleCard = () => {
           <Divider className={classes.divider} />
         </Grid>
         <Grid item xs={12}>
-          <Typography>
+          <Typography className={classes.text}>
             Not yet scheduled will notify you when it is scheduled
           </Typography>
         </Grid>

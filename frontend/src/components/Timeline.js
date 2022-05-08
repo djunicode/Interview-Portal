@@ -113,8 +113,8 @@ const useStyles = makeStyles((theme) => ({
   card2: {
     padding: "3%",
     height: "57vh",
-    boxShadow: "1px 1px 6px rgba(0, 0, 0, 0.25)",
-    borderRadius: "10px",
+    boxShadow: "1px 1px 6px rgba(0, 0, 0, 0.25)!important",
+    borderRadius: "10px!important",
   },
 }));
 

@@ -19,11 +19,12 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     justifyContent: "flex-start",
     color: " #4F4F4F",
+    fontSize: "8px!important",
   },
   card1: {
     padding: "1%",
-    boxShadow: "1px 1px 6px rgba(0, 0, 0, 0.25)",
-    borderRadius: "10px",
+    boxShadow: "1px 1px 6px rgba(0, 0, 0, 0.25)!important",
+    borderRadius: "10px!important",
     paddingTop: "6%",
     paddingBottom: "6%",
   },
@@ -38,7 +39,7 @@ const ProfileProgress = (props) => {
           <ProgressCircle />
         </Grid>
         <Grid item>
-          <Grid item className={classes.text1}>
+          <Grid item variant="h6">
             <Typography> Your profile is still 80% incomplete</Typography>
           </Grid>
           <Grid item className={classes.text2}>

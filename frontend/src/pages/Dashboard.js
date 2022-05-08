@@ -12,6 +12,9 @@ const useStyles = makeStyles((theme) => ({
   flexItem: {
     display: "flex",
     justifyContent: "space-around",
+    [theme.breakpoints.down("md")]: {
+      marginLeft: "40px!important",
+    },
   },
   background: {
     backgroundColor: "#F2F3F7",
@@ -26,18 +29,18 @@ const Dashboard = () => {
         <Grid item xs={2}>
           <SideNavbar />
         </Grid>
-        <Grid item xs={3}>
+        <Grid item md={3} xs={12}>
           <Grid item xs={12} mt={3}>
             <ProfileProgress />
           </Grid>
-          <Grid item xs={12} mt={7}>
+          <Grid item lg={12} mt={7}>
             <InterviewScheduleCard />
           </Grid>
         </Grid>
-        <Grid item xs={3} mt={3}>
+        <Grid item md={3} xs={12} mt={3}>
           <TimeLine />
         </Grid>
-        <Grid item xs={3} mt={3}>
+        <Grid item md={3} xs={12} mt={3}>
           <ApplyForIntreview />
         </Grid>
       </Grid>
