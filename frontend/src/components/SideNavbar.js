@@ -103,10 +103,10 @@ export default function SideNavbar() {
   };
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: 'flex' }} position="fixed" open={open}>>
       <CssBaseline />
-      <AppBar position="fixed" open={open}>
-        <Toolbar>
+      {/* <AppBar position="fixed" open={open}> */}
+        <Toolbar position="fixed" open={open}>>
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -121,11 +121,11 @@ export default function SideNavbar() {
           </IconButton>
          
         </Toolbar>
-      </AppBar>
+      {/* </AppBar> */}
       <Drawer variant="permanent" open={open}>
         <DrawerHeader>
           <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+            { 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
           </IconButton>
         </DrawerHeader>
         <Divider />
@@ -133,11 +133,11 @@ export default function SideNavbar() {
           {['Profile', "FAQ's", 'Application Form', 'Tasks' , 'Resources'].map((text, index) => (
             <ListItemButton
               key={text}
-              sx={{
-                minHeight: 48,
-                justifyContent: open ? 'initial' : 'center',
-                px: 2.5,
-              }}
+            //   sx={{
+            //     minHeight: 48,
+            //     justifyContent: open ? 'initial' : 'center',
+            //     px: 2.5,
+            //   }}
             >
               <ListItemIcon
                 sx={{
@@ -147,7 +147,7 @@ export default function SideNavbar() {
                 }}
               >
                 {index == 0 
-                ? <PersonIcon />
+                ? <PersonIcon  />
                  : index ==1
                  ? <QuizIcon/>
                   : index ==2
