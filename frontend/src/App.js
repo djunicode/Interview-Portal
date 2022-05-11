@@ -11,6 +11,7 @@ import TimeLine from "./components/Timeline";
 import Time from "./components/Time";
 import ApplyForIntreview from "./components/ApplyForIntreview";
 import SideNavbar from "./components/SideNavbar";
+import DashboardPage from "./pages/DashboardPage";
 
 function App() {
   const PrivateRoute = () => {
@@ -38,7 +39,7 @@ function App() {
             <Route path="/details" element={<Details />} />
           </Route>
           <Route path="/dashboard" element={<PrivateRoute />}>
-            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/dashboard" element={<DashboardPage />} />
           </Route>
         </Routes>
       </div>

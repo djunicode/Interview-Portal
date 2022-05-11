@@ -1,179 +1,131 @@
-import * as React from "react";
-import { styled, useTheme } from "@mui/material/styles";
-import Box from "@mui/material/Box";
-import MuiDrawer from "@mui/material/Drawer";
-import MuiAppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
-import List from "@mui/material/List";
-import CssBaseline from "@mui/material/CssBaseline";
-import Typography from "@mui/material/Typography";
-import Divider from "@mui/material/Divider";
-import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
-import PersonIcon from "@mui/icons-material/Person";
-import QuizIcon from "@mui/icons-material/Quiz";
-import AssignmentIcon from "@mui/icons-material/Assignment";
-import TaskIcon from "@mui/icons-material/Task";
-import SourceIcon from "@mui/icons-material/Source";
+import React, { useState } from 'react'
+import PropTypes from 'prop-types'
+import Box from '@mui/material/Box'
+import Drawer from '@mui/material/Drawer'
+import { useTheme } from '@mui/material/styles'
+import { useNavigate } from "react-router";
+import NarrowDrawer from './NarrowDrawer'
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import BroadDrawer from './BroadDrawer'
+import { Grid } from '@mui/material'
 
 const drawerWidth = 240;
+const narrowDrawerWidth = 60;
 
-const openedMixin = (theme) => ({
-  width: drawerWidth,
-  transition: theme.transitions.create("width", {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.enteringScreen,
-  }),
-  overflowX: "hidden",
-});
+function ResponsiveDrawer(props) {
+  let navigate = useNavigate()
 
-const closedMixin = (theme) => ({
-  transition: theme.transitions.create("width", {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
-  }),
-  overflowX: "hidden",
-  width: `calc(${theme.spacing(7)} + 1px)`,
-  [theme.breakpoints.up("sm")]: {
-    width: `calc(${theme.spacing(8)} + 1px)`,
-  },
-});
 
-const DrawerHeader = styled("div")(({ theme }) => ({
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "flex-end",
-  padding: theme.spacing(0, 1),
-  // necessary for content to be below app bar
-  ...theme.mixins.toolbar,
-}));
+  const { windows } = props
+  const [mobileOpen, setMobileOpen] = useState(false)
+  const { children } = props
+  const [value, setValue] = useState(0)
+  const [openDrawer, setOpenDrawer] = useState(true)
 
-const AppBar = styled(MuiAppBar, {
-  shouldForwardProp: (prop) => prop !== "open",
-})(({ theme, open }) => ({
-  zIndex: theme.zIndex.drawer + 1,
-  transition: theme.transitions.create(["width", "margin"], {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
-  }),
-  ...(open && {
-    marginLeft: drawerWidth,
-    width: `calc(100% - ${drawerWidth}px)`,
-    transition: theme.transitions.create(["width", "margin"], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  }),
-}));
+  const theme = useTheme()
+  const handleChange = (event, newValue) => {
+    setValue(newValue)
+  }
 
-const Drawer = styled(MuiDrawer, {
-  shouldForwardProp: (prop) => prop !== "open",
-})(({ theme, open }) => ({
-  width: drawerWidth,
-  flexShrink: 0,
-  whiteSpace: "nowrap",
-  boxSizing: "border-box",
-  ...(open && {
-    ...openedMixin(theme),
-    "& .MuiDrawer-paper": openedMixin(theme),
-  }),
-  ...(!open && {
-    ...closedMixin(theme),
-    "& .MuiDrawer-paper": closedMixin(theme),
-  }),
-}));
+  const transitionDuration = {
+    enter: theme.transitions.duration.enteringScreen,
+    exit: theme.transitions.duration.leavingScreen,
+  }
 
-export default function SideNavbar() {
-  const theme = useTheme();
-  const [open, setOpen] = React.useState(true);
+  const [anchorEl, setAnchorEl] = React.useState(null)
 
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
+  const open = Boolean(anchorEl)
+  const id = open ? 'simple-popover' : undefined
 
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen)
+  }
+
+  const narrowDrawer = (
+    <NarrowDrawer />
+  )
+
+  const drawer = (
+    <BroadDrawer />
+  )
+
+  const container =
+    windows !== undefined ? () => windows().document.body : undefined
 
   return (
-    <Box sx={{ display: "flex" }}>
-      <CssBaseline />
-      {/* <AppBar position="fixed" open={open}> */}
-      <Toolbar>
-        <IconButton
-          color="inherit"
-          aria-label="open drawer"
-          onClick={handleDrawerOpen}
-          edge="start"
+    <Box sx={{ display: 'flex' }}>
+      <Box component="nav" sx={openDrawer ? { width: { sm: narrowDrawerWidth }, flexShrink: { sm: 0 } } : { width: { sm: drawerWidth }, flexShrink: { sm: 0 } }} aria-label="mailbox folders">
+        <Drawer
+          container={container}
+          variant="temporary"
+          open={mobileOpen}
+          onClose={handleDrawerToggle}
+          ModalProps={{
+            keepMounted: true,
+          }}
           sx={{
-            marginRight: 5,
-            ...(open && { display: "none" }),
+            display: { xs: 'block', sm: 'none' },
+            '& .MuiDrawer-paper': {
+              boxSizing: 'border-box',
+              width: drawerWidth,
+            },
           }}
         >
-          <MenuIcon />
-        </IconButton>
-      </Toolbar>
-      {/* </AppBar> */}
-      <Drawer variant="permanent" open={open}>
-        <DrawerHeader>
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction === "rtl" ? (
+          {drawer}
+        </Drawer>
+        {
+          openDrawer ? <Drawer
+            variant="permanent"
+            className='borderSidebar'
+            sx={{
+              display: { xs: 'none', sm: 'block' },
+              '& .MuiDrawer-paper': {
+                boxSizing: 'border-box',
+                width: narrowDrawerWidth
+              },
+            }}
+            open
+          >
+            <Grid onClick={() => setOpenDrawer(!openDrawer)} sx={{ display: 'flex', justifyContent: 'center', padding: '20%', cursor: 'pointer' }}>
               <ChevronRightIcon />
-            ) : (
+            </Grid>
+            {narrowDrawer}
+          </Drawer> : <Drawer
+            variant="permanent"
+            className='borderSidebar'
+            sx={{
+              display: { xs: 'none', sm: 'block' },
+              '& .MuiDrawer-paper': {
+                boxSizing: 'border-box',
+                width: drawerWidth
+              },
+            }}
+            open
+          >
+            <Grid onClick={() => setOpenDrawer(!openDrawer)} sx={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center', padding: '0%', cursor: 'pointer' }}>
               <ChevronLeftIcon />
-            )}
-          </IconButton>
-        </DrawerHeader>
-        <Divider />
-        <List>
-          {["Profile", "FAQ's", "Application Form", "Tasks", "Resources"].map(
-            (text, index) => (
-              <ListItemButton
-                key={text}
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? "initial" : "center",
-                  px: 2.5,
-                }}
-              >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : "auto",
-                    justifyContent: "center",
-                  }}
-                >
-                  {index == 0 ? (
-                    <PersonIcon />
-                  ) : index == 1 ? (
-                    <QuizIcon />
-                  ) : index == 2 ? (
-                    <AssignmentIcon />
-                  ) : index == 3 ? (
-                    <TaskIcon />
-                  ) : index == 4 ? (
-                    <SourceIcon />
-                  ) : (
-                    <SourceIcon />
-                  )}
-                </ListItemIcon>
-                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
-              </ListItemButton>
-            )
-          )}
-        </List>
-        <Divider />
-      </Drawer>
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-        <DrawerHeader />
+              <p>Minimize</p>
+            </Grid>
+            {drawer}
+          </Drawer>
+        }
+
       </Box>
+      <Box
+        component="main"
+        sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` }, overflowX: 'hidden', margin: '0', padding: '1%' }}
+
+      >
+        {children}
+      </Box>
+
     </Box>
-  );
+  )
 }
+
+ResponsiveDrawer.propTypes = {
+  windows: PropTypes.func,
+}
+
+export default ResponsiveDrawer

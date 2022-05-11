@@ -24,11 +24,8 @@ const useStyles = makeStyles((theme) => ({
 const Dashboard = () => {
   const classes = useStyles();
   return (
-    <div className={classes.background}>
+    <>
       <Grid container columnSpacing={5} className={classes.flexItem}>
-        <Grid item xs={2}>
-          <SideNavbar />
-        </Grid>
         <Grid item md={3} xs={12}>
           <Grid item xs={12} mt={3}>
             <ProfileProgress />
@@ -44,7 +41,7 @@ const Dashboard = () => {
           <ApplyForIntreview />
         </Grid>
       </Grid>
-    </div>
+    </>
   );
 };
 
