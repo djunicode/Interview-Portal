@@ -8,8 +8,8 @@ import { Grid } from "@mui/material";
 const useStyles = makeStyles((theme) => ({
   grad: {
     backgroundImage: theme.gradient,
-    width: "48vw",
-    height: "100vh",
+    width: "48%",
+    height: "96vh",
     borderRadius: "26px",
     margin: "1%!important",
     display: "flex",
