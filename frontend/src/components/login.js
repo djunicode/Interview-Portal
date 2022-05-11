@@ -6,7 +6,15 @@ import { useFormik } from "formik";
 import axios from "axios";
 import * as Yup from "yup";
 import "../styles/login.css";
+import { makeStyles } from "@mui/styles";
+const useStyles = makeStyles((theme) => ({
+  error: {
+    display: "flex",
+    color: theme.palette.error.main,
+  },
+}));
 const Login = () => {
+  const classes = useStyles();
   const formik = useFormik({
     initialValues: {
       username: "",
@@ -49,7 +57,7 @@ const Login = () => {
   console.log(formik.errors);
 
   return (
-    <div className="outerDiv2">
+    <div className="outerDiv2ForLogin">
       <div className="innerDiv2">
         <div className="loginHeader">LOGIN</div>
         <div className="userPass"> Username</div>
@@ -63,7 +71,7 @@ const Login = () => {
           variant="outlined"
         />
         {formik.touched.username && formik.errors.username ? (
-          <p className="error">{formik.errors.username}</p>
+          <p className={classes.error}>{formik.errors.username}</p>
         ) : null}
         <div className="userPass">Password</div>
         <TextField
@@ -77,7 +85,7 @@ const Login = () => {
           value={formik.values.password}
         />
         {formik.touched.password && formik.errors.password ? (
-          <p className="error">{formik.errors.password}</p>
+          <p className={classes.error}>{formik.errors.password}</p>
         ) : null}
         <div className="dhaaText">
           <div className="dhaaText1">Don't have an account?</div>
