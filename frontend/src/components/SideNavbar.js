@@ -105,7 +105,7 @@ export default function SideNavbar() {
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      {/* <AppBar position="fixed" open={open}> */}
+      <AppBar position="fixed" open={open}>
       <Toolbar>
         <IconButton
           color="inherit"
@@ -120,7 +120,7 @@ export default function SideNavbar() {
           <MenuIcon />
         </IconButton>
       </Toolbar>
-      {/* </AppBar> */}
+      </AppBar>
       <Drawer variant="permanent" open={open}>
         <DrawerHeader>
           <IconButton onClick={handleDrawerClose}>
@@ -133,7 +133,7 @@ export default function SideNavbar() {
         </DrawerHeader>
         <Divider />
         <List>
-          {["Profile", "FAQ's", "Application Form", "Tasks", "Resources"].map(
+          {["Profile", "FAQ's", "Application Form", "Resources"].map(
             (text, index) => (
               <ListItemButton
                 key={text}
