@@ -3,6 +3,8 @@ from rest_framework import serializers
 from .models import * 
 import re
 from rest_framework.exceptions import ValidationError
+from rest_framework.response import Response
+from rest_framework import status
 
 email_pattern = re.compile(r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)")
 
@@ -84,14 +86,14 @@ class IntervieweeRegisterSerializer(serializers.ModelSerializer):
         instance.name = new_user['name']
         instance.email = new_user['email']
         instance.sapid = instance.sapid
-        # instance.sapid = validated_data.get('sapid', instance.sapid)
+
         instance.grad_year = new_user['grad_year']
         instance.save()
         return instance
 
 
 class ApplicationStackSerializer(serializers.ModelSerializer):
-    # application = serializers.ReadOnlyField(source='application.interviewee')
+
     class Meta:
         model = ApplicationStack
         fields = ['name','repo_link']
@@ -104,17 +106,21 @@ class ApplicationSerializer(serializers.ModelSerializer):
         fields = ['stack','resume_link']
 
     def create(self,validated_data):
-        stack_data = validated_data.pop('stack')
+        stack_data = validated_data['stack']
         user = self.context.get("request").user
         interviewee = Interviewee.objects.get(user = user)
-        application = Application.objects.create(interviewee = interviewee, **validated_data)
-        for stack in stack_data:
-            ApplicationStack.objects.create(application = application, **stack)
+        try:
+            application = Application.objects.get(interviewee = interviewee, **validated_data)
+            return Response("Application already exists", status=status.HTTP_400_BAD_REQUEST)
+        except:
+            application = Application.objects.create(interviewee = interviewee, **validated_data)
+            for stack in stack_data:
+                ApplicationStack.objects.create(application = application, **stack)
+            return Response(validated_data, status=status.HTTP_202_ACCEPTED)
 
-        return validated_data
 
     def update(self,validated_data,instance):
-        new_stack_data = validated_data.pop('stack')
+        new_stack_data = validated_data['stack']
         instance.resume_link = validated_data['resume_link']
         instance.save()
 
@@ -122,7 +128,7 @@ class ApplicationSerializer(serializers.ModelSerializer):
         for stack in new_stack_data:
             ApplicationStack.objects.create(application=instance, **stack)
 
-        return validated_data
+        return Response(validated_data, status=status.HTTP_202_ACCEPTED)
 
 
 class TasksSerializer(serializers.ModelSerializer):
