@@ -1,0 +1,48 @@
+.loginHeader {
+  color: #5154ce;
+  font-size: 150%;
+  font-weight: 700;
+}
+.userPass {
+  justify-content: flex-start;
+  display: flex;
+  padding: 1%;
+}
+.outerDiv2ForLogin {
+  display: flex;
+  flex-direction: column;
+  width: 55%;
+  height: 40%;
+}
+.dhaaText {
+  display: flex;
+  flex-flow: row wrap;
+  font-family: "poppins" !important;
+  justify-content: center;
+}
+.dhaaText1 {
+  font-size: 14px;
+  font-weight: 400;
+  padding: 1%;
+}
+.dhaaText2 {
+  font-size: 14px;
+  font-weight: 700;
+  color: #8985f2;
+  padding: 1%;
+}
+.signBttn {
+  background-color: #8985f2 !important;
+}
+.innerDiv2 {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-around;
+}
+@media screen and (max-width: 600px) {
+  .outerDiv2ForLogin {
+    background-color: white !important;
+    padding: 5%;
+  }
+}
