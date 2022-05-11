@@ -2,6 +2,7 @@ import { createTheme } from "@mui/material";
 export const theme = createTheme({
   palette: {
     primary: { main: "#5154CE" },
+    error: { main: "#d32f2f" },
   },
   background: "#F2F3F7",
   text: { primary: "#7E7E7E" },
@@ -12,6 +13,13 @@ export const theme = createTheme({
     h3: {
       fontWeight: "700",
       fontSize: "30px",
+    },
+    h6: {
+      fontWeight: "500",
+      fontSize: "10px",
+    },
+    textField: {
+      height: "50px!important",
     },
   },
 });

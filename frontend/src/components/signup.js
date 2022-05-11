@@ -9,7 +9,12 @@ import "../styles/login.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const useStyles = makeStyles({});
+const useStyles = makeStyles((theme) => ({
+  error: {
+    display: "flex",
+    color: theme.palette.error.main,
+  },
+}));
 const Signup = () => {
   const classes = useStyles();
 
@@ -77,7 +82,7 @@ const Signup = () => {
   });
   let navigate = useNavigate();
   return (
-    <div className="outerDiv2">
+    <div className="outerDiv2ForSignup">
       <div className="innerDiv2">
         <div className="loginHeader">SIGNUP</div>
         <div className="userPass"> EMAIL</div>
@@ -89,9 +94,10 @@ const Signup = () => {
           onBlur={formik.handleBlur}
           onChange={formik.handleChange}
           value={formik.values.email}
+          className={classes.field}
         />
         {formik.touched.email && formik.errors.email ? (
-          <p className="error">{formik.errors.email}</p>
+          <p className={classes.error}>{formik.errors.email}</p>
         ) : null}
 
         <div className="userPass"> USERNAME</div>
@@ -105,7 +111,7 @@ const Signup = () => {
           value={formik.values.username}
         />
         {formik.touched.username && formik.errors.username ? (
-          <p className="error">{formik.errors.username}</p>
+          <p className={classes.error}>{formik.errors.username}</p>
         ) : null}
 
         <div className="userPass"> SAP ID</div>
@@ -118,7 +124,7 @@ const Signup = () => {
           value={formik.values.sapid}
         />
         {formik.touched.sapid && formik.errors.sapid ? (
-          <p className="error">{formik.errors.sapid}</p>
+          <p className={classes.error}>{formik.errors.sapid}</p>
         ) : null}
 
         <div className="userPass"> Graduation Year</div>
@@ -131,7 +137,7 @@ const Signup = () => {
           value={formik.values.grad_year}
         />
         {formik.touched.grad_year && formik.errors.grad_year ? (
-          <p className="error">{formik.errors.grad_year}</p>
+          <p className={classes.error}>{formik.errors.grad_year}</p>
         ) : null}
 
         <div className="userPass">Password</div>
@@ -145,7 +151,7 @@ const Signup = () => {
           value={formik.values.setPassword}
         />
         {formik.touched.setPassword && formik.errors.setPassword ? (
-          <p className="error">{formik.errors.setPassword}</p>
+          <p className={classes.error}>{formik.errors.setPassword}</p>
         ) : null}
 
         <div className="userPass"> Confirm Password</div>
@@ -159,7 +165,7 @@ const Signup = () => {
           value={formik.values.confirmPassword}
         />
         {formik.touched.confirmPassword && formik.errors.confirmPassword ? (
-          <p className="error">{formik.errors.confirmPassword}</p>
+          <p className={classes.error}>{formik.errors.confirmPassword}</p>
         ) : null}
 
         <div className="dhaaText">
