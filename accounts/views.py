@@ -12,7 +12,6 @@ from .serializers import *
 from django.contrib.auth import authenticate, login
 from rest_framework.response import Response
 from rest_framework import status, permissions
-# Create your views here.
 
 
 class IntervieweeRegisterAPI(GenericAPIView):
@@ -25,11 +24,14 @@ class IntervieweeRegisterAPI(GenericAPIView):
 		serializer.is_valid(raise_exception=True)
 		interviewee = serializer.save()
 		user = User.objects.get(interviewee=interviewee)
-		send_mail(user=user, html='',
-                text='Account Created Successfully',
-                subject='User Verification',
-                from_email='djangorest3@gmail.com',
-                to_emails=[user.email])
+		try:
+			send_mail(user=user, html='',
+					text='Account Created Successfully',
+					subject='User Verification',
+					from_email='testsender1507@gmail.com',
+					to_emails=[user.email])
+		except:
+			pass
 		return Response({'Success': 'Your account is successfully created'}, status=status.HTTP_201_CREATED)
 
 
@@ -38,10 +40,11 @@ class IntervieweeAPI(APIView):
 	permission_classes = [permissions.IsAuthenticated]
 
 	def get(self, request, pk):
-		interviewee = Interviewee.objects.get(id=pk)
-		# print(interviewee)
+		try:
+			interviewee = Interviewee.objects.get(id=pk)
+		except:
+			JsonResponse("interviewee not found", status= status.HTTP_404_NOT_FOUND)
 		serializer = self.serializer_class(interviewee)
-		print(serializer)
 		return JsonResponse(serializer.data, safe=False)
 
 	def put(self, request, pk):
@@ -71,28 +74,32 @@ class ApplicationView(GenericAPIView):
 	serializer_class = ApplicationSerializer
 
 	def get(self,request):
-		user = request.user
-		interviewee = Interviewee.objects.get(user = request.user)
-		application = Application.objects.get(interviewee = interviewee)
+		try:
+			interviewee = Interviewee.objects.get(user = request.user)
+		except:
+			JsonResponse("interviewee not found", status= status.HTTP_404_NOT_FOUND)
+
+		try:
+			application = Application.objects.get(interviewee = interviewee)
+		except:
+			JsonResponse("Application not found", status= status.HTTP_404_NOT_FOUND)
 		serializer = ApplicationSerializer(application)
 		return Response(serializer.data)
 
 	def post(self,request,*args,**kwargs):
-		data = request.data
-		user = request.user
-		serializer = self.serializer_class(data=data, context={'request': request})
+		serializer = self.serializer_class(data=request.data, context={'request': request})
 		serializer.is_valid(raise_exception = True)
-		serializer.create(request.data)
-		return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
+		response = serializer.create(request.data)
+		return response
 
 	def put(self,request,*args,**kwargs):
 		interviewee = Interviewee.objects.get(user = request.user)
 		application = Application.objects.get(interviewee = interviewee)
 		serializer = self.serializer_class(data=request.data)
 		serializer.is_valid(raise_exception=True)
-		serializer.update(request.data,application)
+		response = serializer.update(request.data,application)
 
-		return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
+		return response
 		
 class TaskAPI(ListAPIView):
 	permission_classes = [permissions.IsAuthenticated]
