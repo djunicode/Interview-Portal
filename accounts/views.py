@@ -76,15 +76,15 @@ class ApplicationView(GenericAPIView):
 	def get(self,request):
 		try:
 			interviewee = Interviewee.objects.get(user = request.user)
+			try:
+				application = Application.objects.get(interviewee = interviewee)
+				serializer = ApplicationSerializer(application)
+				return Response(serializer.data)
+			except:
+				return Response({"message":"Application not found"}, status= status.HTTP_404_NOT_FOUND)
 		except:
-			JsonResponse("interviewee not found", status= status.HTTP_404_NOT_FOUND)
+			return Response({"message":"interviewee not found"}, status= status.HTTP_404_NOT_FOUND)
 
-		try:
-			application = Application.objects.get(interviewee = interviewee)
-		except:
-			JsonResponse("Application not found", status= status.HTTP_404_NOT_FOUND)
-		serializer = ApplicationSerializer(application)
-		return Response(serializer.data)
 
 	def post(self,request,*args,**kwargs):
 		serializer = self.serializer_class(data=request.data, context={'request': request})

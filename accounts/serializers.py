@@ -106,7 +106,7 @@ class ApplicationSerializer(serializers.ModelSerializer):
         fields = ['stack','resume_link']
 
     def create(self,validated_data):
-        stack_data = validated_data['stack']
+        stack_data = validated_data.pop('stack')
         user = self.context.get("request").user
         interviewee = Interviewee.objects.get(user = user)
         try:
