@@ -11,11 +11,8 @@ username=config('username')
 password=config('password')
 
 def send_mail(user,html=None,text='Email_body',subject='Confirmation',from_email='',to_emails=[]):
-
-
+    
     otp_gen = random.randint(1000,9999)
-    # user.email_otp  = otp_gen
-    # user.save()
 
     assert isinstance(to_emails,list)
     msg=MIMEMultipart('alternative')
