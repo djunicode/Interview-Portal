@@ -7,4 +7,5 @@ urlpatterns = [
     path('login/', views.LoginAPI.as_view(), name = 'login'),
     path('application/',views.ApplicationView.as_view(), name = 'application'),
     path('resources/', views.ResourcesAPI.as_view(), name = 'resources'),
+    path('tasks/', views.TaskAPI.as_view(), name='tasks')
 ]

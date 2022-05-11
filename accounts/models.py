@@ -71,18 +71,17 @@ class Interview(models.Model):
     time = models.TimeField()
     questionnaire = models.ForeignKey(Questionnaire, on_delete=models.CASCADE)
 
-class Task(models.Model):
-
-    task_id = models.IntegerField(primary_key=True)
+class Task(models.Model):  
     task_question = models.TextField(max_length=255)
-    resources = models.SlugField(max_length=100, blank=True)
+    task_description = models.TextField(max_length=500, blank=True)
+    task_resources = models.URLField(max_length=100, blank=True)
     stack = models.ForeignKey(Stack, on_delete=models.CASCADE)
 
 
 class Application(models.Model):
     interviewee = models.ForeignKey(Interviewee, on_delete= models.CASCADE)
     resume_link = models.CharField(max_length=50, blank = True, default = "")
-    status      = models.BooleanField(default=False)
+    status = models.BooleanField(default=False)
 
 class ApplicationStack(models.Model):
     application = models.ForeignKey(Application, on_delete= models.CASCADE,related_name='stack')
