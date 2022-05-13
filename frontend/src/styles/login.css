@@ -1,5 +1,5 @@
 .loginHeader {
-  color: #5154ce;
+  color: rgba(81, 84, 206, 1);
   font-size: 150%;
   font-weight: 700;
 }
@@ -28,12 +28,10 @@
 .dhaaText2 {
   font-size: 14px;
   font-weight: 700;
-  color: #8985f2;
-  padding: 1%;
+  color: rgba(81, 84, 206, 1);
+  text-decoration: none !important;
 }
-.signBttn {
-  background-color: #8985f2 !important;
-}
+
 .innerDiv2 {
   display: flex;
   flex-direction: column;

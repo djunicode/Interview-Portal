@@ -1,7 +1,8 @@
 import React from "react";
 import { makeStyles } from "@mui/styles";
-import { Grid, Input } from "@mui/material";
+import { Grid, Input, Typography } from "@mui/material";
 import "../styles/signupPage.css";
+import { Card } from "@mui/material";
 import "../styles/login_signup.css";
 // import Panel from "muicss/lib/react/panel";
 import { Button } from "@mui/material";
@@ -10,196 +11,105 @@ import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 import Chip from "@mui/material/Chip";
 import ChipInput from "material-ui-chip-input";
+import resume from "../assets/resume.svg";
+import git from "../assets/git.svg";
+import stacks from "../assets/stacks.svg";
 import TextField from "@material-ui/core/TextField";
+import { Box } from "@mui/system";
+
 // import Form from 'muicss/lib/react/form';
 // import Input from 'muicss/lib/react/input';
 
 const useStyles = makeStyles((theme) => ({
-	grad: {
-		backgroundImage: theme.gradient,
-		width: "49vw",
-		height: "100vh",
-		borderRadius: "26px",
-		margin: "1%",
-		display: "flex",
-	},
+  grad: {
+    backgroundImage: theme.gradient,
+    height: "100vh",
+
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  card1: {
+    display: "flex",
+    height: "75vh",
+    width: "110vh",
+    display: "flex",
+    justifyContent: "center",
+    padding: "5%",
+    borderRadius: "20px!important",
+  },
+  header: {
+    color: theme.palette.primary.main,
+  },
+
+  gridRow: {
+    display: "flex",
+    justifyContent: "space-around",
+    alignItems: "center",
+  },
+  container: {
+    width: "60%!important",
+  },
+  field: {
+    width: "80%",
+  },
+  bttn: {
+    width: "100%",
+  },
 }));
 
 const Details = () => {
-	const classes = useStyles();
-	return (
-		<>
-			<Grid
-				container
-				style={{
-					padding: "15px",
-					width: "100vw",
-					height: "100vh",
-					position: "relative",
-				}}
-			>
-				<Grid
-					className={classes.grad}
-					item
-					style={{
-						width: "100%",
-						height: "100%",
-						borderRadius: "7px",
-					}}
-				>
-					<Grid
-						container
-						style={{
-							display: "flex",
-							justifyContent: "center",
-							alignItems: "center",
-							flexDirection: "column",
-							height: "100%",
-						}}
-					>
-						<Grid
-							container
-							sx={{
-								display: "flex",
-								justifyContent: "center",
-								alignItems: "center",
-								flexDirection: "column",
-								backgroundColor: "#F1F1F1",
-								width: { md: "40vw", sm: "60vw", xs: "80vw" },
-								padding: "2%",
-								borderRadius: "3.5px",
-								marginTop: "5%",
-							}}
-						>
-							<Grid
-								item
-								style={{
-									fontWeight: "bold",
-									marginBottom: "3%",
-									fontSize: "1.5em",
-									color: "#8080FF",
-								}}
-							>
-								DETAILS
-							</Grid>
-							<Grid
-								item
-								style={{
-									width: "100%",
-									display: "flex",
-									alignItems: "center",
-									justifyContent: "center",
-								}}
-							>
-								<Grid
-									container
-									spacing={3}
-									style={{
-										display: "flex",
-										alignItems: "center",
-										justifyContent: "center",
-										flexDirection: "column",
-										width: "100%",
-									}}
-								>
-									<Grid
-										item
-										style={{
-											width: "100%",
-											display: "flex",
-											alignItems: "center",
-											justifyContent: "center",
-											flexDirection: "column",
-											rowGap: "1.5rem",
-										}}
-									>
-										<Grid
-											container
-											spacing={3}
-											style={{
-												display: "flex",
-												alignItems: "center",
-												justifyContent: "center",
-												width: "100%",
-												flexDirection: "column",
-											}}
-										>
-											<Grid item style={{ width: "100%" }}>
-												{/* <TextField
-													required
-													label="Email"
-													id="email"
-													name="email"
-													// value={list.email}
-													autoFocus
-													style={{ width: "100%" }}
-													// onChange={handleChange}
-												/> */}
-												<Grid>
-													<TextField
-														id="outlined-basic"
-														label=""
-														variant="outlined"
-													/>
-													<TextField
-														id="outlined-basic"
-														label=""
-														variant="outlined"
-													/>
-												</Grid>
-												<Grid>
-													
-												</Grid>
-											</Grid>
-											<Grid item style={{ width: "100%" }}>
-												<TextField
-													type="password"
-													required
-													label="Password"
-													id="password"
-													name="password"
-													// value={list.password}
-													style={{ width: "100%" }}
-													// onChange={handleChange}
-												/>
-											</Grid>
-										</Grid>
-									</Grid>
-								</Grid>
-							</Grid>
-
-							<Grid
-								item
-								style={{
-									width: "100%",
-									display: "flex",
-									justifyContent: "center",
-									alignItems: "center",
-								}}
-							>
-								{/* <Link to={'/contactlist'} style={{ width: '50%', marginTop: '2%', background: 'linear-gradient(149.06deg, #E02768 5.36%, #C71C7A 85.52%)', color: 'white', fontWeight: '600', width: '100%', fontSize: '1.1em', display: 'flex', justifyContent: 'center', alignItems: 'center' }} state={personCreds} onClick={handleSubmit}>Sign In</Link> */}
-								<Button
-									style={{
-										width: "87%",
-										height: "45px",
-										border: "2px solid #8080FF",
-										color: "#8080FF",
-										marginTop: "2%",
-										background: "rgba(128, 128, 255, 0.2)",
-										fontWeight: "600",
-										fontSize: "1.1em",
-									}}
-									// onClick={handleSubmit}
-								>
-									Sign In
-								</Button>
-							</Grid>
-						</Grid>
-					</Grid>
-				</Grid>
-			</Grid>
-		</>
-	);
+  const classes = useStyles();
+  return (
+    <>
+      <Box
+        container
+        className={classes.grad}
+        sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+      >
+        <Card className={classes.card1}>
+          <Grid container className={classes.container}>
+            <Grid item xs={12}>
+              <Typography className={classes.header} variant="h2">
+                DETAILS
+              </Typography>
+            </Grid>
+            <Grid item xs={12} className={classes.gridRow}>
+              <img src={resume} />
+              <TextField
+                variant="outlined"
+                label="Resume Link"
+                className={classes.field}
+              />
+            </Grid>
+            <Grid item xs={12} className={classes.gridRow}>
+              <img src={stacks} />
+              <TextField
+                variant="outlined"
+                label="Stacks"
+                className={classes.field}
+              />
+            </Grid>
+            <Grid item xs={12} className={classes.gridRow}>
+              <img src={git} />
+              <TextField
+                variant="outlined"
+                label="Github profile"
+                className={classes.field}
+              />
+            </Grid>
+            <Grid item xs={12} className={classes.gridRow}>
+              <Button variant="contained" className={classes.bttn}>
+                Confirm Details
+              </Button>
+            </Grid>
+            <Grid item xs={12} className={classes.gridRow}>
+              <Typography>Skip for now {">"} </Typography>
+            </Grid>
+          </Grid>
+        </Card>
+      </Box>
+    </>
+  );
 };
 
 export default Details;
