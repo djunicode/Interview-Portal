@@ -4,7 +4,6 @@ import "./App.css";
 import { Route, Routes } from "react-router";
 import { BrowserRouter as Router, Outlet, Navigate } from "react-router-dom";
 import Details from "./pages/Details";
-import Dashboard from "./pages/Dashboard";
 import TimeLine from "./components/Timeline";
 import Time from "./components/Time";
 import ApplyForIntreview from "./components/ApplyForIntreview";
@@ -12,6 +11,7 @@ import SideNavbar from "./components/SideNavbar";
 import DashboardPage from "./pages/DashboardPage";
 import TabPanel from "./components/TasksSection";
 import Resources from "./components/ResourcesSection";
+import Profile from "./pages/Profile";
 
 function App() {
   const PrivateRoute = () => {
@@ -34,14 +34,14 @@ function App() {
           <Route path="/" element={<PrivateRoute />}>
             <Route path="/" element={<Login_signup />} />
           </Route>
-          {/* <Route path="/signup" element={<PrivateRoute />}>
-						<Route path="/signup" element={<SignupPage />} />
-					</Route> */}
           <Route path="/details" element={<PrivateRoute />}>
             <Route path="/details" element={<Details />} />
           </Route>
           <Route path="/dashboard" element={<PrivateRoute />}>
             <Route path="/dashboard" element={<DashboardPage />} />
+          </Route>
+          <Route path="/profile" element={<PrivateRoute />}>
+            <Route path="/profile" element={<Profile />} />
           </Route>
         </Routes>
       </div>

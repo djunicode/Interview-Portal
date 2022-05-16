@@ -19,7 +19,7 @@ function NarrowDrawer() {
             </Box>
             <Divider />
             <List>
-                <ListItem button onClick={() => navigate('/')}>
+                <ListItem button onClick={() => navigate('/profile')}>
                     <ListItemIcon>
                         <PersonIcon />
                     </ListItemIcon>
