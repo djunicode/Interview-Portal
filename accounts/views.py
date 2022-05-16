@@ -39,9 +39,10 @@ class IntervieweeAPI(APIView):
 	serializer_class = IntervieweeRegisterSerializer
 	permission_classes = [permissions.IsAuthenticated]
 
-	def get(self, request, pk):
+	def get(self, request):
 		try:
-			interviewee = Interviewee.objects.get(id=pk)
+			interviewee = Interviewee.objects.get(user = request.user)
+			print(interviewee)
 		except:
 			JsonResponse("interviewee not found", status= status.HTTP_404_NOT_FOUND)
 		serializer = self.serializer_class(interviewee)
