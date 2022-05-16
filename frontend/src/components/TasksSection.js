@@ -65,37 +65,33 @@ function a11yProps(index) {
 }
 
 export default function BasicTabs() {
-	// const [value, setValue] = useState([]);
-  // const handleChange = (event, newValue) => {
-	// 	setTasks(newValue);
-	// };
-
+	
 	const [tasks, setTasks] = useState([]);
 
-	const handleTask = (event, newTask) => {
-		setTasks(newTask);
-	};
+	// const handleTask = (event, newTask) => {
+	// 	setTasks(newTask);
+	// };
 
-	useEffect(() => {
-		var axios = require("axios");
+	// useEffect(() => {
+	// 	var axios = require("axios");
 
-		var config = {
-			method: "get",
-			url: "https://unicodeinterview.pythonanywhere.com/accounts/tasks/",
-			headers: {
-				Authorization: "Token a85940fbf0ce66a9df63e8128c0e2290b985ff20",
-			},
-		};
+	// 	var config = {
+	// 		method: "get",
+	// 		url: "https://unicodeinterview.pythonanywhere.com/accounts/tasks/",
+	// 		headers: {
+	// 			Authorization: "Token a85940fbf0ce66a9df63e8128c0e2290b985ff20",
+	// 		},
+	// 	};
 
-		axios(config)
-			.then(function (response) {
-				console.log(JSON.stringify(response.data));
-        setTasks(JSON.stringify(response.data));
-			})
-			.catch(function (error) {
-				console.log(error);
-			});
-	}, []);
+	// 	axios(config)
+	// 		.then(function (response) {
+	// 			console.log(JSON.stringify(response.data));
+    //     setTasks(JSON.stringify(response.data));
+	// 		})
+	// 		.catch(function (error) {
+	// 			console.log(error);
+	// 		});
+	// }, []);
 
 	const classes = useStyles();
 
@@ -113,7 +109,7 @@ export default function BasicTabs() {
 					<Box sx={{ borderBottom: 1, borderColor: "divider", mt: 3 }}>
 						<Tabs
 							value={tasks}
-							onChange={handleTask}
+							// onChange={handleTask}
 							aria-label="basic tabs example"
 						>
 							<Tab label="Frontend" {...a11yProps(0)} />
@@ -123,14 +119,7 @@ export default function BasicTabs() {
 						</Tabs>
 					</Box>
 					<TabPanel value={tasks} index={0}>
-						<div className="item-container">
-							{tasks.map((task) => (
-								<div className="card">
-									<h3>{task.task_question}</h3>
-									<p>{task.task_description}</p>
-								</div>
-							))}
-						</div>
+						Item One
 					</TabPanel>
 					<TabPanel value={tasks} index={1}>
 						Item Two

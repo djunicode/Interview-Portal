@@ -73,7 +73,11 @@ const Signup = () => {
 
       axios(config)
         .then(function (response) {
-          console.log(JSON.stringify(response.data));
+          if (response.data) {
+            console.log(response.data);
+            navigate("/login");
+          }
+          // console.log(JSON.stringify(response.data));
         })
         .catch(function (error) {
           console.log(error);
@@ -174,8 +178,10 @@ const Signup = () => {
         </div>
         <Button
           variant="contained"
-          onClick={formik.handleSubmit}
-          //  onClick={() => navigate("/login")}
+          // onClick={() => {
+					// 	navigate("/login");
+					// }}
+           onClick={() => navigate("/login")}
         >
           SIGN UP
         </Button>

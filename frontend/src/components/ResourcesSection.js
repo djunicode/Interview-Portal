@@ -1,4 +1,4 @@
-import  React, {useEffect} from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
@@ -6,6 +6,9 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { Card, Divider, Grid } from "@mui/material";
 import { makeStyles } from "@mui/styles";
+import SideNavbar from "../components/SideNavbar";
+import ProgressCircle from "./ProgressCircle";
+import ResourcesData from "./ResourcesData";
 
 const useStyles = makeStyles((theme) => ({
 	flexItem: {
@@ -65,32 +68,12 @@ function a11yProps(index) {
 }
 
 export default function Resources() {
-	const [value, setValue] = React.useState(0);
+	const [value, setValue] = useState([]);
 
 	const handleChange = (event, newValue) => {
 		setValue(newValue);
 	};
 	const classes = useStyles();
-
-	useEffect(() => {
-		var axios = require("axios");
-
-		var config = {
-			method: "get",
-			url: "https://unicodeinterview.pythonanywhere.com/accounts/resources/",
-			headers: {
-				Authorization: "Token 5cf113a408a69b6acee34213bbd9d41d73613eaa",
-			},
-		};
-
-		axios(config)
-			.then(function (response) {
-				console.log(JSON.stringify(response.data));
-			})
-			.catch(function (error) {
-				console.log(error);
-			});
-	},[])
 
 	return (
 		<Card className={classes.card1}>
@@ -119,19 +102,19 @@ export default function Resources() {
 						</Grid>
 					</Box>
 					<TabPanel value={value} index={0}>
-						Item One
+						<ResourcesData stack="Frontend" />
 					</TabPanel>
 					<TabPanel value={value} index={1}>
-						Item Two
+						<ResourcesData stack="Django" />
 					</TabPanel>
 					<TabPanel value={value} index={2}>
-						Item Three
+						<ResourcesData stack="React Native" />
 					</TabPanel>
 					<TabPanel value={value} index={3}>
-						Item Four
+						<ResourcesData stack="Flutter" />
 					</TabPanel>
 					<TabPanel value={value} index={4}>
-						Item Five
+					<ResourcesData stack="Fullstack Django" />
 					</TabPanel>
 				</Box>
 			</Grid>
