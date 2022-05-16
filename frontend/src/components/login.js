@@ -6,6 +6,7 @@ import { useFormik } from "formik";
 import axios from "axios";
 import * as Yup from "yup";
 import "../styles/login.css";
+import { useNavigate } from "react-router-dom";
 import { makeStyles } from "@mui/styles";
 const useStyles = makeStyles((theme) => ({
   error: {
@@ -15,6 +16,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 const Login = () => {
   const classes = useStyles();
+  const navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
       username: "",
@@ -46,7 +48,13 @@ const Login = () => {
       axios(config)
         .then(function (response) {
           console.log(response.data);
-          console.log(response.data.token);
+          if (response.data.token) {
+            console.log(response.data.token);
+            navigate("/dashboard");
+          } else {
+            navigate("/signup");
+            alert("Invalid cred");
+          }
           localStorage.setItem("token", response.data.token);
         })
         .catch(function (error) {
