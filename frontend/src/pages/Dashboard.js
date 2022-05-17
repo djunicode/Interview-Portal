@@ -8,6 +8,7 @@ import ApplyForIntreview from "../components/ApplyForIntreview";
 import Tasks from "../components/Tasks";
 import { Grid } from "@mui/material";
 import TimeLine from "../components/Timeline";
+import TabPanel from "../components/TasksSection";
 const useStyles = makeStyles((theme) => ({
   flexItem: {
     display: "flex",
@@ -18,14 +19,14 @@ const useStyles = makeStyles((theme) => ({
   },
   background: {
     backgroundColor: "#F2F3F7",
-    height: "100vh",
+    height: "120vh",
   },
   rowone: {},
 }));
 const Dashboard = () => {
   const classes = useStyles();
   return (
-    <div className={classes.background}>
+    <>
       <Grid container columnSpacing={5} className={classes.flexItem}>
         <Grid item xs={2}>
           <SideNavbar />
@@ -45,9 +46,12 @@ const Dashboard = () => {
         <Grid item md={3} xs={12} mt={3}>
           <ApplyForIntreview />
         </Grid>
+        <Grid item md={10} xs={12} mt={3}>
+          <TabPanel />
+        </Grid>
       </Grid>
       {/* </Grid> */}
-    </div>
+    </>
   );
 };
 

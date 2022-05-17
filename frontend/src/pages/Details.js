@@ -1,6 +1,6 @@
 import React from "react";
 import { makeStyles } from "@mui/styles";
-import { Grid, Input, Typography } from "@mui/material";
+import { Checkbox, Grid, Input, Typography } from "@mui/material";
 import "../styles/signupPage.css";
 import { Card } from "@mui/material";
 import "../styles/login_signup.css";
@@ -16,6 +16,7 @@ import git from "../assets/git.svg";
 import stacks from "../assets/stacks.svg";
 import TextField from "@material-ui/core/TextField";
 import { Box } from "@mui/system";
+import { useState, useEffect } from "react";
 
 // import Form from 'muicss/lib/react/form';
 // import Input from 'muicss/lib/react/input';
@@ -50,15 +51,43 @@ const useStyles = makeStyles((theme) => ({
     width: "60%!important",
   },
   field: {
-    width: "80%",
+    width: "100%",
   },
   bttn: {
     width: "100%",
+  },
+  formlabel: {
+    display: "flex",
   },
 }));
 
 const Details = () => {
   const classes = useStyles();
+  const [tick, setTick] = useState("false");
+  const [data, setData] = useState([]);
+  const [name, setName] = useState("");
+  const handleChange = () => {
+    setTick((tick) => (tick === "false" ? "true" : "false"));
+  };
+  const getValue = (e) => {
+    console.log(data.map((items) => items));
+    console.log(e.target.value);
+    console.log(data.includes(e.target.value));
+    data.map((item) => console.log(e.target.value == item));
+    if (data.includes(e.target.value)) {
+      let index = data.indexOf(e.target.value);
+      console.log(index);
+      setData([data.filter((item) => item !== e.target.value)]);
+    } else {
+      console.log([...data, e.target.value]);
+      setData([...data, e.target.value]);
+    }
+  };
+  console.log(data);
+  // useEffect(() => {
+  //   handleChange();
+  // }, []);
+  console.log(tick);
   return (
     <>
       <Box
@@ -75,26 +104,80 @@ const Details = () => {
             </Grid>
             <Grid item xs={12} className={classes.gridRow}>
               <img src={resume} />
-              <TextField
-                variant="outlined"
-                label="Resume Link"
-                className={classes.field}
-              />
+              <Grid item xs={12}>
+                <Typography className={classes.formlabel}>Resume</Typography>
+                <TextField
+                  variant="outlined"
+                  // label="Resume Link"
+                  className={classes.field}
+                />
+              </Grid>
             </Grid>
-            <Grid item xs={12} className={classes.gridRow}>
+            {/* <Grid item xs={12} className={classes.gridRow}>
               <img src={stacks} />
               <TextField
                 variant="outlined"
                 label="Stacks"
                 className={classes.field}
               />
+            </Grid> */}
+            <Grid item xs={12} className={classes.gridRow}>
+              <Grid item xs={3}>
+                <img src={git} />
+              </Grid>
+              <Grid item xs={9}>
+                <Typography className={classes.formlabel}>
+                  Github repository link
+                </Typography>
+              </Grid>
             </Grid>
             <Grid item xs={12} className={classes.gridRow}>
-              <img src={git} />
+              <Checkbox
+                tick={tick}
+                value="frontend"
+                onChange={(e) => {
+                  handleChange(e);
+                }}
+              />
               <TextField
-                variant="outlined"
-                label="Github profile"
                 className={classes.field}
+                disabled={tick === "true" ? true : false}
+                label="frontend"
+                variant="outlined"
+              />
+            </Grid>
+            <Grid item xs={12} className={classes.gridRow}>
+              <Checkbox tick={tick} value="node" onChange={handleChange} />
+              <TextField
+                className={classes.field}
+                disabled={tick ? true : false}
+                label="node"
+                variant="outlined"
+              />
+            </Grid>
+            <Grid item xs={12} className={classes.gridRow}>
+              <Checkbox tick={tick} value="django" onChange={handleChange} />
+              <TextField
+                className={classes.field}
+                disabled={tick ? true : false}
+                label="django"
+                variant="outlined"
+              />
+            </Grid>
+            <Grid item xs={12} className={classes.gridRow}>
+              <Checkbox
+                tick={tick}
+                value="app"
+                onChange={(e) => {
+                  getValue(e);
+                  handleChange();
+                }}
+              />
+              <TextField
+                className={classes.field}
+                disabled={tick ? true : false}
+                label="app"
+                variant="outlined"
               />
             </Grid>
             <Grid item xs={12} className={classes.gridRow}>
