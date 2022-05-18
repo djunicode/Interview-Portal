@@ -1,18 +1,11 @@
 import React from "react";
 import { makeStyles } from "@mui/styles";
-import { Grid, Input } from "@mui/material";
+import { Grid } from "@mui/material";
 import "../styles/signupPage.css";
 import "../styles/login_signup.css";
 // import Panel from "muicss/lib/react/panel";
 import { Button } from "@mui/material";
-// import TextField from "@mui/material/TextField";
-import { useNavigate } from "react-router";
-import { Link } from "react-router-dom";
-import Chip from "@mui/material/Chip";
-import ChipInput from "material-ui-chip-input";
 import TextField from "@material-ui/core/TextField";
-// import Form from 'muicss/lib/react/form';
-// import Input from 'muicss/lib/react/input';
 
 const useStyles = makeStyles((theme) => ({
 	grad: {
