@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import React from "react";
 import { makeStyles } from "@mui/styles";
 import { Checkbox, Grid, Input, Typography } from "@mui/material";
@@ -16,7 +17,6 @@ import git from "../assets/git.svg";
 import stacks from "../assets/stacks.svg";
 import TextField from "@material-ui/core/TextField";
 import { Box } from "@mui/system";
-import { useState, useEffect } from "react";
 
 // import Form from 'muicss/lib/react/form';
 // import Input from 'muicss/lib/react/input';
