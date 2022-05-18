@@ -1,18 +1,18 @@
-import React from 'react'
-import Box from '@mui/material/Box'
-import Divider from '@mui/material/Divider'
-import List from '@mui/material/List'
-import ListItem from '@mui/material/ListItem'
-import ListItemIcon from '@mui/material/ListItemIcon'
-import ListItemText from '@mui/material/ListItemText'
+import React from "react";
+import Box from "@mui/material/Box";
+import Divider from "@mui/material/Divider";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
 import { useNavigate } from "react-router";
-import PersonIcon from '@mui/icons-material/Person';
-import QuizIcon from '@mui/icons-material/Quiz';
-import AssignmentIcon from '@mui/icons-material/Assignment';
-import TaskIcon from '@mui/icons-material/Task';
+import PersonIcon from "@mui/icons-material/Person";
+import QuizIcon from "@mui/icons-material/Quiz";
+import AssignmentIcon from "@mui/icons-material/Assignment";
+import TaskIcon from "@mui/icons-material/Task";
 
 function BroadDrawer() {
-    const navigate = useNavigate()
+  const navigate = useNavigate();
 
     return (
         <>
@@ -39,7 +39,7 @@ function BroadDrawer() {
                 </ListItem>
             </List>
             <List>
-                <ListItem button onClick={() => navigate('/details')} >
+                <ListItem button onClick={() => navigate('/ApplicationForm')} >
                     <ListItemIcon>
                         <AssignmentIcon />
                     </ListItemIcon>
@@ -59,4 +59,4 @@ function BroadDrawer() {
     )
 }
 
-export default BroadDrawer
+export default BroadDrawer;

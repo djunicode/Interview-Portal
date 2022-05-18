@@ -21,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#F2F3F7",
     height: "120vh",
   },
+  rowone: {},
 }));
 const Dashboard = () => {
   const classes = useStyles();
@@ -45,6 +46,7 @@ const Dashboard = () => {
           <TabPanel />
         </Grid>
       </Grid>
+      {/* </Grid> */}
     </>
   );
 };
