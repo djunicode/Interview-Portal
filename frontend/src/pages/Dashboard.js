@@ -21,12 +21,17 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#F2F3F7",
     height: "120vh",
   },
+  rowone: {},
 }));
 const Dashboard = () => {
   const classes = useStyles();
   return (
     <>
       <Grid container columnSpacing={5} className={classes.flexItem}>
+        <Grid item xs={2}>
+          <SideNavbar />
+        </Grid>
+        {/* <Grid item xs={10} className={classes.rowone}> */}
         <Grid item md={3} xs={12}>
           <Grid item xs={12} mt={3}>
             <ProfileProgress />
@@ -45,6 +50,7 @@ const Dashboard = () => {
           <TabPanel />
         </Grid>
       </Grid>
+      {/* </Grid> */}
     </>
   );
 };
