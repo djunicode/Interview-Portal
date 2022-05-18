@@ -143,3 +143,26 @@ class StackSerializer(serializers.ModelSerializer):
     class Meta:
         model = Stack
         fields = '__all__'
+
+class User_GET_Serilizer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['sapid','name','email','grad_year']
+
+class Interviewee_GET_Serializer(serializers.ModelSerializer):
+    user = User_GET_Serilizer()
+    class Meta:
+        model = Interviewee
+        fields = "__all__"
+
+class Interviewer_GET_Serializer(serializers.ModelSerializer):
+    class Meta:
+        model = Interviewer
+        fields = "__all__"
+
+class PanelSerializer(serializers.ModelSerializer):
+    interviewees = Interviewee_GET_Serializer(many = True)
+    interviewers = Interviewer_GET_Serializer(many = True)
+    class Meta:
+        model = Panel
+        fields = '__all__'

@@ -118,3 +118,27 @@ class ResourcesAPI(ListAPIView):
 	def get_queryset(self):
 		queryset = Stack.objects.all()
 		return queryset
+
+
+class PanelAPI(GenericAPIView):
+	permission_classes = [permissions.IsAuthenticated]
+	serializer_class = PanelSerializer
+
+	def get(self,request):
+		interviewer = Interviewer.objects.get(user = request.user)
+		panels = Panel.objects.filter(interviewers = interviewer)
+		if not panels :
+			return Response({"message":"No Panel has been assigned to you"}, status= status.HTTP_404_NOT_FOUND)
+		serializer = PanelSerializer(panels, many = True)
+		return Response(serializer.data)
+
+class CandidateAPI(GenericAPIView):
+	permission_classes = [permissions.IsAuthenticated]
+	serializer_class = ApplicationSerializer
+
+	def get(self,request,sapid):
+		
+		interviewee = Interviewee.objects.get(user = sapid)
+		application = Application.objects.get(interviewee = interviewee)
+		serializer = ApplicationSerializer(application)
+		return Response(serializer.data)
