@@ -4,7 +4,7 @@ import Login_signup from "../src/pages/login_signup";
 import "./App.css";
 import { Route, Routes } from "react-router";
 import { BrowserRouter as Router, Outlet, Navigate } from "react-router-dom";
-import Details from "./pages/Details";
+
 import Dashboard from "./pages/Dashboard";
 import Timeline from "./components/Timeline";
 import TimeLine from "./components/Timeline";
@@ -14,7 +14,7 @@ import SideNavbar from "./components/SideNavbar";
 import DashboardPage from "./pages/DashboardPage";
 import TabPanel from "./components/TasksSection";
 import Resources from "./components/ResourcesSection";
-
+import ApplicationForm from "./pages/ApplicationForm";
 function App() {
   const PrivateRoute = () => {
     const token = localStorage.getItem("token");
@@ -30,8 +30,8 @@ function App() {
           <Route path="/timeline" element={<TimeLine />} />
           <Route path="/time" element={<Time />} />
           <Route path="/sidenavbar" element={<SideNavbar />} />
-          <Route path="/tasks" element={< TabPanel />} />
-          <Route path="/resources" element={< Resources />} />
+          <Route path="/tasks" element={<TabPanel />} />
+          <Route path="/resources" element={<Resources />} />
           <Route path="/apply" element={<ApplyForIntreview />} />
           <Route path="/" element={<PrivateRoute />}>
             <Route path="/" element={<Login_signup />} />
@@ -39,8 +39,8 @@ function App() {
           {/* <Route path="/signup" element={<PrivateRoute />}>
 						<Route path="/signup" element={<SignupPage />} />
 					</Route> */}
-          <Route path="/details" element={<PrivateRoute />}>
-            <Route path="/details" element={<Details />} />
+          <Route path="/ApplicationForm" element={<PrivateRoute />}>
+            <Route path="/ApplicationForm" element={<ApplicationForm />} />
           </Route>
           <Route path="/dashboard" element={<PrivateRoute />}>
             <Route path="/dashboard" element={<DashboardPage />} />

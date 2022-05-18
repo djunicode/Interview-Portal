@@ -27,4 +27,8 @@ export const theme = createTheme({
       height: "50px!important",
     },
   },
+  MuiCard: {
+    boxShadow: "1px 1px 6px rgba(0, 0, 0, 0.25)!important",
+    borderRadius: "10px!important",
+  },
 });

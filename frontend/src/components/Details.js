@@ -23,9 +23,9 @@ import { useState, useEffect } from "react";
 
 const useStyles = makeStyles((theme) => ({
   grad: {
-    backgroundImage: theme.gradient,
+    backgroundColor: "#F2F3F7",
     height: "100vh",
-
+    padding: "0!important",
     justifyContent: "center",
     alignItems: "center",
   },
@@ -63,31 +63,19 @@ const useStyles = makeStyles((theme) => ({
 
 const Details = () => {
   const classes = useStyles();
-  const [tick, setTick] = useState("false");
+
   const [data, setData] = useState([]);
-  const [name, setName] = useState("");
-  const handleChange = () => {
-    setTick((tick) => (tick === "false" ? "true" : "false"));
-  };
+
   const getValue = (e) => {
-    console.log(data.map((items) => items));
-    console.log(e.target.value);
-    console.log(data.includes(e.target.value));
-    data.map((item) => console.log(e.target.value == item));
     if (data.includes(e.target.value)) {
-      let index = data.indexOf(e.target.value);
-      console.log(index);
-      setData([data.filter((item) => item !== e.target.value)]);
+      let arr = data.filter((item) => item !== e.target.value);
+      setData(arr);
     } else {
-      console.log([...data, e.target.value]);
+      console.log(data.concat(e.target.value));
       setData([...data, e.target.value]);
     }
   };
-  console.log(data);
-  // useEffect(() => {
-  //   handleChange();
-  // }, []);
-  console.log(tick);
+
   return (
     <>
       <Box
@@ -102,6 +90,7 @@ const Details = () => {
                 DETAILS
               </Typography>
             </Grid>
+            {/* <Grid item><Profile/></Grid> */}
             <Grid item xs={12} className={classes.gridRow}>
               <img src={resume} />
               <Grid item xs={12}>
@@ -133,49 +122,60 @@ const Details = () => {
             </Grid>
             <Grid item xs={12} className={classes.gridRow}>
               <Checkbox
-                tick={tick}
+                checked={data.includes("frontend")}
                 value="frontend"
                 onChange={(e) => {
-                  handleChange(e);
+                  getValue(e);
                 }}
               />
               <TextField
                 className={classes.field}
-                disabled={tick === "true" ? true : false}
+                disabled={!data.includes("frontend")}
                 label="frontend"
                 variant="outlined"
               />
             </Grid>
             <Grid item xs={12} className={classes.gridRow}>
-              <Checkbox tick={tick} value="node" onChange={handleChange} />
+              <Checkbox
+                checked={data.includes("node")}
+                value="node"
+                onChange={(e) => {
+                  getValue(e);
+                }}
+              />
               <TextField
                 className={classes.field}
-                disabled={tick ? true : false}
+                disabled={!data.includes("node")}
                 label="node"
                 variant="outlined"
               />
             </Grid>
             <Grid item xs={12} className={classes.gridRow}>
-              <Checkbox tick={tick} value="django" onChange={handleChange} />
+              <Checkbox
+                checked={data.includes("django")}
+                value="django"
+                onChange={(e) => {
+                  getValue(e);
+                }}
+              />
               <TextField
                 className={classes.field}
-                disabled={tick ? true : false}
+                disabled={!data.includes("django")}
                 label="django"
                 variant="outlined"
               />
             </Grid>
             <Grid item xs={12} className={classes.gridRow}>
               <Checkbox
-                tick={tick}
+                checked={data.includes("app")}
                 value="app"
                 onChange={(e) => {
                   getValue(e);
-                  handleChange();
                 }}
               />
               <TextField
                 className={classes.field}
-                disabled={tick ? true : false}
+                disabled={!data.includes("app")}
                 label="app"
                 variant="outlined"
               />
