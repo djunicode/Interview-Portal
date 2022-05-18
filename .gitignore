@@ -5,3 +5,5 @@ Pipfile
 Pipfile.lock
 venv/
 erd.png
+interview_portal-env
+media
