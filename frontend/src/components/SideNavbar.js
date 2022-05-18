@@ -104,8 +104,10 @@ function ResponsiveDrawer(props) {
             open
           >
             <Grid onClick={() => setOpenDrawer(!openDrawer)} sx={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center', padding: '0%', cursor: 'pointer' }}>
+             <Grid>
               <ChevronLeftIcon />
-              <p>Minimize</p>
+              </Grid>
+              {/* <p></p> */}
             </Grid>
             {drawer}
           </Drawer>

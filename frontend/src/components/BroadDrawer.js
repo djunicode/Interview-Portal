@@ -20,7 +20,7 @@ function BroadDrawer() {
             </Box>
             <Divider />
             <List>
-                <ListItem button onClick={() => navigate('/')}>
+                <ListItem button onClick={() => navigate('/profile')}>
                     <ListItemIcon>
                         <PersonIcon />
                     </ListItemIcon>
@@ -31,7 +31,7 @@ function BroadDrawer() {
                 </ListItem>
             </List>
             <List>
-                <ListItem button onClick={() => navigate('/createpost')} >
+                <ListItem button onClick={() => navigate('/faqs')} >
                     <ListItemIcon>
                         <QuizIcon />
                     </ListItemIcon>
@@ -39,7 +39,7 @@ function BroadDrawer() {
                 </ListItem>
             </List>
             <List>
-                <ListItem button onClick={() => navigate('/createpost')} >
+                <ListItem button onClick={() => navigate('/details')} >
                     <ListItemIcon>
                         <AssignmentIcon />
                     </ListItemIcon>
@@ -47,7 +47,7 @@ function BroadDrawer() {
                 </ListItem>
             </List>
             <List>
-                <ListItem button onClick={() => navigate('/')} >
+                <ListItem button onClick={() => navigate('/resources')} >
                     <ListItemIcon>
                         <TaskIcon />
                     </ListItemIcon>

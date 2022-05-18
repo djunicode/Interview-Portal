@@ -6,6 +6,7 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { Card, Divider, Grid } from "@mui/material";
 import { makeStyles } from "@mui/styles";
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
 	flexItem: {
@@ -73,7 +74,6 @@ export default function BasicTabs() {
 	// };
 
 	// useEffect(() => {
-	// 	var axios = require("axios");
 
 	// 	var config = {
 	// 		method: "get",

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Card, Divider, Grid } from "@mui/material";
+import axios from "axios";
 
 const ResourcesData = ( props ) => {
 	const [data, setData] = useState([{
@@ -8,16 +9,15 @@ const ResourcesData = ( props ) => {
         "resources": "",
     }]);
 	useEffect(() => {
-		var axios = require("axios");
 
 		var config = {
 			method: "get",
 			url: "https://unicodeinterview.pythonanywhere.com/accounts/resources/",
 			headers: {
-				Authorization: "Token 5cf113a408a69b6acee34213bbd9d41d73613eaa",
+				Authorization: `Token ${localStorage.getItem("token")}`,
 			},
 		};
-
+console.log(localStorage.getItem("token"));
 		axios(config)
 			.then(function (response) {
 				console.log(JSON.stringify(response.data));

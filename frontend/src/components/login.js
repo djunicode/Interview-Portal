@@ -37,6 +37,11 @@ const Login = () => {
       var config = {
         method: "post",
         url: "https://unicodeinterview.pythonanywhere.com/accounts/login/",
+        headers: {
+          Cookie:
+            "csrftoken=lYS6Ws57155J4Ki9iYZz1x2w0PpUe2Sr4mb8R44e1lgymx2kHYNywUJX8bubAK9C; sessionid=kwn1usqi04ydrdpe9x1iolrzx4xo10qg",
+          // ...data.getHeaders(),
+        },
         data: data,
       };
 
@@ -47,7 +52,7 @@ const Login = () => {
             console.log(response.data.token);
             navigate("/dashboard");
           } else {
-            navigate("/login");
+            navigate("/signup");
             alert("Invalid cred");
           }
           localStorage.setItem("token", response.data.token);
