@@ -174,7 +174,7 @@ const Signup = () => {
           <div className="dhaaText1">Already have an account?</div>
           <div>
             <Link to="/login" className="dhaaText2">
-              login
+              Login
             </Link>
           </div>
         </div>
@@ -182,7 +182,6 @@ const Signup = () => {
           variant="contained"
           className="signBttn"
           onClick={formik.handleSubmit}
-          //  onClick={() => navigate("/login")}
         >
           SIGN UP
         </Button>

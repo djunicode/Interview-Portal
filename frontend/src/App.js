@@ -33,7 +33,7 @@ function App() {
           <Route path="/time" element={<Time />} />
           <Route path="/sidenavbar" element={<SideNavbar />} />
           <Route path="/tasks" element={<TabPanel />} />
-          <Route path="/resources" element={<Resources />} />
+          <Route path="/resources" element={<ResourcePage />} />
           <Route path="/apply" element={<ApplyForIntreview />} />
           <Route path="/" element={<PrivateRoute />}>
             <Route path="/" element={<Login_signup />} />

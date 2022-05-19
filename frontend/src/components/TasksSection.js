@@ -1,4 +1,4 @@
-import React, { useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
@@ -7,6 +7,7 @@ import Box from "@mui/material/Box";
 import { Card, Divider, Grid } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import axios from "axios";
+import TaskData from "./TaskData"
 
 const useStyles = makeStyles((theme) => ({
 	flexItem: {
@@ -66,32 +67,14 @@ function a11yProps(index) {
 }
 
 export default function BasicTabs() {
-	
-	const [tasks, setTasks] = useState([]);
+	const [value, setValue] = useState([]);
 
-	// const handleTask = (event, newTask) => {
-	// 	setTasks(newTask);
-	// };
+	const handleChange = (event, newValue) => {
+		setValue(newValue);
+	};
+	// const classes = useStyles();
 
-	// useEffect(() => {
 
-	// 	var config = {
-	// 		method: "get",
-	// 		url: "https://unicodeinterview.pythonanywhere.com/accounts/tasks/",
-	// 		headers: {
-	// 			Authorization: "Token a85940fbf0ce66a9df63e8128c0e2290b985ff20",
-	// 		},
-	// 	};
-
-	// 	axios(config)
-	// 		.then(function (response) {
-	// 			console.log(JSON.stringify(response.data));
-    //     setTasks(JSON.stringify(response.data));
-	// 		})
-	// 		.catch(function (error) {
-	// 			console.log(error);
-	// 		});
-	// }, []);
 
 	const classes = useStyles();
 
@@ -106,29 +89,35 @@ export default function BasicTabs() {
 				</Grid>
 
 				<Box sx={{ width: "100%" }}>
-					<Box sx={{ borderBottom: 1, borderColor: "divider", mt: 3 }}>
-						<Tabs
-							value={tasks}
-							// onChange={handleTask}
-							aria-label="basic tabs example"
-						>
-							<Tab label="Frontend" {...a11yProps(0)} />
-							<Tab label="Backend" {...a11yProps(1)} />
-							<Tab label="Design" {...a11yProps(2)} />
-							<Tab label="App" {...a11yProps(3)} />
-						</Tabs>
+					<Box sx={{ mt: 3 }} className={classes.flexItem}>
+						<Grid item>
+							<Tabs
+								value={value}
+								onChange={handleChange}
+								aria-label="basic tabs example"
+							>
+								<Tab label="Frontend" {...a11yProps(0)} />
+								<Tab label="Backend" {...a11yProps(1)} />
+								<Tab label="Design" {...a11yProps(2)} />
+								<Tab label="App" {...a11yProps(3)} />
+								<Tab label="Git Basics" {...a11yProps(4)} />
+							</Tabs>
+						</Grid>
 					</Box>
-					<TabPanel value={tasks} index={0}>
-						Item One
+					<TabPanel value={value} index={0}>
+						<TaskData />
 					</TabPanel>
-					<TabPanel value={tasks} index={1}>
-						Item Two
+					<TabPanel value={value} index={1}>
+						Item 2
 					</TabPanel>
-					<TabPanel value={tasks} index={2}>
-						Item Three
+					<TabPanel value={value} index={2}>
+						Item 3
 					</TabPanel>
-					<TabPanel value={tasks} index={3}>
-						Item Four
+					<TabPanel value={value} index={3}>
+						Item 4
+					</TabPanel>
+					<TabPanel value={value} index={4}>
+						Item 5
 					</TabPanel>
 				</Box>
 			</Grid>

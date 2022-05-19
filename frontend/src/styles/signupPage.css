@@ -34,6 +34,7 @@
   align-items: center;
   justify-content: center;
   width: 50%;
+  min-height: 100vh;
 }
 @media screen and (max-width: 600px) {
   .signUpDiv {
@@ -43,7 +44,8 @@
       #7b5bbc 86.47%
     );
     width: 100vw;
-    height: 100vh;
+    /* height: 100vh; */
+    min-height: 100vh;
     border-radius: 26px;
     margin: 1% !important;
     display: flex;
@@ -51,10 +53,13 @@
   .outerDiv2ForSignup {
     background-color: white !important;
     padding: 5%;
+    border-radius: 16px;
   }
 }
 .outerDiv2ForSignup {
   display: flex;
   flex-direction: column;
   width: 55%;
+  margin-top: 5%;
+  margin-bottom: 5%;
 }
