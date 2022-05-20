@@ -24,18 +24,18 @@ import { Box } from "@mui/system";
 const useStyles = makeStyles((theme) => ({
   grad: {
     backgroundColor: "#F2F3F7",
-    height: "100vh",
+    height: "100%",
     padding: "0!important",
     justifyContent: "center",
     alignItems: "center",
   },
   card1: {
     display: "flex",
-    // height: "75vh",
+    // height: "75%",
     width: "110vh",
     display: "flex",
     justifyContent: "center",
-    padding: "5%",
+    padding: "3%",
     borderRadius: "20px!important",
   },
   header: {
@@ -156,9 +156,9 @@ const Details = () => {
                 Application Form
               </Typography>
             </Grid>
-            {/* <Grid item>
+            <Grid item xs={12}>
               <ProfileDetails />
-            </Grid> */}
+            </Grid>
             <Grid item xs={12} className={classes.gridRow}>
               <img src={resume} />
               <Grid item xs={12}>
