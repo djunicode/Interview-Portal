@@ -28,25 +28,21 @@ const Dashboard = () => {
   return (
     <>
       <Grid container columnSpacing={5} className={classes.flexItem}>
-        <Grid item xs={2}>
-          <SideNavbar />
-        </Grid>
-        {/* <Grid item xs={10} className={classes.rowone}> */}
-        <Grid item md={3} xs={12}>
-          <Grid item xs={12} mt={3}>
+        <Grid item md={5} xs={10}>
+          <Grid item xs={10} lg={12} md={5} mt={3}>
             <ProfileProgress />
           </Grid>
-          <Grid item lg={12} mt={7}>
+          <Grid item xs={10} lg={12} md={5} mt={7}>
             <InterviewScheduleCard />
           </Grid>
         </Grid>
-        <Grid item md={3} xs={12} mt={3}>
+        <Grid item xs={10} md={5} xs={10} mt={3}>
           <TimeLine />
         </Grid>
-        <Grid item md={3} xs={12} mt={3}>
+        {/* <Grid item md={3} xs={12} mt={3}>
           <ApplyForIntreview />
-        </Grid>
-        <Grid item md={10} xs={12} mt={3}>
+        </Grid> */}
+        <Grid item md={11} xs={12} mt={3}>
           <TabPanel />
         </Grid>
       </Grid>

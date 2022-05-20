@@ -9,7 +9,7 @@ const useStyles = makeStyles((theme) => ({
   grad: {
     backgroundImage: theme.gradient,
     width: "48%",
-    height: "96vh",
+    minHeight: "96vh",
     borderRadius: "26px",
     margin: "1%!important",
     display: "flex",
@@ -21,7 +21,7 @@ const SignupPage = () => {
   return (
     <div>
       <Grid container>
-        {!matches && <Grid item className={classes.grad}></Grid>}
+        {!matches && <Grid item className={classes.grad} ></Grid>}
         <Grid item className="signUpDiv">
           <Signup />
         </Grid>

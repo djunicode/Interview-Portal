@@ -20,8 +20,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 const Login = () => {
-  let navigate = useNavigate();
   const classes = useStyles();
+  const navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
       username: "",
@@ -53,7 +53,13 @@ const Login = () => {
       axios(config)
         .then(function (response) {
           console.log(response.data);
-          console.log(response.data.token);
+          if (response.data.token) {
+            console.log(response.data.token);
+            navigate("/dashboard");
+          } else {
+            navigate("/signup");
+            alert("Invalid cred");
+          }
           localStorage.setItem("token", response.data.token);
           navigate("/dashboard");
         })
