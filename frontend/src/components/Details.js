@@ -6,6 +6,7 @@ import { Checkbox, Grid, Input, Typography } from "@mui/material";
 import "../styles/signupPage.css";
 import { Card } from "@mui/material";
 import { useFormik } from "formik";
+import ProfileDetails from "./ProfileDetails";
 import "../styles/login_signup.css";
 // import Panel from "muicss/lib/react/panel";
 import { Button } from "@mui/material";
@@ -30,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
   },
   card1: {
     display: "flex",
-    height: "75vh",
+    // height: "75vh",
     width: "110vh",
     display: "flex",
     justifyContent: "center",
@@ -45,6 +46,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "space-around",
     alignItems: "center",
+    padding: "2%",
   },
   container: {
     width: "60%!important",
@@ -151,9 +153,12 @@ const Details = () => {
           <Grid container className={classes.container}>
             <Grid item xs={12}>
               <Typography className={classes.header} variant="h2">
-                DETAILS
+                Application Form
               </Typography>
             </Grid>
+            {/* <Grid item>
+              <ProfileDetails />
+            </Grid> */}
             <Grid item xs={12} className={classes.gridRow}>
               <img src={resume} />
               <Grid item xs={12}>
