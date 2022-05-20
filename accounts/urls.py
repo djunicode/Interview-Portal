@@ -7,5 +7,9 @@ urlpatterns = [
     path('login/', views.LoginAPI.as_view(), name = 'login'),
     path('application/',views.ApplicationView.as_view(), name = 'application'),
     path('resources/', views.ResourcesAPI.as_view(), name = 'resources'),
-    path('tasks/', views.TaskAPI.as_view(), name='tasks')
+    path('tasks/', views.TaskAPI.as_view(), name='tasks'),
+
+#Interviewer APIs
+    path('panel_details/', views.PanelAPI.as_view(), name='panel'),
+    path('view_candidate/<str:sapid>', views.CandidateAPI.as_view(), name='candidate_view'),
 ]
