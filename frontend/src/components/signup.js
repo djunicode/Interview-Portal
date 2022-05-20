@@ -8,6 +8,7 @@ import { useFormik } from "formik";
 import "../styles/login.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   error: {
@@ -17,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 const Signup = () => {
   const classes = useStyles();
-
+  let navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -74,13 +75,14 @@ const Signup = () => {
       axios(config)
         .then(function (response) {
           console.log(JSON.stringify(response.data));
+          navigate("/login");
         })
         .catch(function (error) {
           console.log(error);
         });
     },
   });
-  let navigate = useNavigate();
+
   return (
     <div className="outerDiv2ForSignup">
       <div className="innerDiv2">
@@ -170,10 +172,15 @@ const Signup = () => {
 
         <div className="dhaaText">
           <div className="dhaaText1">Already have an account?</div>
-          <div className="dhaaText2">login</div>
+          <div>
+            <Link to="/login" className="dhaaText2">
+              login
+            </Link>
+          </div>
         </div>
         <Button
           variant="contained"
+          className="signBttn"
           onClick={formik.handleSubmit}
           //  onClick={() => navigate("/login")}
         >
