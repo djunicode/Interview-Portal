@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
@@ -6,6 +6,9 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { Card, Divider, Grid } from "@mui/material";
 import { makeStyles } from "@mui/styles";
+import SideNavbar from "../components/SideNavbar";
+import ProgressCircle from "./ProgressCircle";
+import ResourcesData from "./ResourcesData";
 
 const useStyles = makeStyles((theme) => ({
 	flexItem: {
@@ -65,7 +68,7 @@ function a11yProps(index) {
 }
 
 export default function Resources() {
-	const [value, setValue] = React.useState(0);
+	const [value, setValue] = useState([]);
 
 	const handleChange = (event, newValue) => {
 		setValue(newValue);
@@ -74,44 +77,44 @@ export default function Resources() {
 
 	return (
 		<Card className={classes.card1}>
-			<Grid container className={classes.flexItem}  >
-				<Grid item >
-					<Typography className={classes.header} variant="h3" >
+			<Grid container className={classes.flexItem}>
+				<Grid item>
+					<Typography className={classes.header} variant="h3">
 						Resources
 					</Typography>
 					<Divider className={classes.divider} />
 				</Grid>
 
 				<Box sx={{ width: "100%" }}>
-					<Box sx={{ mt:3 }} className={classes.flexItem}>
-                    <Grid item >
-						<Tabs
-							value={value}
-							onChange={handleChange}
-							aria-label="basic tabs example"
-						>
-							<Tab label="Frontend" {...a11yProps(0)} />
-							<Tab label="Backend" {...a11yProps(1)} />
-							<Tab label="Design" {...a11yProps(2)} />
-							<Tab label="App" {...a11yProps(3)} />
-                            <Tab label="Git Basics" {...a11yProps(4)} />
-						</Tabs>
-                        </Grid>
+					<Box sx={{ mt: 3 }} className={classes.flexItem}>
+						<Grid item>
+							<Tabs
+								value={value}
+								onChange={handleChange}
+								aria-label="basic tabs example"
+							>
+								<Tab label="Frontend" {...a11yProps(0)} />
+								<Tab label="Backend" {...a11yProps(1)} />
+								<Tab label="Design" {...a11yProps(2)} />
+								<Tab label="App" {...a11yProps(3)} />
+								<Tab label="Git Basics" {...a11yProps(4)} />
+							</Tabs>
+						</Grid>
 					</Box>
 					<TabPanel value={value} index={0}>
-						Item One
+						<ResourcesData stack="Frontend" />
 					</TabPanel>
 					<TabPanel value={value} index={1}>
-						Item Two
+						<ResourcesData stack="Django" />
 					</TabPanel>
 					<TabPanel value={value} index={2}>
-						Item Three
+						<ResourcesData stack="React Native" />
 					</TabPanel>
 					<TabPanel value={value} index={3}>
-						Item Four
+						<ResourcesData stack="Flutter" />
 					</TabPanel>
-                    <TabPanel value={value} index={4}>
-						Item Five
+					<TabPanel value={value} index={4}>
+					<ResourcesData stack="Fullstack Django" />
 					</TabPanel>
 				</Box>
 			</Grid>

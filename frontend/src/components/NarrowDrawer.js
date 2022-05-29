@@ -11,44 +11,44 @@ import AssignmentIcon from "@mui/icons-material/Assignment";
 import TaskIcon from "@mui/icons-material/Task";
 
 function NarrowDrawer() {
-    const navigate = useNavigate()
-    return (
-        <div style={{ overflowX: 'hidden' }}>
-            <Box className="logoBox" >
-                {/* <img width={100} src={} className="logo" /> */}
-            </Box>
-            <Divider />
-            <List>
-                <ListItem button onClick={() => navigate('/profile')}>
-                    <ListItemIcon>
-                        <PersonIcon />
-                    </ListItemIcon>
-                </ListItem>
-            </List>
-            <List>
-                <ListItem button onClick={() => navigate('/createpost')} >
-                    <ListItemIcon>
-                        <QuizIcon />
-                    </ListItemIcon>
-                </ListItem>
-            </List>
-            <List>
-                <ListItem button onClick={() => navigate('/createpost')} >
-                    <ListItemIcon>
-                        <AssignmentIcon />
-                    </ListItemIcon>
-                </ListItem>
-            </List>
-            <List>
-                <ListItem button onClick={() => navigate('/createpost')} >
-                    <ListItemIcon>
-                        <TaskIcon />
-                    </ListItemIcon>
-                </ListItem>
-            </List>
-            <Divider />
-        </div>
-    )
+  const navigate = useNavigate();
+  return (
+    <div style={{ overflowX: "hidden" }}>
+      <Box className="logoBox">
+        {/* <img width={100} src={} className="logo" /> */}
+      </Box>
+      <Divider />
+      <List>
+        <ListItem button onClick={() => navigate("/profile")}>
+          <ListItemIcon>
+            <PersonIcon />
+          </ListItemIcon>
+        </ListItem>
+      </List>
+      <List>
+        <ListItem button onClick={() => navigate("/faqs")}>
+          <ListItemIcon>
+            <QuizIcon />
+          </ListItemIcon>
+        </ListItem>
+      </List>
+      <List>
+        <ListItem button onClick={() => navigate("/ApplicationForm")}>
+          <ListItemIcon>
+            <AssignmentIcon />
+          </ListItemIcon>
+        </ListItem>
+      </List>
+      <List>
+        <ListItem button onClick={() => navigate("/resources")}>
+          <ListItemIcon>
+            <TaskIcon />
+          </ListItemIcon>
+        </ListItem>
+      </List>
+      <Divider />
+    </div>
+  );
 }
 
 export default NarrowDrawer;

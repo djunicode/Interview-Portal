@@ -1,9 +1,12 @@
 import { useState, useEffect } from "react";
 import React from "react";
+import * as Yup from "yup";
 import { makeStyles } from "@mui/styles";
 import { Checkbox, Grid, Input, Typography } from "@mui/material";
 import "../styles/signupPage.css";
 import { Card } from "@mui/material";
+import { useFormik } from "formik";
+import ProfileDetails from "./ProfileDetails";
 import "../styles/login_signup.css";
 // import Panel from "muicss/lib/react/panel";
 import { Button } from "@mui/material";
@@ -18,24 +21,21 @@ import stacks from "../assets/stacks.svg";
 import TextField from "@material-ui/core/TextField";
 import { Box } from "@mui/system";
 
-// import Form from 'muicss/lib/react/form';
-// import Input from 'muicss/lib/react/input';
-
 const useStyles = makeStyles((theme) => ({
   grad: {
     backgroundColor: "#F2F3F7",
-    height: "100vh",
+    height: "100%",
     padding: "0!important",
     justifyContent: "center",
     alignItems: "center",
   },
   card1: {
     display: "flex",
-    height: "75vh",
+    // height: "75%",
     width: "110vh",
     display: "flex",
     justifyContent: "center",
-    padding: "5%",
+    padding: "3%",
     borderRadius: "20px!important",
   },
   header: {
@@ -46,6 +46,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "space-around",
     alignItems: "center",
+    padding: "2%",
   },
   container: {
     width: "60%!important",
@@ -58,6 +59,11 @@ const useStyles = makeStyles((theme) => ({
   },
   formlabel: {
     display: "flex",
+  },
+  error: {
+    display: "flex",
+    color: theme.palette.error.main,
+    marginLeft: "10%",
   },
 }));
 
@@ -75,7 +81,67 @@ const Details = () => {
       setData([...data, e.target.value]);
     }
   };
+  const formik = useFormik({
+    initialValues: {
+      resume: "",
+      frontend: "",
+      node: "",
+      django: "",
+      app: "",
+    },
+    validationSchema: Yup.object({
+      resume: Yup.string().required("Required"),
+      //frontend: Yup.string().required("Required"),
+      // node: Yup.string().required("Required"),
+      // django: Yup.string().required("Required"),
+      // app: Yup.string().required("Required"),
+    }),
+    onSubmit: (values) => {
+      console.log(values);
+      var axios = import("axios");
+      var data = JSON.stringify({
+        stack: [
+          {
+            name: "Frontend",
+            repo_link: values.frontend,
+          },
+          {
+            name: "Node",
+            repo_link: values.node,
+          },
+          {
+            name: "Django",
+            repo_link: values.django,
+          },
+          {
+            name: "Flutter",
+            repo_link: values.app,
+          },
+        ],
+        resume_link: values.resume,
+      });
+      console.log(data);
+      var config = {
+        method: "post",
+        url: "https://unicodeinterview.pythonanywhere.com/accounts/application/",
+        headers: {
+          Authorization: `token ${localStorage.getItem("token")}`,
+          "Content-Type": "application/json",
+          Cookie:
+            "csrftoken=lYS6Ws57155J4Ki9iYZz1x2w0PpUe2Sr4mb8R44e1lgymx2kHYNywUJX8bubAK9C",
+        },
+        data: data,
+      };
 
+      axios(config)
+        .then(function (response) {
+          console.log(JSON.stringify(response.data));
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    },
+  });
   return (
     <>
       <Box
@@ -87,29 +153,32 @@ const Details = () => {
           <Grid container className={classes.container}>
             <Grid item xs={12}>
               <Typography className={classes.header} variant="h2">
-                DETAILS
+                Application Form
               </Typography>
             </Grid>
-            {/* <Grid item><Profile/></Grid> */}
+            <Grid item xs={12}>
+              <ProfileDetails />
+            </Grid>
             <Grid item xs={12} className={classes.gridRow}>
               <img src={resume} />
               <Grid item xs={12}>
                 <Typography className={classes.formlabel}>Resume</Typography>
                 <TextField
+                  id="resume"
+                  name="resume"
+                  onBlur={formik.handleBlur}
+                  onChange={formik.handleChange}
+                  value={formik.values.resume}
                   variant="outlined"
-                  // label="Resume Link"
                   className={classes.field}
                 />
+                <Grid item xs={12}>
+                  {formik.touched.resume && formik.errors.resume ? (
+                    <p className={classes.error}>{formik.errors.resume}</p>
+                  ) : null}
+                </Grid>
               </Grid>
             </Grid>
-            {/* <Grid item xs={12} className={classes.gridRow}>
-              <img src={stacks} />
-              <TextField
-                variant="outlined"
-                label="Stacks"
-                className={classes.field}
-              />
-            </Grid> */}
             <Grid item xs={12} className={classes.gridRow}>
               <Grid item xs={3}>
                 <img src={git} />
@@ -132,9 +201,20 @@ const Details = () => {
                 className={classes.field}
                 disabled={!data.includes("frontend")}
                 label="frontend"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.frontend}
                 variant="outlined"
+                id="frontend"
+                name="frontend"
               />
             </Grid>
+            <Grid item xs={12}>
+              {formik.touched.frontend && formik.errors.frontend ? (
+                <p className={classes.error}>{formik.errors.frontend}</p>
+              ) : null}
+            </Grid>
+
             <Grid item xs={12} className={classes.gridRow}>
               <Checkbox
                 checked={data.includes("node")}
@@ -148,7 +228,17 @@ const Details = () => {
                 disabled={!data.includes("node")}
                 label="node"
                 variant="outlined"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.node}
+                id="node"
+                name="node"
               />
+            </Grid>
+            <Grid item xs={12}>
+              {formik.touched.node && formik.errors.node ? (
+                <p className={classes.error}>{formik.errors.node}</p>
+              ) : null}
             </Grid>
             <Grid item xs={12} className={classes.gridRow}>
               <Checkbox
@@ -162,8 +252,18 @@ const Details = () => {
                 className={classes.field}
                 disabled={!data.includes("django")}
                 label="django"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.django}
                 variant="outlined"
+                id="django"
+                node="django"
               />
+            </Grid>
+            <Grid item xs={12}>
+              {formik.touched.django && formik.errors.django ? (
+                <p className={classes.error}>{formik.errors.django}</p>
+              ) : null}
             </Grid>
             <Grid item xs={12} className={classes.gridRow}>
               <Checkbox
@@ -177,11 +277,26 @@ const Details = () => {
                 className={classes.field}
                 disabled={!data.includes("app")}
                 label="app"
+                onChange={formik.handleChange}
                 variant="outlined"
+                onBlur={formik.handleBlur}
+                value={formik.values.app}
+                id="app"
+                name="app"
               />
             </Grid>
+            <Grid item xs={12}>
+              {formik.touched.app && formik.errors.app ? (
+                <p className={classes.error}>{formik.errors.app}</p>
+              ) : null}
+            </Grid>
             <Grid item xs={12} className={classes.gridRow}>
-              <Button variant="contained" className={classes.bttn}>
+              <Button
+                variant="contained"
+                className={classes.bttn}
+                type="submit"
+                onClick={formik.handleSubmit}
+              >
                 Confirm Details
               </Button>
             </Grid>

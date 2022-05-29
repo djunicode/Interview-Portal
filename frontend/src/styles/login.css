@@ -42,5 +42,7 @@
   .outerDiv2ForLogin {
     background-color: white !important;
     padding: 5%;
+    border-radius: 16px;
+    min-height: 320px;
   }
 }
