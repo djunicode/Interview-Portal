@@ -96,71 +96,71 @@
 
 import React from "react";
 import {
-  Timeline,
-  Events,
-  UrlButton,
-  TextEvent,
-  YouTubeEvent,
+	Timeline,
+	Events,
+	UrlButton,
+	TextEvent,
+	YouTubeEvent,
 } from "@merc/react-timeline";
 import { Card, Grid, Typography, Divider } from "@mui/material";
 import { themes, createTheme } from "@merc/react-timeline";
 
 import { makeStyles } from "@mui/styles";
 const useStyles = makeStyles((theme) => ({
-  divider: {
-    width: "100%",
-  },
-  card2: {
-    padding: "3%",
-    height: "57vh",
-    boxShadow: "1px 1px 6px rgba(0, 0, 0, 0.25)!important",
-    borderRadius: "10px!important",
-  },
+	divider: {
+		width: "100%",
+	},
+	card2: {
+		padding: "3%",
+		height: "57vh",
+		boxShadow: "1px 1px 6px rgba(0, 0, 0, 0.25)!important",
+		borderRadius: "10px!important",
+	},
 }));
 
 const customTheme = createTheme(themes.default, {
-  card: {
-    backgroundColor: "#efefef",
-  },
-  date: {
-    backgroundColor: "#8985f2",
-  },
-  marker: {
-    borderColor: "rebeccapurple",
-  },
-  timelineTrack: {
-    backgroundColor: "rebeccapurple",
-  },
+	card: {
+		backgroundColor: "#efefef",
+	},
+	date: {
+		backgroundColor: "#8985f2",
+	},
+	marker: {
+		borderColor: "rebeccapurple",
+	},
+	timelineTrack: {
+		backgroundColor: "rebeccapurple",
+	},
 });
 
 const TimeLine = () => {
-  const classes = useStyles();
-  return (
-    <Card className={classes.card2}>
-      <Grid container>
-        <Grid item>
-          <Typography variant="h3">Timeline</Typography>
-        </Grid>
-        <Grid item xs={12}>
-          <Divider className={classes.divider} />
-        </Grid>
-        <Grid xs={4} md={12}>
-          <Timeline theme={customTheme}>
-            <Events>
-              <TextEvent
-                date="02 May"
-                text="Tasks will be assigned"
-                sx={{ backgroundColor: "rgba(81, 84, 206, 0.5) " }}
-              />
-              <TextEvent date="18 May" text="Application Form will be live" />
-              <TextEvent date="28 May" text="Last Day for registration" />
-              <TextEvent date="05 June" text="Interview Round" />
-              <TextEvent date="14 June" text="Results" />
-            </Events>
-          </Timeline>
-        </Grid>
-      </Grid>
-    </Card>
-  );
+	const classes = useStyles();
+	return (
+		<Card className={classes.card2}>
+			<Grid container>
+				<Grid item>
+					<Typography variant="h3">Timeline</Typography>
+				</Grid>
+				<Grid item xs={12}>
+					<Divider className={classes.divider} />
+				</Grid>
+				<Grid xs={4} md={12}>
+					<Timeline theme={customTheme}>
+						<Events>
+							<TextEvent
+								date="02 May"
+								text="Tasks will be assigned"
+								sx={{ backgroundColor: "rgba(81, 84, 206, 0.5) " }}
+							/>
+							<TextEvent date="18 May" text="Application Form will be live" />
+							<TextEvent date="28 May" text="Last Day for registration" />
+							<TextEvent date="05 June" text="Interview Round" />
+							<TextEvent date="14 June" text="Results" />
+						</Events>
+					</Timeline>
+				</Grid>
+			</Grid>
+		</Card>
+	);
 };
 export default TimeLine;

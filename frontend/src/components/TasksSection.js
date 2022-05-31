@@ -81,7 +81,7 @@ export default function BasicTabs() {
 	return (
 		<Card className={classes.card1}>
 			<Grid container className={classes.flexItem} rowSpacing="20">
-				<Grid item>
+				<Grid item xs={2} >
 					<Typography className={classes.header} variant="h3">
 						Tasks
 					</Typography>
@@ -105,7 +105,7 @@ export default function BasicTabs() {
 						</Grid>
 					</Box>
 					<TabPanel value={value} index={0}>
-						<TaskData />
+						<TaskData stack="1"/>
 					</TabPanel>
 					<TabPanel value={value} index={1}>
 						Item 2
