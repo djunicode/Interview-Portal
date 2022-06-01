@@ -5,7 +5,7 @@ import { makeStyles } from "@mui/styles";
 import { Checkbox, Grid, Input, Typography } from "@mui/material";
 import "../styles/signupPage.css";
 import { Card } from "@mui/material";
-import { useFormik } from "formik";
+import { useFormik, yupToFormErrors } from "formik";
 import ProfileDetails from "./ProfileDetails";
 import "../styles/login_signup.css";
 // import Panel from "muicss/lib/react/panel";
@@ -69,32 +69,48 @@ const useStyles = makeStyles((theme) => ({
 
 const Details = () => {
   const classes = useStyles();
-
   const [data, setData] = useState([]);
-
-  const getValue = (e) => {
-    if (data.includes(e.target.value)) {
-      let arr = data.filter((item) => item !== e.target.value);
-      setData(arr);
-    } else {
-      console.log(data.concat(e.target.value));
-      setData([...data, e.target.value]);
-    }
-  };
   const formik = useFormik({
     initialValues: {
       resume: "",
       frontend: "",
       node: "",
       django: "",
-      app: "",
+      flutter: "",
+      fullStackDjango: "",
+      reactNative: "",
+      fullStackNode: "",
+      stacks: [],
     },
-    validationSchema: Yup.object({
+    validationSchema: Yup.object().shape({
       resume: Yup.string().required("Required"),
-      //frontend: Yup.string().required("Required"),
-      // node: Yup.string().required("Required"),
-      // django: Yup.string().required("Required"),
-      // app: Yup.string().required("Required"),
+      stacks: Yup.array().min(1, "select atleast one stack"),
+      frontend: Yup.string().when("stacks", (stacks) => {
+        if (stacks.includes("frontend"))
+          return Yup.string().required("Required");
+      }),
+      node: Yup.string().when("stacks", (stacks) => {
+        if (stacks.includes("node")) return Yup.string().required("Required");
+      }),
+      flutter: Yup.string().when("stacks", (stacks) => {
+        if (stacks.includes("flutter"))
+          return Yup.string().required("Required");
+      }),
+      django: Yup.string().when("stacks", (stacks) => {
+        if (stacks.includes("django")) return Yup.string().required("Required");
+      }),
+      fullStackDjango: Yup.string().when("stacks", (stacks) => {
+        if (stacks.includes("fullStackDjango"))
+          return Yup.string().required("Required");
+      }),
+      reactNative: Yup.string().when("stacks", (stacks) => {
+        if (stacks.includes("reactNative"))
+          return Yup.string().required("Required");
+      }),
+      fullStackNode: Yup.string().when("stacks", (stacks) => {
+        if (stacks.includes("fullStackNode"))
+          return Yup.string().required("Required");
+      }),
     }),
     onSubmit: (values) => {
       console.log(values);
@@ -115,7 +131,20 @@ const Details = () => {
           },
           {
             name: "Flutter",
-            repo_link: values.app,
+            repo_link: values.flutter,
+          },
+
+          {
+            name: "Fullstack Django",
+            repo_link: values.fullStackDjango,
+          },
+          {
+            name: "React Native",
+            repo_link: values.reactNative,
+          },
+          {
+            name: "Fullstack Node",
+            repo_link: values.fullStackNode,
           },
         ],
         resume_link: values.resume,
@@ -142,6 +171,18 @@ const Details = () => {
         });
     },
   });
+
+  const getValue = (e) => {
+    if (data.includes(e)) {
+      console.log(e);
+      let arr = data.filter((item) => item !== e);
+      setData(arr);
+    } else {
+      console.log(e);
+      console.log(data.concat(e));
+      setData([...data, e]);
+    }
+  };
   return (
     <>
       <Box
@@ -166,17 +207,17 @@ const Details = () => {
                 <TextField
                   id="resume"
                   name="resume"
+                  helperText={
+                    formik.touched.resume && formik.errors.resume
+                      ? formik.errors.resume
+                      : null
+                  }
                   onBlur={formik.handleBlur}
                   onChange={formik.handleChange}
                   value={formik.values.resume}
                   variant="outlined"
                   className={classes.field}
                 />
-                <Grid item xs={12}>
-                  {formik.touched.resume && formik.errors.resume ? (
-                    <p className={classes.error}>{formik.errors.resume}</p>
-                  ) : null}
-                </Grid>
               </Grid>
             </Grid>
             <Grid item xs={12} className={classes.gridRow}>
@@ -191,15 +232,24 @@ const Details = () => {
             </Grid>
             <Grid item xs={12} className={classes.gridRow}>
               <Checkbox
-                checked={data.includes("frontend")}
+                checked={formik.values.stacks.includes("frontend")}
+                name="stacks"
                 value="frontend"
                 onChange={(e) => {
-                  getValue(e);
+                  getValue(e.target.value);
+                  formik.handleChange(e);
                 }}
+                onBlur={formik.handleBlur}
               />
+
               <TextField
                 className={classes.field}
-                disabled={!data.includes("frontend")}
+                disabled={!formik.values.stacks.includes("frontend")}
+                helperText={
+                  formik.touched.frontend && formik.errors.frontend
+                    ? formik.errors.frontend
+                    : null
+                }
                 label="frontend"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
@@ -209,24 +259,27 @@ const Details = () => {
                 name="frontend"
               />
             </Grid>
-            <Grid item xs={12}>
-              {formik.touched.frontend && formik.errors.frontend ? (
-                <p className={classes.error}>{formik.errors.frontend}</p>
-              ) : null}
-            </Grid>
 
             <Grid item xs={12} className={classes.gridRow}>
               <Checkbox
-                checked={data.includes("node")}
+                name="stacks"
                 value="node"
+                onBlur={formik.handleBlur}
+                checked={formik.values.stacks.includes("node")}
                 onChange={(e) => {
-                  getValue(e);
+                  getValue(e.target.value);
+                  formik.handleChange(e);
                 }}
               />
               <TextField
                 className={classes.field}
-                disabled={!data.includes("node")}
+                disabled={!formik.values.stacks.includes("node")}
                 label="node"
+                helperText={
+                  formik.touched.node && formik.errors.node
+                    ? formik.errors.node
+                    : null
+                }
                 variant="outlined"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
@@ -235,61 +288,155 @@ const Details = () => {
                 name="node"
               />
             </Grid>
-            <Grid item xs={12}>
-              {formik.touched.node && formik.errors.node ? (
-                <p className={classes.error}>{formik.errors.node}</p>
-              ) : null}
-            </Grid>
+
             <Grid item xs={12} className={classes.gridRow}>
               <Checkbox
-                checked={data.includes("django")}
+                name="stacks"
+                onBlur={formik.handleBlur}
+                checked={formik.values.stacks.includes("django")}
                 value="django"
                 onChange={(e) => {
-                  getValue(e);
+                  getValue(e.target.value);
+                  formik.handleChange(e);
                 }}
               />
               <TextField
                 className={classes.field}
-                disabled={!data.includes("django")}
+                disabled={!formik.values.stacks.includes("django")}
                 label="django"
+                helperText={
+                  formik.touched.django && formik.errors.django
+                    ? formik.errors.django
+                    : null
+                }
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.django}
                 variant="outlined"
                 id="django"
-                node="django"
+                name="django"
               />
             </Grid>
-            <Grid item xs={12}>
-              {formik.touched.django && formik.errors.django ? (
-                <p className={classes.error}>{formik.errors.django}</p>
-              ) : null}
-            </Grid>
+
             <Grid item xs={12} className={classes.gridRow}>
               <Checkbox
-                checked={data.includes("app")}
-                value="app"
+                name="stacks"
+                checked={formik.values.stacks.includes("flutter")}
+                value="flutter"
+                onBlur={formik.handleBlur}
                 onChange={(e) => {
-                  getValue(e);
+                  getValue(e.target.value);
+                  formik.handleChange(e);
                 }}
               />
               <TextField
                 className={classes.field}
-                disabled={!data.includes("app")}
-                label="app"
+                disabled={!formik.values.stacks.includes("flutter")}
+                label="Flutter"
+                helperText={
+                  formik.touched.flutter && formik.errors.flutter
+                    ? formik.errors.flutter
+                    : null
+                }
                 onChange={formik.handleChange}
                 variant="outlined"
                 onBlur={formik.handleBlur}
-                value={formik.values.app}
-                id="app"
-                name="app"
+                value={formik.values.flutter}
+                id="flutter"
+                name="flutter"
               />
             </Grid>
-            <Grid item xs={12}>
-              {formik.touched.app && formik.errors.app ? (
-                <p className={classes.error}>{formik.errors.app}</p>
-              ) : null}
+
+            <Grid item xs={12} className={classes.gridRow}>
+              <Checkbox
+                checked={formik.values.stacks.includes("reactNative")}
+                name="stacks"
+                value="reactNative"
+                onChange={(e) => {
+                  getValue(e.target.value);
+                  formik.handleChange(e);
+                }}
+                onBlur={formik.handleBlur}
+              />
+
+              <TextField
+                className={classes.field}
+                disabled={!formik.values.stacks.includes("reactNative")}
+                helperText={
+                  formik.touched.reactNative && formik.errors.reactNative
+                    ? formik.errors.reactNative
+                    : null
+                }
+                label="React Native"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.reactNative}
+                variant="outlined"
+                id="reactNative"
+                name="reactNative"
+              />
             </Grid>
+
+            <Grid item xs={12} className={classes.gridRow}>
+              <Checkbox
+                checked={formik.values.stacks.includes("fullStackNode")}
+                name="stacks"
+                value="fullStackNode"
+                onChange={(e) => {
+                  getValue(e.target.value);
+                  formik.handleChange(e);
+                }}
+                onBlur={formik.handleBlur}
+              />
+
+              <TextField
+                className={classes.field}
+                disabled={!formik.values.stacks.includes("fullStackNode")}
+                helperText={
+                  formik.touched.fullStackNode && formik.errors.fullStackNode
+                    ? formik.errors.fullStackNode
+                    : null
+                }
+                label="Fullstack Node"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.fullStackNode}
+                variant="outlined"
+                id="fullStackNode"
+                name="fullStackNode"
+              />
+            </Grid>
+
+            <Grid item xs={12} className={classes.gridRow}>
+              <Checkbox
+                checked={formik.values.stacks.includes("fullStackDjango")}
+                name="stacks"
+                value="fullStackDjango"
+                onChange={(e) => {
+                  getValue(e.target.value);
+                  formik.handleChange(e);
+                }}
+                onBlur={formik.handleBlur}
+              />
+              <TextField
+                className={classes.field}
+                disabled={!formik.values.stacks.includes("fullStackDjango")}
+                helperText={
+                  formik.touched.fullStackDjango &&
+                  formik.errors.fullStackDjango
+                    ? formik.errors.fullStackDjango
+                    : null
+                }
+                label="Fullstack Django"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.fullStackDjango}
+                variant="outlined"
+                id="fullStackDjango"
+                name="fullStackDjango"
+              />
+            </Grid>
+
             <Grid item xs={12} className={classes.gridRow}>
               <Button
                 variant="contained"
