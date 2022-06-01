@@ -11,3 +11,6 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+.MuiFormHelperText-root {
+  color: #d32f2f !important;
+}

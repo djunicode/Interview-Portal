@@ -74,28 +74,34 @@ const Login = () => {
           id="username"
           name="username"
           type="username"
+          helperText={
+            formik.touched.username && formik.errors.username
+              ? formik.errors.username
+              : null
+          }
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.username}
           variant="outlined"
         />
-        {formik.touched.username && formik.errors.username ? (
-          <p className={classes.error}>{formik.errors.username}</p>
-        ) : null}
+
         <div className="userPass">Password</div>
         <TextField
           variant="outlined"
           className="styledInput"
           id="password"
+          helperText={
+            formik.touched.password && formik.errors.password
+              ? formik.errors.password
+              : null
+          }
           name="password"
           type="password"
           onBlur={formik.handleBlur}
           onChange={formik.handleChange}
           value={formik.values.password}
         />
-        {formik.touched.password && formik.errors.password ? (
-          <p className={classes.error}>{formik.errors.password}</p>
-        ) : null}
+
         <div className="dhaaText">
           <div className="dhaaText1">Don't have an account?</div>
           <div>

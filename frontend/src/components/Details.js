@@ -20,7 +20,7 @@ import git from "../assets/git.svg";
 import stacks from "../assets/stacks.svg";
 import TextField from "@material-ui/core/TextField";
 import { Box } from "@mui/system";
-
+import axios from "axios";
 const useStyles = makeStyles((theme) => ({
   grad: {
     backgroundColor: "#F2F3F7",
@@ -41,15 +41,29 @@ const useStyles = makeStyles((theme) => ({
   header: {
     color: theme.palette.primary.main,
   },
-
-  gridRow: {
+  labelRow: {
     display: "flex",
     justifyContent: "space-around",
     alignItems: "center",
     padding: "2%",
   },
+  gridRow: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    padding: "2%",
+  },
   container: {
     width: "60%!important",
+    [theme.breakpoints.between("sm", "md")]: {
+      width: "80%!important",
+    },
+    [theme.breakpoints.between("xs", "sm")]: {
+      width: "90%!important",
+    },
+    [theme.breakpoints.down("xs")]: {
+      width: "100%!important",
+    },
   },
   field: {
     width: "100%",
@@ -59,17 +73,27 @@ const useStyles = makeStyles((theme) => ({
   },
   formlabel: {
     display: "flex",
+    marginLeft: "5%!important",
+    fontSize: "20px!important",
+    [theme.breakpoints.down("sm")]: {
+      marginLeft: "10%!important",
+    },
   },
   error: {
     display: "flex",
     color: theme.palette.error.main,
     marginLeft: "10%",
   },
+  resumeField: {
+    width: "92.5%",
+    marginLeft: "7.5%",
+  },
 }));
 
 const Details = () => {
   const classes = useStyles();
   const [data, setData] = useState([]);
+  const [submitted, setSubmitted] = useState(false);
   const formik = useFormik({
     initialValues: {
       resume: "",
@@ -114,7 +138,7 @@ const Details = () => {
     }),
     onSubmit: (values) => {
       console.log(values);
-      var axios = import("axios");
+
       var data = JSON.stringify({
         stack: [
           {
@@ -156,8 +180,6 @@ const Details = () => {
         headers: {
           Authorization: `token ${localStorage.getItem("token")}`,
           "Content-Type": "application/json",
-          Cookie:
-            "csrftoken=lYS6Ws57155J4Ki9iYZz1x2w0PpUe2Sr4mb8R44e1lgymx2kHYNywUJX8bubAK9C",
         },
         data: data,
       };
@@ -165,6 +187,7 @@ const Details = () => {
       axios(config)
         .then(function (response) {
           console.log(JSON.stringify(response.data));
+          setSubmitted(true);
         })
         .catch(function (error) {
           console.log(error);
@@ -201,9 +224,15 @@ const Details = () => {
               <ProfileDetails />
             </Grid>
             <Grid item xs={12} className={classes.gridRow}>
-              <img src={resume} />
-              <Grid item xs={12}>
+              <Grid item xs={1}>
+                <img src={resume} />
+              </Grid>
+              <Grid item xs={11}>
                 <Typography className={classes.formlabel}>Resume</Typography>
+              </Grid>
+            </Grid>
+            <Grid item xs={12} className={classes.gridRow}>
+              <Grid item xs={12}>
                 <TextField
                   id="resume"
                   name="resume"
@@ -216,15 +245,15 @@ const Details = () => {
                   onChange={formik.handleChange}
                   value={formik.values.resume}
                   variant="outlined"
-                  className={classes.field}
+                  className={classes.resumeField}
                 />
               </Grid>
             </Grid>
             <Grid item xs={12} className={classes.gridRow}>
-              <Grid item xs={3}>
+              <Grid item xs={1}>
                 <img src={git} />
               </Grid>
-              <Grid item xs={9}>
+              <Grid item xs={11}>
                 <Typography className={classes.formlabel}>
                   Github repository link
                 </Typography>
@@ -443,6 +472,7 @@ const Details = () => {
                 className={classes.bttn}
                 type="submit"
                 onClick={formik.handleSubmit}
+                disabled={submitted}
               >
                 Confirm Details
               </Button>
