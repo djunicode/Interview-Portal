@@ -14,48 +14,49 @@ import TaskIcon from "@mui/icons-material/Task";
 function BroadDrawer() {
   const navigate = useNavigate();
 
-  return (
-    <>
-      <Box className="logoBox"></Box>
-      <Divider />
-      <List>
-        <ListItem button onClick={() => navigate("/")}>
-          <ListItemIcon>
-            <PersonIcon />
-          </ListItemIcon>
-          <ListItemText
-            sx={{ color: "#000", textDecoration: "none!important" }}
-            primary="Profile"
-          />
-        </ListItem>
-      </List>
-      <List>
-        <ListItem button onClick={() => navigate("/createpost")}>
-          <ListItemIcon>
-            <QuizIcon />
-          </ListItemIcon>
-          <ListItemText primary="FAQs" />
-        </ListItem>
-      </List>
-      <List>
-        <ListItem button onClick={() => navigate("/ApplicationForm")}>
-          <ListItemIcon>
-            <AssignmentIcon />
-          </ListItemIcon>
-          <ListItemText primary="Application Form" />
-        </ListItem>
-      </List>
-      <List>
-        <ListItem button onClick={() => navigate("/")}>
-          <ListItemIcon>
-            <TaskIcon />
-          </ListItemIcon>
-          <ListItemText primary="Resources" />
-        </ListItem>
-      </List>
-      <Divider />
-    </>
-  );
+    return (
+        <>
+            <Box className="logoBox" >
+            </Box>
+            <Divider />
+            <List>
+                <ListItem button onClick={() => navigate('/profile')}>
+                    <ListItemIcon>
+                        <PersonIcon />
+                    </ListItemIcon>
+                    <ListItemText
+                        sx={{ color: '#000', textDecoration: 'none!important' }}
+                        primary="Profile"
+                    />
+                </ListItem>
+            </List>
+            <List>
+                <ListItem button onClick={() => navigate('/faqs')} >
+                    <ListItemIcon>
+                        <QuizIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="FAQs" />
+                </ListItem>
+            </List>
+            <List>
+                <ListItem button onClick={() => navigate('/ApplicationForm')} >
+                    <ListItemIcon>
+                        <AssignmentIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Application Form" />
+                </ListItem>
+            </List>
+            <List>
+                <ListItem button onClick={() => navigate('/resources')} >
+                    <ListItemIcon>
+                        <TaskIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Resources" />
+                </ListItem>
+            </List>
+            <Divider />
+        </>
+    )
 }
 
 export default BroadDrawer;

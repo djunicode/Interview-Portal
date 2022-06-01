@@ -5,7 +5,6 @@ import InterviewScheduleCard from "../components/InterviewScheduleCard";
 import Time from "../components/Time";
 import { makeStyles } from "@mui/styles";
 import ApplyForIntreview from "../components/ApplyForIntreview";
-import Tasks from "../components/Tasks";
 import { Grid } from "@mui/material";
 import TimeLine from "../components/Timeline";
 import TabPanel from "../components/TasksSection";
@@ -28,27 +27,31 @@ const Dashboard = () => {
   return (
     <>
       <Grid container columnSpacing={5} className={classes.flexItem}>
-        <Grid item xs={2}>
-          <SideNavbar />
-        </Grid>
-        {/* <Grid item xs={10} className={classes.rowone}> */}
-        <Grid item md={3} xs={12}>
-          <Grid item xs={12} mt={3}>
+
+        <Grid item md={5} xs={10}>
+          <Grid item xs={10} lg={12} md={5} mt={3}>
             <ProfileProgress />
           </Grid>
-          <Grid item lg={12} mt={7}>
+          <Grid item xs={10} lg={12} md={5} mt={7}>
             <InterviewScheduleCard />
           </Grid>
         </Grid>
-        <Grid item md={3} xs={12} mt={3}>
+
+        <Grid item md={5} xs={10}>
+        <Grid item xs={10} md={5} mt={3} lg={12}>
           <TimeLine />
         </Grid>
-        <Grid item md={3} xs={12} mt={3}>
-          <ApplyForIntreview />
         </Grid>
-        <Grid item md={10} xs={12} mt={3}>
+
+        {/* <Grid item md={3} xs={12} mt={3}>
+          <ApplyForIntreview />
+        </Grid> */}
+         <Grid item md={5} xs={10} lg={11}>
+        <Grid item md={5} xs={10} mt={3} lg={12}>
           <TabPanel />
         </Grid>
+        </Grid>
+
       </Grid>
       {/* </Grid> */}
     </>

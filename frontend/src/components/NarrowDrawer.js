@@ -19,14 +19,14 @@ function NarrowDrawer() {
       </Box>
       <Divider />
       <List>
-        <ListItem button onClick={() => navigate("/")}>
+        <ListItem button onClick={() => navigate("/profile")}>
           <ListItemIcon>
             <PersonIcon />
           </ListItemIcon>
         </ListItem>
       </List>
       <List>
-        <ListItem button onClick={() => navigate("/createpost")}>
+        <ListItem button onClick={() => navigate("/faqs")}>
           <ListItemIcon>
             <QuizIcon />
           </ListItemIcon>
@@ -40,7 +40,7 @@ function NarrowDrawer() {
         </ListItem>
       </List>
       <List>
-        <ListItem button onClick={() => navigate("/createpost")}>
+        <ListItem button onClick={() => navigate("/resources")}>
           <ListItemIcon>
             <TaskIcon />
           </ListItemIcon>

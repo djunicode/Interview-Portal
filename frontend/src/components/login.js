@@ -20,8 +20,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 const Login = () => {
-  let navigate = useNavigate();
   const classes = useStyles();
+  const navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
       username: "",
@@ -42,18 +42,19 @@ const Login = () => {
       var config = {
         method: "post",
         url: "https://unicodeinterview.pythonanywhere.com/accounts/login/",
-        headers: {
-          Cookie:
-            "csrftoken=lYS6Ws57155J4Ki9iYZz1x2w0PpUe2Sr4mb8R44e1lgymx2kHYNywUJX8bubAK9C; sessionid=kwn1usqi04ydrdpe9x1iolrzx4xo10qg",
-          // ...data.getHeaders(),
-        },
         data: data,
       };
 
       axios(config)
         .then(function (response) {
           console.log(response.data);
-          console.log(response.data.token);
+          if (response.data.token) {
+            console.log(response.data.token);
+            navigate("/dashboard");
+          } else {
+            navigate("/signup");
+            alert("Invalid cred");
+          }
           localStorage.setItem("token", response.data.token);
           navigate("/dashboard");
         })
