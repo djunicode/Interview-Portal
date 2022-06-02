@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
 	card1: {
 		padding: "6%",
 		//   height: "28vh",
-		boxShadow: "1px 1px 6px rgba(0, 0, 0, 0.25)!important",
+		// boxShadow: "1px 1px 6px rgba(0, 0, 0, 0.25)!important",
 		borderRadius: "10px!important",
 	},
 	divider: {
@@ -83,10 +83,11 @@ export default function BasicTabs() {
 			<Grid container className={classes.flexItem} rowSpacing="20">
 				<Grid item xs={2} >
 					<Typography className={classes.header} variant="h3">
-						Tasks
+					<strong>Tasks</strong>	
 					</Typography>
-					<Divider className={classes.divider} />
+					
 				</Grid>
+				<Divider className={classes.divider} />
 
 				<Box sx={{ width: "100%" }}>
 					<Box sx={{ mt: 3 }} className={classes.flexItem}>

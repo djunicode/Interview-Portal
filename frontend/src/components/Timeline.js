@@ -112,7 +112,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 	card2: {
 		padding: "3%",
-		height: "57vh",
+		// height: "65vh",
 		boxShadow: "1px 1px 6px rgba(0, 0, 0, 0.25)!important",
 		borderRadius: "10px!important",
 	},
@@ -136,21 +136,20 @@ const customTheme = createTheme(themes.default, {
 const TimeLine = () => {
 	const classes = useStyles();
 	return (
-		<Card className={classes.card2}>
-			<Grid container>
-				<Grid item>
-					<Typography variant="h3">Timeline</Typography>
+		<Card className={classes.card2} sx={{height:"fit-content"}}>
+			<Grid container sx={{height:"fit-content"}} >
+				<Grid item  sx={{height:"fit-content"}}>
+					<Typography gutterBottom variant="h5" component="div" mt={1} mb={1}>
+						<strong>TimeLine </strong>
+					</Typography>
 				</Grid>
-				<Grid item xs={12}>
-					<Divider className={classes.divider} />
-				</Grid>
-				<Grid xs={4} md={12}>
+				<Divider className={classes.divider} />	
+				<Grid xs={12} md={12} sx={{minHeight:"40vh"}}>
 					<Timeline theme={customTheme}>
 						<Events>
 							<TextEvent
 								date="02 May"
-								text="Tasks will be assigned"
-								sx={{ backgroundColor: "rgba(81, 84, 206, 0.5) " }}
+								text="Tasks will be assigned"							
 							/>
 							<TextEvent date="18 May" text="Application Form will be live" />
 							<TextEvent date="28 May" text="Last Day for registration" />
