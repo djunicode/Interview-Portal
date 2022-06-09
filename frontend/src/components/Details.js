@@ -33,8 +33,13 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     // height: "75%",
     width: "110vh",
+    [theme.breakpoints.up("xs")]: {
+      marginTop: "5%",
+      marginBottom: "5%",
+    },
     display: "flex",
     justifyContent: "center",
+
     padding: "3%",
     borderRadius: "20px!important",
   },
