@@ -83,12 +83,13 @@ const Login = () => {
           onBlur={formik.handleBlur}
           value={formik.values.username}
           variant="outlined"
+          className="smallfield"
         />
 
         <div className="userPass">Password</div>
         <TextField
           variant="outlined"
-          className="styledInput"
+          className="smallfield"
           id="password"
           helperText={
             formik.touched.password && formik.errors.password

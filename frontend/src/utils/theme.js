@@ -31,4 +31,16 @@ export const theme = createTheme({
     boxShadow: "1px 1px 6px rgba(0, 0, 0, 0.25)!important",
     borderRadius: "10px!important",
   },
+  components: {
+    // Name of the component
+    MuiInputBase: {
+      styleOverrides: {
+        root: {
+          height: "40px",
+        },
+        // The props to change the default for.
+        // No more ripple, on the whole application 💣!
+      },
+    },
+  },
 });

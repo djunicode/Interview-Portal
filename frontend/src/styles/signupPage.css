@@ -52,6 +52,7 @@
   .outerDiv2ForSignup {
     background-color: white !important;
     padding: 5%;
+    height: 75%;
     border-radius: 16px;
   }
 }
@@ -60,5 +61,6 @@
   flex-direction: column;
   width: 55%;
   margin-top: 5%;
+  height: 75%;
   margin-bottom: 5%;
 }
