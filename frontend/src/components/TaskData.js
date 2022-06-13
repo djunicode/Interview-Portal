@@ -10,7 +10,7 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
 
-const ResourcesData = (props) => {
+const TaskData = (props) => {
 	const theme = useTheme();
 	const style = {
 		position: "absolute",
@@ -151,4 +151,4 @@ const ResourcesData = (props) => {
 	);
 };
 
-export default ResourcesData;
+export default TaskData;

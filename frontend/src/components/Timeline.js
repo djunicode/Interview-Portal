@@ -140,7 +140,7 @@ const TimeLine = () => {
 			<Grid container sx={{height:"fit-content"}} >
 				<Grid item  sx={{height:"fit-content"}}>
 					<Typography gutterBottom variant="h5" component="div" mt={1} mb={1}>
-						<strong>TimeLine </strong>
+						<strong>Timeline </strong>
 					</Typography>
 				</Grid>
 				<Divider className={classes.divider} />	
