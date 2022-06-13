@@ -14,6 +14,7 @@ import Paper from '@mui/material/Paper';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import Chip from "@mui/material/Chip";
+import { useEffect, useState } from "react";
 
 function createData(name, stacks, interview, submission, protein, price) {
   return {
@@ -128,23 +129,51 @@ const rows = [
   onClick={() => {}}
 />
 , '6 June', 'Null'),
-  createData('Greha Shah', <Chip
-  label="Frontend "
-  color="secondary"
-  sx={{ margin: "5px" }}
-  onClick={() => {}}
-/>, '9 June', 'Null'),
-  createData('Khushi Mehta', <Chip
-  label="Backend "
-  color="secondary"
-  sx={{ margin: "5px" }}
-  onClick={() => {}}
-/>, '6 June', 'Null'),
-  createData('Anish Kulkarni', 3,'8 June', 'Null'),
-  createData('Pratham Bhoir', 1, '6 June', 'Null'),
+//   createData('Greha Shah', <Chip
+//   label="Frontend "
+//   color="secondary"
+//   sx={{ margin: "5px" }}
+//   onClick={() => {}}
+// />, '9 June', 'Null'),
+//   createData('Khushi Mehta', <Chip
+//   label="Backend "
+//   color="secondary"
+//   sx={{ margin: "5px" }}
+//   onClick={() => {}}
+// />, '6 June', 'Null'),
+//   createData('Anish Kulkarni', 3,'8 June', 'Null'),
+//   createData('Pratham Bhoir', 1, '6 June', 'Null'),
 ];
 
 export default function CollapsibleTable() {
+    var myHeaders = new Headers();
+    myHeaders.append("Authorization", `Token ${localStorage.getItem("token")}`);
+  
+    const [user, setUser] = useState({
+      email: "",
+      grad_year: "",
+      name: "",
+      sapid: "",
+    });
+    var requestOptions = {
+        method: "GET",
+        headers: myHeaders,
+        redirect: "follow",
+      };
+    
+      useEffect(() => {
+        fetch(
+          "https://unicodeinterview.pythonanywhere.com/accounts/application/",
+          requestOptions
+        )
+          .then((response) => response.json())
+          .then((result) => {
+            console.log(result);
+            setUser(result.user);
+          })
+          .catch((error) => console.log("error", error));
+        }, []);
+    
   return (
     <TableContainer component={Paper}>
       <Table stickyHeader aria-label="sticky table">
