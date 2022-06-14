@@ -72,13 +72,13 @@ const ResourcesData = (props) => {
 										mt: 2,
 									}}
 								>
-									{item.stack == props.stack ? item.id : "01"}
+									{item.stack === props.stack ? item.id : "01"}
 								</Typography>
 							</Box>
 							<Box sx={{ display: "flex", flexDirection: "column" }}>
 								<CardContent sx={{ flex: "1 0 auto" }}>
 									<Typography variant="h5" sx={{textAlign:"left"}}>
-										{item.stack == props.stack ? item.task_question : "Question"}
+										{item.stack === props.stack ? item.task_question : "Question"}
 									</Typography>
 									<Typography
 										variant="subtitle1"
@@ -86,12 +86,12 @@ const ResourcesData = (props) => {
 										component="div"
 										sx={{textAlign:"left"}}
 									>
-										{item.stack == props.stack ? item.task_description : "Desc"}
+										{item.stack === props.stack ? item.task_description : "Desc"}
 									</Typography>
 								</CardContent>
 							</Box>
 						</Card>
-						{/* <h3>{item.stack == props.stack ? item.task_description : "hi"}</h3> */}
+						{/* <h3>{item.stack === props.stack ? item.task_description : "hi"}</h3> */}
 					</>
 				))}
 			</Grid>
