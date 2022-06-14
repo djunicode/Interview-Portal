@@ -15,13 +15,13 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import Chip from "@mui/material/Chip";
 import { useEffect, useState } from "react";
+import { Grid } from '@mui/material';
 
-function createData(name, stacks, interview, submission, protein,) {
+function createData(name, stacks, interview) {
   return {
     name,
     stacks,
     interview,
-    submission,
     history: [
       {
         sapid: '60004200038',
@@ -56,7 +56,6 @@ function Row(props) {
         </TableCell>
         <TableCell align="right">{row.stacks}</TableCell>
         <TableCell align="right">{row.interview}</TableCell>
-        <TableCell align="right">{row.submission}</TableCell>
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
@@ -99,48 +98,13 @@ function Row(props) {
   );
 }
 
-Row.propTypes = {
-  row: PropTypes.shape({
-    stacks: PropTypes.number.isRequired,
-    // submission: PropTypes.number.isRequired,
-    // interview: PropTypes.number.isRequired,
-    history: PropTypes.arrayOf(
-      PropTypes.shape({
-        email
-        : PropTypes.string.isRequired,
-        gradyear: PropTypes.number.isRequired,
-        sapid: PropTypes.number.isRequired,
-        resume: PropTypes.string.isRequired,
-        github: PropTypes.string.isRequired,
-      }),
-    ).isRequired,
-    name: PropTypes.string.isRequired,
-    // price: PropTypes.number.isRequired,
-    // protein: PropTypes.number.isRequired,
-  }).isRequired,
-};
-
 const rows = [
-  createData('Shrey ',  <Chip
+  createData('Shrey',  <Chip
   label="Fullstack "
   color="secondary"
   sx={{ margin: "5px" }}
   onClick={() => {}}
-/>),
-//   createData('Greha Shah', <Chip
-//   label="Frontend "
-//   color="secondary"
-//   sx={{ margin: "5px" }}
-//   onClick={() => {}}
-// />, '9 June', 'Null'),
-//   createData('Khushi Mehta', <Chip
-//   label="Backend "
-//   color="secondary"
-//   sx={{ margin: "5px" }}
-//   onClick={() => {}}
-// />, '6 June', 'Null'),
-//   createData('Anish Kulkarni', 3,'8 June', 'Null'),
-//   createData('Pratham Bhoir', 1, '6 June', 'Null'),
+/>, "Null"),
 ];
 
 export default function CollapsibleTable() {
@@ -168,12 +132,19 @@ export default function CollapsibleTable() {
           .then((response) => response.json())
           .then((result) => {
             console.log(result);
-            setUser(result.user);
+            setUser(result);
           })
           .catch((error) => console.log("error", error));
         }, []);
     
   return (
+      <Grid container>
+          <Grid item md="12">
+            <div >
+            Interviewers:
+            </div>
+          </Grid>
+          <Grid item md="12">
     <TableContainer component={Paper}>
       <Table stickyHeader aria-label="sticky table">
         <TableHead>
@@ -181,8 +152,8 @@ export default function CollapsibleTable() {
             <TableCell />
             <TableCell>Name </TableCell>
             <TableCell align="right">Stacks applied</TableCell>
-            {/* <TableCell align="right">Scheduled Interview&nbsp;</TableCell>
-            <TableCell align="right">Submission Details&nbsp;</TableCell> */}
+            <TableCell align="right">Scheduled Interview&nbsp;</TableCell>
+            <TableCell />
           </TableRow>
         </TableHead>
         <TableBody>
@@ -192,5 +163,7 @@ export default function CollapsibleTable() {
         </TableBody>
       </Table>
     </TableContainer>
+    </Grid>
+    </Grid>
   );
 }
