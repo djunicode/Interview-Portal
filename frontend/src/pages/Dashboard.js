@@ -11,23 +11,26 @@ import TabPanel from "../components/TasksSection";
 const useStyles = makeStyles((theme) => ({
   flexItem: {
     display: "flex",
+    height: "100vh",
+    backgroundColor: "#F2F3F7",
     justifyContent: "space-around",
     [theme.breakpoints.down("md")]: {
       marginLeft: "40px!important",
     },
   },
-  background: {
-    backgroundColor: "#F2F3F7",
-    height: "120vh",
-  },
-  rowone: {},
+  // background: {
+  //   height: "120vh",
+  // },
+  // body: {
+  //   backgroundColor: "#F2F3F7",
+  // },
+  // rowone: {},
 }));
 const Dashboard = () => {
   const classes = useStyles();
   return (
     <>
       <Grid container columnSpacing={5} className={classes.flexItem}>
-
         <Grid item md={5} xs={10}>
           <Grid item xs={10} lg={12} md={5} mt={3}>
             <ProfileProgress />
@@ -38,20 +41,19 @@ const Dashboard = () => {
         </Grid>
 
         <Grid item md={5} xs={10}>
-        <Grid item xs={10} md={5} mt={3} lg={12}>
-          <TimeLine />
-        </Grid>
+          <Grid item xs={10} md={5} mt={3} lg={12}>
+            <TimeLine />
+          </Grid>
         </Grid>
 
         {/* <Grid item md={3} xs={12} mt={3}>
           <ApplyForIntreview />
         </Grid> */}
-         <Grid item md={5} xs={10} lg={11}>
-        <Grid item md={5} xs={10} mt={3} lg={12}>
-          <TabPanel />
+        <Grid item md={5} xs={10} lg={11}>
+          <Grid item md={5} xs={10} mt={3} lg={12}>
+            <TabPanel />
+          </Grid>
         </Grid>
-        </Grid>
-
       </Grid>
       {/* </Grid> */}
     </>
