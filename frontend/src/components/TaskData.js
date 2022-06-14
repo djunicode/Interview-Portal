@@ -7,12 +7,23 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import SkipPreviousIcon from "@mui/icons-material/SkipPrevious";
-import PlayArrowIcon from "@mui/icons-material/PlayArrow";
-import SkipNextIcon from "@mui/icons-material/SkipNext";
+import Button from "@mui/material/Button";
+import Modal from "@mui/material/Modal";
 
-const ResourcesData = (props) => {
+const TaskData = (props) => {
 	const theme = useTheme();
+	const style = {
+		position: "absolute",
+		top: "50%",
+		left: "50%",
+		transform: "translate(-50%, -50%)",
+		// width: 400,
+		bgcolor: "background.paper",
+		border: "2px solid #000",
+		boxShadow: 10,
+		p: 4,
+	};
+
 	const [data, setData] = useState([
 		{
 			id: "",
@@ -22,6 +33,10 @@ const ResourcesData = (props) => {
 			stack: "",
 		},
 	]);
+	const [open, setOpen] = useState(false);
+	const handleOpen = () => setOpen(true);
+	const handleClose = () => setOpen(false);
+
 	useEffect(() => {
 		var config = {
 			method: "get",
@@ -46,9 +61,18 @@ const ResourcesData = (props) => {
 	return (
 		<div>
 			<Grid>
-				{data.map((item) => (
+				{data.map((item, index) => (
 					<>
-						<Card sx={{ display: "flex", mb:5, boxShadow:" inset 0 -3em 3em rgba(0,0,0,0.1), 0 0  0 2px rgb(255,255,255), 0.3em 0.3em 1em rgba(0,0,0,0.3)" } }>
+						<Card
+							key={index}
+							sx={{
+								display: "flex",
+								mb: 5,
+								boxShadow:
+									" inset 0 -3em 3em rgba(0,0,0,0.1), 0 0  0 2px rgb(255,255,255), 0.3em 0.3em 1em rgba(0,0,0,0.3)",
+							}}
+							onClick={handleOpen}
+						>
 							<Box
 								sx={{
 									width: 81,
@@ -77,21 +101,49 @@ const ResourcesData = (props) => {
 							</Box>
 							<Box sx={{ display: "flex", flexDirection: "column" }}>
 								<CardContent sx={{ flex: "1 0 auto" }}>
-									<Typography variant="h5" sx={{textAlign:"left"}}>
-										{item.stack == props.stack ? item.task_question : "Question"}
+									<Typography variant="h5" sx={{ textAlign: "left" }}>
+										{item.stack == props.stack
+											? item.task_question
+											: "Question"}
 									</Typography>
 									<Typography
 										variant="subtitle1"
 										color="text.secondary"
 										component="div"
-										sx={{textAlign:"left"}}
+										sx={{ textAlign: "left" }}
 									>
 										{item.stack == props.stack ? item.task_description : "Desc"}
+									</Typography>
+									<Typography
+										variant="subtitle1"
+										color="text.secondary"
+										component="div"
+										sx={{ textAlign: "left" }}
+									>
+										<a href={item.task_resources} target = "_blank">{item.stack == props.stack ? item.task_resources: "Resources"} </a> 
 									</Typography>
 								</CardContent>
 							</Box>
 						</Card>
-						{/* <h3>{item.stack == props.stack ? item.task_description : "hi"}</h3> */}
+						<Modal
+							key={index}
+							open={open}
+							onClose={handleClose}
+							aria-labelledby="modal-modal-title"
+							aria-describedby="modal-modal-description"
+						>
+							<Box sx={style}>
+								<Typography id="modal-modal-title" variant="h4" component="h2">
+									{item.stack == props.stack ? item.task_question : "Question"}
+								</Typography>
+								<Typography id="modal-modal-description" sx={{ mt: 2 }}>
+									{item.stack == props.stack ? item.task_description : "Desc"}
+								</Typography>
+								<Typography id="modal-modal-description" sx={{ mt: 2 }}>
+								<a href={item.task_resources} target = "_blank">{item.stack == props.stack ? item.task_resources: "Resources"} </a> 
+								</Typography>
+							</Box>
+						</Modal>
 					</>
 				))}
 			</Grid>
@@ -99,4 +151,4 @@ const ResourcesData = (props) => {
 	);
 };
 
-export default ResourcesData;
+export default TaskData;

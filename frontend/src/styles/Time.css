@@ -87,7 +87,7 @@
     /* right: -33px; */
     bottom: 0;
     z-index: -1;
-    box-shadow: inset 7px 0 9px -7px #444;
+    /* box-shadow: inset 7px 0 9px -7px #444; */
 }
 .main-timeline .circle span{
     display: block;

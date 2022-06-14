@@ -10,6 +10,7 @@ import PersonIcon from "@mui/icons-material/Person";
 import QuizIcon from "@mui/icons-material/Quiz";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import TaskIcon from "@mui/icons-material/Task";
+import HomeIcon from '@mui/icons-material/Home';
 
 function BroadDrawer() {
   const navigate = useNavigate();
@@ -19,6 +20,14 @@ function BroadDrawer() {
             <Box className="logoBox" >
             </Box>
             <Divider />
+            <List>
+                <ListItem button onClick={() => navigate('/dashboard')} >
+                    <ListItemIcon>
+                        <HomeIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Dashboard" />
+                </ListItem>
+            </List>
             <List>
                 <ListItem button onClick={() => navigate('/profile')}>
                     <ListItemIcon>

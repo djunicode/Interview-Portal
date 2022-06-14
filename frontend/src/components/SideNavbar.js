@@ -54,8 +54,8 @@ function ResponsiveDrawer(props) {
         component="nav"
         sx={
           openDrawer
-            ? { width: { sm: narrowDrawerWidth }, flexShrink: { sm: 0 } }
-            : { width: { sm: drawerWidth }, flexShrink: { sm: 0 } }
+            ? { width: { sm: narrowDrawerWidth }, flexShrink: { sm: 2 } }
+            : { width: { sm: drawerWidth }, flexShrink: { sm: 2 } }
         }
         aria-label="mailbox folders"
       >
@@ -68,7 +68,7 @@ function ResponsiveDrawer(props) {
             keepMounted: true,
           }}
           sx={{
-            display: { xs: "block", sm: "none" },
+            display: { xs: "block", sm: 2 },
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
               width: drawerWidth,
@@ -82,7 +82,7 @@ function ResponsiveDrawer(props) {
             variant="permanent"
             className="borderSidebar"
             sx={{
-              display: { xs: "none", sm: "block" },
+              display: { xs: 2, sm: 2 },
               "& .MuiDrawer-paper": {
                 boxSizing: "border-box",
                 width: narrowDrawerWidth,
@@ -108,10 +108,10 @@ function ResponsiveDrawer(props) {
             variant="permanent"
             className="borderSidebar"
             sx={{
-              display: { xs: "none", sm: "block" },
+              display: { xs: 1, sm: "block" },
               "& .MuiDrawer-paper": {
                 boxSizing: "border-box",
-                width: drawerWidth,
+                width: { xs: "240px", sm: {drawerWidth} },
               },
             }}
             open
