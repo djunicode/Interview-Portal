@@ -1,5 +1,4 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import Collapse from '@mui/material/Collapse';
 import IconButton from '@mui/material/IconButton';
@@ -15,7 +14,8 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import Chip from "@mui/material/Chip";
 import { useEffect, useState } from "react";
-import { Grid } from '@mui/material';
+import { Button, Grid } from '@mui/material';
+import Interviewers from './Interviewers';
 
 function createData(name, stacks, interview) {
   return {
@@ -139,12 +139,20 @@ export default function CollapsibleTable() {
     
   return (
       <Grid container>
-          <Grid item md="12">
-            <div >
-            Interviewers:
-            </div>
+          <Grid item sm="12" >   
+          <div style={{clear:"both"}}>     
+            <h3 style={{float:"left", margin: "10px"}}><u>Panel Alpha </u></h3>
+            <Button
+              size="large"
+              variant="contained"
+              sx={{ textTransform: "none", padding:'5px', float:"right",margin: "10px" }}
+            >
+             Schedule Interview
+            </Button>
+            </div> 
+            <Interviewers />
           </Grid>
-          <Grid item md="12">
+          <Grid item sm="12">
     <TableContainer component={Paper}>
       <Table stickyHeader aria-label="sticky table">
         <TableHead>
