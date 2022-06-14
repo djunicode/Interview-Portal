@@ -142,3 +142,29 @@ class CandidateAPI(GenericAPIView):
 		application = Application.objects.get(interviewee = interviewee)
 		serializer = ApplicationSerializer(application)
 		return Response(serializer.data)
+
+
+class ScorecardAPI(GenericAPIView):
+	permission_classes = [permissions.IsAuthenticated]
+	serializer_class = ScorecardSerializer
+
+	def post(self, request):
+
+		serializer = self.serializer_class(data=request.data)
+		serializer.is_valid(raise_exception = True)
+		response = serializer.create(request.data)
+
+		return response
+
+class ScorecardGetAPI(GenericAPIView):
+	permission_classes = [permissions.IsAuthenticated]
+	serializer_class = ScorecardSerializer
+
+	def get(self,request,sapid, stack):
+		
+		interviewee = Interviewee.objects.get(user=sapid)
+		app = Application.objects.get(interviewee=interviewee)
+		app_stack = ApplicationStack.objects.filter(application=app).get(name=stack)
+		scorecard = Scorecard.objects.get(stack = app_stack)
+		serializer = self.serializer_class(scorecard)
+		return Response(serializer.data)

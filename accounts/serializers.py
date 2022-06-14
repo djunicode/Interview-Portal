@@ -1,3 +1,4 @@
+from email.mime import application
 from lib2to3.pgen2 import token
 from rest_framework import serializers
 from .models import * 
@@ -166,3 +167,40 @@ class PanelSerializer(serializers.ModelSerializer):
     class Meta:
         model = Panel
         fields = '__all__'
+
+
+class QuestionnaireSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model= Questionnaire
+        fields= ['question', 'rating']
+
+
+class ScorecardSerializer(serializers.ModelSerializer):
+    questionnaire = QuestionnaireSerializer(many = True, required = False)
+    sapid = serializers.CharField(max_length = 11, min_length= 11, read_only = True)
+    rating = serializers.IntegerField(read_only= True)
+    stack = serializers.CharField(max_length=20, read_only= True)
+
+    class Meta:
+        model= Scorecard
+        fields= ['questionnaire', 'sapid', 'stack', 'rating']
+
+    def create(self, validated_data):
+        questionnaire = validated_data['questionnaire']
+        sapid = validated_data['sapid']
+        stack = validated_data['stack']
+
+        interviewee = Interviewee.objects.get(user=sapid)
+        app = Application.objects.get(interviewee=interviewee)
+        app_stack = ApplicationStack.objects.filter(application=app).get(name=stack)
+
+        rating = 0
+        for question in questionnaire:
+            rating = rating + question['rating']
+        rating = rating/len(questionnaire)
+        scorecard = Scorecard.objects.create(stack = app_stack, rating=rating)
+
+        for question in questionnaire:
+            Questionnaire.objects.create(scorecard = scorecard, **question)
+        return Response(validated_data, status=status.HTTP_202_ACCEPTED)
