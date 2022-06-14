@@ -1,3 +1,4 @@
+from email.mime import application
 from lib2to3.pgen2 import token
 from rest_framework import serializers
 from .models import * 
@@ -172,3 +173,58 @@ class PanelSerializer(serializers.ModelSerializer):
     class Meta:
         model = Panel
         fields = '__all__'
+
+
+class ScoreSerializer(serializers.ModelSerializer):
+    question_no = serializers.IntegerField()
+
+    class Meta:
+        model= Score
+        fields= ['question_no', 'rating']
+
+
+class ScorecardSerializer(serializers.ModelSerializer):
+    scores = ScoreSerializer(many = True, required = False)
+    sapid = serializers.CharField(max_length = 11, min_length= 11)
+    rating = serializers.IntegerField(read_only= True)
+    stack = serializers.CharField(max_length=20)
+
+    class Meta:
+        model= Scorecard
+        fields= ['scores', 'sapid', 'stack', 'rating']
+
+    def create(self, validated_data):
+        scores = validated_data['scores']
+        sapid = validated_data['sapid']
+        stack = validated_data['stack']
+
+        interviewee = Interviewee.objects.get(user=sapid)
+        app = Application.objects.get(interviewee=interviewee)
+        app_stack = ApplicationStack.objects.filter(application=app).get(name=stack)
+
+        rating = 0
+        for item in scores:
+            rating = rating + item['rating']
+        rating = rating/len(scores)
+        scorecard = Scorecard.objects.create(stack = app_stack, rating=rating)
+
+        for score in scores:
+            question = Question.objects.get(id=score.pop('question_no'))
+            Score.objects.create(scorecard = scorecard, question= question, **score)
+        return Response(validated_data, status=status.HTTP_202_ACCEPTED)
+
+    
+class ScorecardGetSerializer(serializers.ModelSerializer):
+    stack = serializers.CharField(max_length=20)
+
+    class Meta:
+            model= Scorecard
+            fields= ['stack', 'rating']
+
+
+class QuestionSerializer(serializers.ModelSerializer):
+    stack = serializers.CharField(max_length=20)
+
+    class Meta:
+            model= Question
+            fields= '__all__'

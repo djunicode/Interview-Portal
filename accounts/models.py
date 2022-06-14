@@ -36,10 +36,10 @@ class Stack(models.Model):
     stacks = (('Frontend', 'Frontend'),
               ('Django', 'Django'),
               ('Node', 'Node'),
-              ('React Native', 'React Native'),
-              ('Fullstack Node', 'Fullstack Node'), 
+              ('ReactNative', 'ReactNative'),
+              ('FullstackNode', 'FullstackNode'), 
               ('Flutter', 'Flutter'),
-              ('Fullstack Django', 'Fullstack Django'))
+              ('FullstackDjango', 'FullstackDjango'))
 
     name = models.CharField(max_length=20, choices=stacks, blank=True)
     resources = models.FileField(upload_to="resources", max_length=200, blank=True)
@@ -88,16 +88,16 @@ class ApplicationStack(models.Model):
     stacks = (('Frontend', 'Frontend'),
               ('Django', 'Django'),
               ('Node', 'Node'),
-              ('React Native', 'React Native'),
-              ('Fullstack Node', 'Fullstack Node'), 
+              ('ReactNative', 'ReactNative'),
+              ('FullstackNode', 'FullstackNode'), 
               ('Flutter', 'Flutter'),
-              ('Fullstack Django', 'Fullstack Django'))
+              ('FullstackDjango', 'FullstackDjango'))
 
     name = models.CharField(max_length=20, choices=stacks, blank=True)
     repo_link = models.CharField(max_length=50,blank=True)
 
-    # def __str__(self):
-    #     return self.application,self.name
+    def __str__(self):
+        return self.name
 
 class Panel(models.Model):
     name = models.CharField(max_length= 100)
@@ -114,8 +114,31 @@ class Interview(models.Model):
     meet_link   = models.URLField(max_length=255, blank=True)
     date_time   = models.DateTimeField()
 
-class Questionnaire(models.Model):
 
-    question    = models.TextField(max_length=500, blank=True)
+class Scorecard(models.Model):
+
+    stack = models.OneToOneField(ApplicationStack, on_delete=models.CASCADE)
+    rating = models.IntegerField(blank=True)
+
+    def __str__(self):
+        return str(self.stack)
+
+
+class Question(models.Model):
+
+    stack = models.ForeignKey(Stack, on_delete=models.CASCADE)
+    name = models.CharField(max_length=50, blank=True)
+    option1 = models.CharField(max_length=50,  blank=True)
+    option2 = models.CharField(max_length=50,  blank=True)
+    option3 = models.CharField(max_length=50,  blank=True)
+    option4 = models.CharField(max_length=50,  blank=True)
+    option5 = models.CharField(max_length=50,  blank=True)
+
+    def __str__(self):
+        return self.name
+
+class Score(models.Model):
+
+    scorecard = models.ForeignKey(Scorecard, on_delete=models.CASCADE)
+    question    = models.OneToOneField(Question, on_delete=models.CASCADE)
     rating      = models.IntegerField(blank=True)
-    stack       = models.OneToOneField(ApplicationStack, on_delete=models.CASCADE)

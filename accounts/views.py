@@ -1,7 +1,7 @@
 
 from email.mime import application
 from django.http import HttpResponse
-from rest_framework.generics import GenericAPIView
+from rest_framework.generics import GenericAPIView, ListAPIView
 
 from django.http.response import JsonResponse
 from rest_framework.generics import GenericAPIView, ListAPIView
@@ -146,6 +146,44 @@ class CandidateAPI(GenericAPIView):
 		return Response(serializer.data)
 
 
+class ScorecardAPI(GenericAPIView):
+	permission_classes = [permissions.IsAuthenticated]
+	serializer_class = ScorecardSerializer
+
+	def post(self, request):
+
+		serializer = self.serializer_class(data=request.data)
+		serializer.is_valid(raise_exception = True)
+		response = serializer.create(request.data)
+
+		return response
+
+class ScorecardGetAPI(GenericAPIView):
+	permission_classes = [permissions.IsAuthenticated]
+	serializer_class = ScorecardGetSerializer
+
+	def get(self,request,sapid, stack):
+		
+		interviewee = Interviewee.objects.get(user=sapid)
+		app = Application.objects.get(interviewee=interviewee)
+		app_stack = ApplicationStack.objects.filter(application=app).get(name=stack)
+		scorecard = Scorecard.objects.get(stack = app_stack)
+		serializer = self.serializer_class(scorecard)
+		return Response(serializer.data)
+
+
+class QuestionAPI(ListAPIView):
+	permission_classes = [permissions.IsAuthenticated]
+	serializer_class = QuestionSerializer
+
+	def get_queryset(self):
+		
+		stack = self.kwargs['stack']
+		stack_obj = Stack.objects.get(name= stack)
+		queryset = Question.objects.filter(stack = stack_obj)
+		return queryset
+
+
 class Scheduler(GenericAPIView):
 
 	# permission_classes = [permissions.IsAuthenticated]
@@ -154,10 +192,10 @@ class Scheduler(GenericAPIView):
 		dict_of_stacks = {"django_list": ApplicationStack.objects.filter(name = 'Django'),
 		"frontend_list" : ApplicationStack.objects.filter(name = 'Frontend'),
 		"node_list" : ApplicationStack.objects.filter(name = 'Node'),
-		"native_list" : ApplicationStack.objects.filter(name = 'React Native'),
+		"native_list" : ApplicationStack.objects.filter(name = 'ReactNative'),
 		"flutter_list" : ApplicationStack.objects.filter(name = 'Flutter'),
-		"fdjango_list" : ApplicationStack.objects.filter(name = 'Fullstack Django'),
-		"fnode_list" : ApplicationStack.objects.filter(name = 'Fullstack Node'),
+		"fdjango_list" : ApplicationStack.objects.filter(name = 'FullstackDjango'),
+		"fnode_list" : ApplicationStack.objects.filter(name = 'FullstackNode'),
 		}
 
 		panels = Panel.objects.all()
