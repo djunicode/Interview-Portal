@@ -12,4 +12,5 @@ urlpatterns = [
 #Interviewer APIs
     path('panel_details/', views.PanelAPI.as_view(), name='panel'),
     path('view_candidate/<str:sapid>', views.CandidateAPI.as_view(), name='candidate_view'),
+    path('scheduling/',views.Scheduler.as_view(), name = 'Scheduler'),
 ]
