@@ -11,11 +11,11 @@ import TabPanel from "../components/TasksSection";
 const useStyles = makeStyles((theme) => ({
   flexItem: {
     display: "flex",
-    height: "100vh",
+    height: "100%",
     backgroundColor: "#F2F3F7",
     justifyContent: "space-around",
     [theme.breakpoints.down("md")]: {
-      marginLeft: "40px!important",
+      marginLeft: "20px!important",
     },
   },
   // background: {
@@ -41,18 +41,18 @@ const Dashboard = () => {
         </Grid>
 
         <Grid item md={5} xs={10}>
-        <Grid item xs={10} md={12} mt={3} lg={12}>
-          <TimeLine />
-        </Grid>
+          <Grid item xs={10} md={12} mt={3} lg={12}>
+            <TimeLine />
+          </Grid>
         </Grid>
 
         {/* <Grid item md={3} xs={12} mt={3}>
           <ApplyForIntreview />
         </Grid> */}
-         <Grid item md={11} xs={10} lg={11}>
-        <Grid item md={12} xs={10} mt={3} lg={12}>
-          <TabPanel />
-        </Grid>
+        <Grid item md={11} xs={10} lg={11}>
+          <Grid item md={12} xs={10} mt={3} lg={12}>
+            <TabPanel />
+          </Grid>
         </Grid>
       </Grid>
       {/* </Grid> */}

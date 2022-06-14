@@ -43,5 +43,15 @@ export const theme = createTheme({
         // No more ripple, on the whole application 💣!
       },
     },
+    MuiCard: {
+      styleOverrides: {
+        root: {
+          boxShadow: "1px 1px 6px rgba(0, 0, 0, 0.25)!important",
+          borderRadius: "10px!important",
+        },
+        // The props to change the default for.
+        // No more ripple, on the whole application 💣!
+      },
+    },
   },
 });

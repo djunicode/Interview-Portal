@@ -11,6 +11,7 @@ import { useFormik, yupToFormErrors } from "formik";
 import ProfileDetails from "./ProfileDetails";
 import "../styles/login_signup.css";
 // import Panel from "muicss/lib/react/panel";
+
 import { Button } from "@mui/material";
 // import TextField from "@mui/material/TextField";
 import { useNavigate } from "react-router";
@@ -59,6 +60,10 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     alignItems: "center",
     padding: "2%",
+  },
+  skip: {
+    color: "rgba(81, 84, 206, 1)",
+    textDecoration: "none!important",
   },
   container: {
     width: "60%!important",
@@ -490,7 +495,11 @@ const Details = () => {
               </Button>
             </Grid>
             <Grid item xs={12} className={classes.gridRow}>
-              <Typography>Skip for now {">"} </Typography>
+              <Typography>
+                <Link to="/dashboard" className={classes.skip}>
+                  Skip for now {">"}
+                </Link>
+              </Typography>
             </Grid>
           </Grid>
         </Card>
