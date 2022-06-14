@@ -151,9 +151,15 @@ class User_GET_Serilizer(serializers.ModelSerializer):
 
 class Interviewee_GET_Serializer(serializers.ModelSerializer):
     user = User_GET_Serilizer()
+    application = serializers.SerializerMethodField()
     class Meta:
         model = Interviewee
         fields = "__all__"
+
+    def get_application(self,obj):
+        application = Application.objects.get(interviewee = obj)
+        serializer =  ApplicationSerializer(application)
+        return serializer.data
 
 class Interviewer_GET_Serializer(serializers.ModelSerializer):
     class Meta:
