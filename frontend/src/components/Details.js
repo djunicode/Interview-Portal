@@ -4,6 +4,8 @@ import * as Yup from "yup";
 import { makeStyles } from "@mui/styles";
 import { Checkbox, Grid, Input, Typography } from "@mui/material";
 import "../styles/signupPage.css";
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
 import { Card } from "@mui/material";
 import { useFormik, yupToFormErrors } from "formik";
 import ProfileDetails from "./ProfileDetails";
@@ -97,6 +99,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Details = () => {
   const classes = useStyles();
+  const [open, setOpen] = React.useState(false);
   const [data, setData] = useState([]);
   const [submitted, setSubmitted] = useState(false);
   const formik = useFormik({
@@ -192,6 +195,7 @@ const Details = () => {
       axios(config)
         .then(function (response) {
           console.log(JSON.stringify(response.data));
+          setOpen(true);
           setSubmitted(true);
         })
         .catch(function (error) {
@@ -199,6 +203,9 @@ const Details = () => {
         });
     },
   });
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const getValue = (e) => {
     if (data.includes(e)) {
@@ -487,6 +494,15 @@ const Details = () => {
             </Grid>
           </Grid>
         </Card>
+        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+          <Alert
+            severity="success"
+            onClose={handleClose}
+            sx={{ width: "100%" }}
+          >
+            Form submitted successfully!
+          </Alert>
+        </Snackbar>
       </Box>
     </>
   );

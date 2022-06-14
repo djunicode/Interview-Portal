@@ -37,6 +37,7 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           height: "40px",
+          backgroundColor: "none!important",
         },
         // The props to change the default for.
         // No more ripple, on the whole application 💣!
