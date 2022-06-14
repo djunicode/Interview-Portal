@@ -96,8 +96,8 @@ class ApplicationStack(models.Model):
     name = models.CharField(max_length=20, choices=stacks, blank=True)
     repo_link = models.CharField(max_length=50,blank=True)
 
-    def __str__(self):
-        return self.application,self.name
+    # def __str__(self):
+    #     return self.application,self.name
 
 class Panel(models.Model):
     name = models.CharField(max_length= 100)
