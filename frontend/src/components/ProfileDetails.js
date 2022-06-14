@@ -3,6 +3,7 @@ import axios from "axios";
 import React from "react";
 import { makeStyles } from "@mui/styles";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 const useStyles = makeStyles((theme) => ({
   gridRow: {
     display: "flex",
@@ -14,6 +15,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 const ProfileDetails = () => {
+  const navigate = useNavigate();
   const classes = useStyles();
   const [userData, setUserData] = useState("");
   const FetchUserData = () => {
@@ -39,7 +41,6 @@ const ProfileDetails = () => {
   useEffect(() => {
     FetchUserData();
   }, []);
-  console.log(userData);
 
   return (
     <>
@@ -72,7 +73,9 @@ const ProfileDetails = () => {
           {userData && userData.user.grad_year}
         </Grid>
         <Grid item xs={12} className={classes.edit}>
-          <Button variant="outlined">Edit profile</Button>
+          <Button variant="outlined" onClick={() => navigate("/profile")}>
+            Edit profile
+          </Button>
         </Grid>
       </Grid>
     </>

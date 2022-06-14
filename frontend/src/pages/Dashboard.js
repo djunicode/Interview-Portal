@@ -11,23 +11,26 @@ import TabPanel from "../components/TasksSection";
 const useStyles = makeStyles((theme) => ({
   flexItem: {
     display: "flex",
+    height: "100vh",
+    backgroundColor: "#F2F3F7",
     justifyContent: "space-around",
     [theme.breakpoints.down("md")]: {
       marginLeft: "40px!important",
     },
   },
-  background: {
-    backgroundColor: "#F2F3F7",
-    height: "120vh",
-  },
-  rowone: {},
+  // background: {
+  //   height: "120vh",
+  // },
+  // body: {
+  //   backgroundColor: "#F2F3F7",
+  // },
+  // rowone: {},
 }));
 const Dashboard = () => {
   const classes = useStyles();
   return (
     <>
       <Grid container columnSpacing={5} className={classes.flexItem}>
-
         <Grid item md={5} xs={10}>
           <Grid item xs={10} lg={12} md={12} mt={3}>
             <ProfileProgress />
@@ -51,7 +54,6 @@ const Dashboard = () => {
           <TabPanel />
         </Grid>
         </Grid>
-
       </Grid>
       {/* </Grid> */}
     </>
