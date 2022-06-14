@@ -15,4 +15,5 @@ urlpatterns = [
     path('scorecard_get/<str:sapid>/<str:stack>', views.ScorecardGetAPI.as_view(), name='scorecard_get'),
     path('scorecard/', views.ScorecardAPI.as_view(), name='scorecard'),
     path('scheduling/',views.Scheduler.as_view(), name = 'Scheduler'),
+    path('question/<str:stack>',views.QuestionAPI.as_view(), name = 'question'),
 ]

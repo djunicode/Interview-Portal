@@ -175,25 +175,26 @@ class PanelSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class QuestionnaireSerializer(serializers.ModelSerializer):
+class ScoreSerializer(serializers.ModelSerializer):
+    question_no = serializers.IntegerField()
 
     class Meta:
-        model= Questionnaire
-        fields= ['question', 'rating']
+        model= Score
+        fields= ['question_no', 'rating']
 
 
 class ScorecardSerializer(serializers.ModelSerializer):
-    questionnaire = QuestionnaireSerializer(many = True, required = False)
-    sapid = serializers.CharField(max_length = 11, min_length= 11, read_only = True)
+    scores = ScoreSerializer(many = True, required = False)
+    sapid = serializers.CharField(max_length = 11, min_length= 11)
     rating = serializers.IntegerField(read_only= True)
-    stack = serializers.CharField(max_length=20, read_only= True)
+    stack = serializers.CharField(max_length=20)
 
     class Meta:
         model= Scorecard
-        fields= ['questionnaire', 'sapid', 'stack', 'rating']
+        fields= ['scores', 'sapid', 'stack', 'rating']
 
     def create(self, validated_data):
-        questionnaire = validated_data['questionnaire']
+        scores = validated_data['scores']
         sapid = validated_data['sapid']
         stack = validated_data['stack']
 
@@ -202,11 +203,28 @@ class ScorecardSerializer(serializers.ModelSerializer):
         app_stack = ApplicationStack.objects.filter(application=app).get(name=stack)
 
         rating = 0
-        for question in questionnaire:
-            rating = rating + question['rating']
-        rating = rating/len(questionnaire)
+        for item in scores:
+            rating = rating + item['rating']
+        rating = rating/len(scores)
         scorecard = Scorecard.objects.create(stack = app_stack, rating=rating)
 
-        for question in questionnaire:
-            Questionnaire.objects.create(scorecard = scorecard, **question)
+        for score in scores:
+            question = Question.objects.get(id=score.pop('question_no'))
+            Score.objects.create(scorecard = scorecard, question= question, **score)
         return Response(validated_data, status=status.HTTP_202_ACCEPTED)
+
+    
+class ScorecardGetSerializer(serializers.ModelSerializer):
+    stack = serializers.CharField(max_length=20)
+
+    class Meta:
+            model= Scorecard
+            fields= ['stack', 'rating']
+
+
+class QuestionSerializer(serializers.ModelSerializer):
+    stack = serializers.CharField(max_length=20)
+
+    class Meta:
+            model= Question
+            fields= '__all__'

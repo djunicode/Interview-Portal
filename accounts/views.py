@@ -1,7 +1,7 @@
 
 from email.mime import application
 from django.http import HttpResponse
-from rest_framework.generics import GenericAPIView
+from rest_framework.generics import GenericAPIView, ListAPIView
 
 from django.http.response import JsonResponse
 from rest_framework.generics import GenericAPIView, ListAPIView
@@ -160,7 +160,7 @@ class ScorecardAPI(GenericAPIView):
 
 class ScorecardGetAPI(GenericAPIView):
 	permission_classes = [permissions.IsAuthenticated]
-	serializer_class = ScorecardSerializer
+	serializer_class = ScorecardGetSerializer
 
 	def get(self,request,sapid, stack):
 		
@@ -171,6 +171,19 @@ class ScorecardGetAPI(GenericAPIView):
 		serializer = self.serializer_class(scorecard)
 		return Response(serializer.data)
 
+
+class QuestionAPI(ListAPIView):
+	permission_classes = [permissions.IsAuthenticated]
+	serializer_class = QuestionSerializer
+
+	def get_queryset(self):
+		
+		stack = self.kwargs['stack']
+		stack_obj = Stack.objects.get(name= stack)
+		queryset = Question.objects.filter(stack = stack_obj)
+		return queryset
+
+
 class Scheduler(GenericAPIView):
 
 	# permission_classes = [permissions.IsAuthenticated]
@@ -179,10 +192,10 @@ class Scheduler(GenericAPIView):
 		dict_of_stacks = {"django_list": ApplicationStack.objects.filter(name = 'Django'),
 		"frontend_list" : ApplicationStack.objects.filter(name = 'Frontend'),
 		"node_list" : ApplicationStack.objects.filter(name = 'Node'),
-		"native_list" : ApplicationStack.objects.filter(name = 'React Native'),
+		"native_list" : ApplicationStack.objects.filter(name = 'ReactNative'),
 		"flutter_list" : ApplicationStack.objects.filter(name = 'Flutter'),
-		"fdjango_list" : ApplicationStack.objects.filter(name = 'Fullstack Django'),
-		"fnode_list" : ApplicationStack.objects.filter(name = 'Fullstack Node'),
+		"fdjango_list" : ApplicationStack.objects.filter(name = 'FullstackDjango'),
+		"fnode_list" : ApplicationStack.objects.filter(name = 'FullstackNode'),
 		}
 
 		panels = Panel.objects.all()
