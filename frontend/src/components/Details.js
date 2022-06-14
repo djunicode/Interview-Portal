@@ -200,7 +200,7 @@ const Details = () => {
               <TextField
                 className={classes.field}
                 disabled={!data.includes("frontend")}
-                label="frontend"
+                label="Frontend"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.frontend}
@@ -226,7 +226,7 @@ const Details = () => {
               <TextField
                 className={classes.field}
                 disabled={!data.includes("node")}
-                label="node"
+                label="Node"
                 variant="outlined"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
@@ -251,7 +251,7 @@ const Details = () => {
               <TextField
                 className={classes.field}
                 disabled={!data.includes("django")}
-                label="django"
+                label="Django"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.django}
@@ -276,7 +276,7 @@ const Details = () => {
               <TextField
                 className={classes.field}
                 disabled={!data.includes("app")}
-                label="app"
+                label="App"
                 onChange={formik.handleChange}
                 variant="outlined"
                 onBlur={formik.handleBlur}

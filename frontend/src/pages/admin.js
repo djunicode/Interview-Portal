@@ -16,13 +16,12 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import Chip from "@mui/material/Chip";
 import { useEffect, useState } from "react";
 
-function createData(name, stacks, interview, submission, protein, price) {
+function createData(name, stacks, interview, submission, protein,) {
   return {
     name,
     stacks,
     interview,
     submission,
-    price,
     history: [
       {
         sapid: '60004200038',
@@ -103,8 +102,8 @@ function Row(props) {
 Row.propTypes = {
   row: PropTypes.shape({
     stacks: PropTypes.number.isRequired,
-    submission: PropTypes.number.isRequired,
-    interview: PropTypes.number.isRequired,
+    // submission: PropTypes.number.isRequired,
+    // interview: PropTypes.number.isRequired,
     history: PropTypes.arrayOf(
       PropTypes.shape({
         email
@@ -116,19 +115,18 @@ Row.propTypes = {
       }),
     ).isRequired,
     name: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    protein: PropTypes.number.isRequired,
+    // price: PropTypes.number.isRequired,
+    // protein: PropTypes.number.isRequired,
   }).isRequired,
 };
 
 const rows = [
-  createData('Shrey Parekh',  <Chip
+  createData('Shrey ',  <Chip
   label="Fullstack "
   color="secondary"
   sx={{ margin: "5px" }}
   onClick={() => {}}
-/>
-, '6 June', 'Null'),
+/>),
 //   createData('Greha Shah', <Chip
 //   label="Frontend "
 //   color="secondary"
@@ -147,6 +145,7 @@ const rows = [
 
 export default function CollapsibleTable() {
     var myHeaders = new Headers();
+    
     myHeaders.append("Authorization", `Token ${localStorage.getItem("token")}`);
   
     const [user, setUser] = useState({
@@ -163,7 +162,7 @@ export default function CollapsibleTable() {
     
       useEffect(() => {
         fetch(
-          "https://unicodeinterview.pythonanywhere.com/accounts/application/",
+           "https://unicodeinterview.pythonanywhere.com/accounts/panel_details/",
           requestOptions
         )
           .then((response) => response.json())
@@ -182,8 +181,8 @@ export default function CollapsibleTable() {
             <TableCell />
             <TableCell>Name </TableCell>
             <TableCell align="right">Stacks applied</TableCell>
-            <TableCell align="right">Scheduled Interview&nbsp;</TableCell>
-            <TableCell align="right">Submission Details&nbsp;</TableCell>
+            {/* <TableCell align="right">Scheduled Interview&nbsp;</TableCell>
+            <TableCell align="right">Submission Details&nbsp;</TableCell> */}
           </TableRow>
         </TableHead>
         <TableBody>
