@@ -67,7 +67,11 @@ class LoginAPI(GenericAPIView):
 		if user:
 			login(request,user)
 			token = Token.objects.get(user=user)
-			return Response({'token' : token.key,'sapid' : user.sapid},status = status.HTTP_200_OK)
+			if Interviewer.objects.filter(user = user):
+				is_interviewer = True
+			else:
+				is_interviewer = False
+			return Response({'token' : token.key,'sapid' : user.sapid,'is_interviewer' : is_interviewer},status = status.HTTP_200_OK)
 			
 		return Response('Invalid Credentials',status = status.HTTP_404_NOT_FOUND)
 
@@ -182,6 +186,21 @@ class QuestionAPI(ListAPIView):
 		stack_obj = Stack.objects.get(name= stack)
 		queryset = Question.objects.filter(stack = stack_obj)
 		return queryset
+
+
+class InterviewAPI(GenericAPIView):
+	permission_classes = [permissions.IsAuthenticated]
+	serializer_class = Interviewee_Panel_Serializer
+	
+	def get(self,request):
+		interviewee = Interviewee.objects.get(user = request.user)
+		panels = Panel.objects.filter(interviewees = interviewee)
+		if not panels:
+			return Response({"message" : "Interviews have not been scheduled yet"})
+		else:
+			serializer = Interviewee_Panel_Serializer(panels, many = True)
+			return Response(serializer.data)
+
 
 
 class Scheduler(GenericAPIView):

@@ -162,11 +162,6 @@ class Interviewee_GET_Serializer(serializers.ModelSerializer):
         serializer =  ApplicationSerializer(application)
         return serializer.data
 
-    def get_application(self,obj):
-        application = Application.objects.get(interviewee = obj)
-        serializer =  ApplicationSerializer(application)
-        return serializer.data
-
 class Interviewer_GET_Serializer(serializers.ModelSerializer):
     class Meta:
         model = Interviewer
@@ -233,3 +228,18 @@ class QuestionSerializer(serializers.ModelSerializer):
     class Meta:
             model= Question
             fields= '__all__'
+
+
+class Interviewee_Panel_Serializer(serializers.ModelSerializer):
+    stacks_in_panel = serializers.SerializerMethodField('get_stacks')
+    class Meta:
+        model = Panel
+        fields = ['name','stacks_in_panel']
+
+    def get_stacks(self,obj):
+        stacks = []
+        interviewers = obj.interviewers.all()
+        for interviewer in interviewers:
+            stacks.append(interviewer.stack)
+        serializer = StackSerializer(stacks, many = True)
+        return serializer.data
