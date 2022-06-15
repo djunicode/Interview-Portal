@@ -15,6 +15,8 @@
     "@testing-library/jest-dom": "^5.16.3",
     "@testing-library/react": "^12.1.4",
     "@testing-library/user-event": "^13.5.0",
+    "@types/react": "^17.0.45",
+    "@types/react-dom": "^18.0.5",
     "axios": "^0.26.1",
     "formik": "^2.2.9",
     "material-ui-chip-input": "^2.0.0-beta.2",
@@ -24,6 +26,7 @@
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.0",
     "styled-components": "^5.3.5",
+    "typescript": "^4.7.3",
     "web-vitals": "^2.1.4",
     "yup": "^0.32.11"
   },

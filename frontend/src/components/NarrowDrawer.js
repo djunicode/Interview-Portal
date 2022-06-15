@@ -9,6 +9,8 @@ import PersonIcon from "@mui/icons-material/Person";
 import QuizIcon from "@mui/icons-material/Quiz";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import TaskIcon from "@mui/icons-material/Task";
+import HomeIcon from '@mui/icons-material/Home';
+import { Home } from "@mui/icons-material";
 
 function NarrowDrawer() {
   const navigate = useNavigate();
@@ -18,6 +20,13 @@ function NarrowDrawer() {
         {/* <img width={100} src={} className="logo" /> */}
       </Box>
       <Divider />
+      <List>
+        <ListItem button onClick={() => navigate("/dashboard")}>
+          <ListItemIcon>
+            <HomeIcon />
+          </ListItemIcon>
+        </ListItem>
+      </List>
       <List>
         <ListItem button onClick={() => navigate("/profile")}>
           <ListItemIcon>
