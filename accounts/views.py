@@ -1,5 +1,5 @@
+from .permissions import IntervieweePermission, InterviewerPermission
 
-from email.mime import application
 from django.http import HttpResponse
 from rest_framework.generics import GenericAPIView, ListAPIView
 
@@ -77,7 +77,7 @@ class LoginAPI(GenericAPIView):
 
 
 class ApplicationView(GenericAPIView):
-	permission_classes = [permissions.IsAuthenticated]
+	permission_classes = [IntervieweePermission]
 	serializer_class = ApplicationSerializer
 
 	def get(self,request):
@@ -127,7 +127,7 @@ class ResourcesAPI(ListAPIView):
 
 
 class PanelAPI(GenericAPIView):
-	permission_classes = [permissions.IsAuthenticated]
+	permission_classes = [InterviewerPermission]
 	serializer_class = PanelSerializer
 
 	def get(self,request):
@@ -139,7 +139,7 @@ class PanelAPI(GenericAPIView):
 		return Response(serializer.data)
 
 class CandidateAPI(GenericAPIView):
-	permission_classes = [permissions.IsAuthenticated]
+	permission_classes = [InterviewerPermission]
 	serializer_class = ApplicationSerializer
 
 	def get(self,request,sapid):
@@ -151,7 +151,7 @@ class CandidateAPI(GenericAPIView):
 
 
 class ScorecardAPI(GenericAPIView):
-	permission_classes = [permissions.IsAuthenticated]
+	permission_classes = [InterviewerPermission]
 	serializer_class = ScorecardSerializer
 
 	def post(self, request):
@@ -163,7 +163,7 @@ class ScorecardAPI(GenericAPIView):
 		return response
 
 class ScorecardGetAPI(GenericAPIView):
-	permission_classes = [permissions.IsAuthenticated]
+	permission_classes = [InterviewerPermission]
 	serializer_class = ScorecardGetSerializer
 
 	def get(self,request,sapid, stack):
@@ -177,7 +177,7 @@ class ScorecardGetAPI(GenericAPIView):
 
 
 class QuestionAPI(ListAPIView):
-	permission_classes = [permissions.IsAuthenticated]
+	permission_classes = [InterviewerPermission]
 	serializer_class = QuestionSerializer
 
 	def get_queryset(self):
@@ -189,7 +189,7 @@ class QuestionAPI(ListAPIView):
 
 
 class InterviewAPI(GenericAPIView):
-	permission_classes = [permissions.IsAuthenticated]
+	permission_classes = [IntervieweePermission]
 	serializer_class = Interviewee_Panel_Serializer
 	
 	def get(self,request):
@@ -205,7 +205,8 @@ class InterviewAPI(GenericAPIView):
 
 class Scheduler(GenericAPIView):
 
-	# permission_classes = [permissions.IsAuthenticated]
+	permission_classes = [InterviewerPermission]
+	serializer_class = PanelSerializer
 
 	def get(self,request):
 		dict_of_stacks = {"django_list": ApplicationStack.objects.filter(name = 'Django'),

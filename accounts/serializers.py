@@ -163,6 +163,7 @@ class Interviewee_GET_Serializer(serializers.ModelSerializer):
         return serializer.data
 
 class Interviewer_GET_Serializer(serializers.ModelSerializer):
+    user = User_GET_Serializer()
     class Meta:
         model = Interviewer
         fields = "__all__"
