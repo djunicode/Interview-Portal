@@ -13,6 +13,7 @@ import Profile from "./pages/Profile";
 import ResourcePage from "./pages/ResourcePage";
 import ApplicationForm from "./pages/ApplicationForm";
 import AdminPanel from "./pages/AdminPanel";
+import FaqPage from "./pages/FaqPage";
 
 function App() {
   const PrivateRoute = () => {
@@ -33,6 +34,7 @@ function App() {
           <Route path="/tasks" element={<TabPanel />} />
           <Route path="/resources" element={<ResourcePage />} />
           <Route path="/apply" element={<ApplyForIntreview />} />
+          <Route path="/faq" element={<FaqPage />} />
           <Route path="/" element={<PrivateRoute />}>
             <Route path="/" element={<Login_signup />} />
           </Route>
