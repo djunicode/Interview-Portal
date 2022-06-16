@@ -1,5 +1,5 @@
+from .permissions import IntervieweePermission, InterviewerPermission
 
-from email.mime import application
 from django.http import HttpResponse
 from rest_framework.generics import GenericAPIView, ListAPIView
 
@@ -67,13 +67,17 @@ class LoginAPI(GenericAPIView):
 		if user:
 			login(request,user)
 			token = Token.objects.get(user=user)
-			return Response({'token' : token.key,'sapid' : user.sapid},status = status.HTTP_200_OK)
+			if Interviewer.objects.filter(user = user):
+				is_interviewer = True
+			else:
+				is_interviewer = False
+			return Response({'token' : token.key,'sapid' : user.sapid,'is_interviewer' : is_interviewer},status = status.HTTP_200_OK)
 			
 		return Response('Invalid Credentials',status = status.HTTP_404_NOT_FOUND)
 
 
 class ApplicationView(GenericAPIView):
-	permission_classes = [permissions.IsAuthenticated]
+	permission_classes = [IntervieweePermission]
 	serializer_class = ApplicationSerializer
 
 	def get(self,request):
@@ -123,7 +127,7 @@ class ResourcesAPI(ListAPIView):
 
 
 class PanelAPI(GenericAPIView):
-	permission_classes = [permissions.IsAuthenticated]
+	permission_classes = [InterviewerPermission]
 	serializer_class = PanelSerializer
 
 	def get(self,request):
@@ -135,7 +139,7 @@ class PanelAPI(GenericAPIView):
 		return Response(serializer.data)
 
 class CandidateAPI(GenericAPIView):
-	permission_classes = [permissions.IsAuthenticated]
+	permission_classes = [InterviewerPermission]
 	serializer_class = ApplicationSerializer
 
 	def get(self,request,sapid):
@@ -147,7 +151,7 @@ class CandidateAPI(GenericAPIView):
 
 
 class ScorecardAPI(GenericAPIView):
-	permission_classes = [permissions.IsAuthenticated]
+	permission_classes = [InterviewerPermission]
 	serializer_class = ScorecardSerializer
 
 	def post(self, request):
@@ -159,7 +163,7 @@ class ScorecardAPI(GenericAPIView):
 		return response
 
 class ScorecardGetAPI(GenericAPIView):
-	permission_classes = [permissions.IsAuthenticated]
+	permission_classes = [InterviewerPermission]
 	serializer_class = ScorecardGetSerializer
 
 	def get(self,request,sapid, stack):
@@ -173,7 +177,7 @@ class ScorecardGetAPI(GenericAPIView):
 
 
 class QuestionAPI(ListAPIView):
-	permission_classes = [permissions.IsAuthenticated]
+	permission_classes = [InterviewerPermission]
 	serializer_class = QuestionSerializer
 
 	def get_queryset(self):
@@ -184,9 +188,25 @@ class QuestionAPI(ListAPIView):
 		return queryset
 
 
+class InterviewAPI(GenericAPIView):
+	permission_classes = [IntervieweePermission]
+	serializer_class = Interviewee_Panel_Serializer
+	
+	def get(self,request):
+		interviewee = Interviewee.objects.get(user = request.user)
+		panels = Panel.objects.filter(interviewees = interviewee)
+		if not panels:
+			return Response({"message" : "Interviews have not been scheduled yet"})
+		else:
+			serializer = Interviewee_Panel_Serializer(panels, many = True)
+			return Response(serializer.data)
+
+
+
 class Scheduler(GenericAPIView):
 
-	# permission_classes = [permissions.IsAuthenticated]
+	permission_classes = [InterviewerPermission]
+	serializer_class = PanelSerializer
 
 	def get(self,request):
 		dict_of_stacks = {"django_list": ApplicationStack.objects.filter(name = 'Django'),

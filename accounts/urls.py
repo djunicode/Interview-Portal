@@ -8,6 +8,7 @@ urlpatterns = [
     path('application/',views.ApplicationView.as_view(), name = 'application'),
     path('resources/', views.ResourcesAPI.as_view(), name = 'resources'),
     path('tasks/', views.TaskAPI.as_view(), name='tasks'),
+    path('interviews/', views.InterviewAPI.as_view(), name='interviews'),
 
 #Interviewer APIs
     path('panel_details/', views.PanelAPI.as_view(), name='panel'),
