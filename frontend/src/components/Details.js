@@ -148,38 +148,42 @@ const Details = () => {
 		onSubmit: (values) => {
 			console.log(values);
 
-			var data = JSON.stringify({
-				stack: [
-					{
-						name: "Frontend",
-						repo_link: values.frontend,
-					},
-					{
-						name: "Node",
-						repo_link: values.node,
-					},
-					{
-						name: "Django",
-						repo_link: values.django,
-					},
-					{
-						name: "Flutter",
-						repo_link: values.flutter,
-					},
+			let stack = [
+				{
+					name: "Frontend",
+					repo_link: values.frontend,
+				},
+				{
+					name: "Node",
+					repo_link: values.node,
+				},
+				{
+					name: "Django",
+					repo_link: values.django,
+				},
+				{
+					name: "Flutter",
+					repo_link: values.flutter,
+				},
 
-					{
-						name: "Fullstack Django",
-						repo_link: values.fullStackDjango,
-					},
-					{
-						name: "React Native",
-						repo_link: values.reactNative,
-					},
-					{
-						name: "Fullstack Node",
-						repo_link: values.fullStackNode,
-					},
-				],
+				{
+					name: "Fullstack Django",
+					repo_link: values.fullStackDjango,
+				},
+				{
+					name: "React Native",
+					repo_link: values.reactNative,
+				},
+				{
+					name: "Fullstack Node",
+					repo_link: values.fullStackNode,
+				},
+			]
+
+			let stackArray = stack.filter((singleStack) => singleStack.repo_link !== "")
+			console.log(stackArray);
+			var data = JSON.stringify({
+				stack: stackArray,
 				resume_link: values.resume,
 			});
 			console.log(data);
@@ -465,7 +469,7 @@ const Details = () => {
 								disabled={!formik.values.stacks.includes("fullStackDjango")}
 								helperText={
 									formik.touched.fullStackDjango &&
-									formik.errors.fullStackDjango
+										formik.errors.fullStackDjango
 										? formik.errors.fullStackDjango
 										: null
 								}

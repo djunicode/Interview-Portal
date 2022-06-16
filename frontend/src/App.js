@@ -14,19 +14,25 @@ import ResourcePage from "./pages/ResourcePage";
 import ApplicationForm from "./pages/ApplicationForm";
 import AdminPanel from "./pages/AdminPanel";
 import FaqPage from "./pages/FaqPage";
+import { useNavigate } from "react-router";
 import PanelName from "./components/PanelName";
 
 function App() {
+
   const PrivateRoute = () => {
     const token = localStorage.getItem("token");
+    const is_interviewer = localStorage.getItem("is_interviewer");
+
     return token ? <Outlet /> : <Navigate to="/login" />;
   };
   return (
     <Router>
+
       <div className="App">
         <Routes>
           // open routes
-          <Route path="/admin" element={<AdminPanel />} />
+
+
           <Route path="/login" element={<Login_signup />} />
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/timeline" element={<TimeLine />} />
@@ -43,6 +49,7 @@ function App() {
           {/* <Route path="/signup" element={<PrivateRoute />}>
 						<Route path="/signup" element={<SignupPage />} />
 					</Route> */}
+
           <Route path="/ApplicationForm" element={<PrivateRoute />}>
             <Route path="/ApplicationForm" element={<ApplicationForm />} />
           </Route>
@@ -51,6 +58,9 @@ function App() {
           </Route>
           <Route path="/profile" element={<PrivateRoute />}>
             <Route path="/profile" element={<Profile />} />
+          </Route>
+          <Route path="/admin" element={<PrivateRoute />}>
+            <Route path="/admin" element={<AdminPanel />} />
           </Route>
         </Routes>
       </div>
