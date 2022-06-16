@@ -16,6 +16,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
+import questions from "../utils/questions";
 
 function createData(name, stacks, history) {
   return {
@@ -34,8 +35,11 @@ const rows = [
 
 export default function CollapsibleTable() {
   const [open, setOpen] = React.useState(false);
+  const [stack, setStack] = useState()
 
-  const handleClickOpen = () => {
+  const handleClickOpen = (name) => {
+    console.log(name)
+    setStack(name)
     setOpen(true);
   };
 
@@ -73,6 +77,8 @@ export default function CollapsibleTable() {
       })
       .catch((error) => console.log("error", error));
   }, []);
+
+  questions(stack)
 
   return (
     <Grid container>
@@ -123,7 +129,7 @@ export default function CollapsibleTable() {
                                   label={obj.name}
                                   color="secondary"
                                   sx={{ margin: "5px" }}
-                                  onClick={handleClickOpen}
+                                  onClick={handleClickOpen(obj.name)}
                                 />
                                 <>
                                   <Dialog
