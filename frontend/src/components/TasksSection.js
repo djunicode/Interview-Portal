@@ -78,38 +78,39 @@ export default function BasicTabs() {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  // const classes = useStyles();
-
   const classes = useStyles();
 
   return (
     <Card className={classes.card1}>
-      <Grid container className={classes.flexItem} rowSpacing="20">
-        <Grid item xs={2}>
+      {/* <Grid container className={classes.flexItem} > */}
+        <Grid item xs="5" md="6">
           <Typography className={classes.header} variant="h3">
             <strong>Tasks</strong>
           </Typography>
         </Grid>
         <Divider className={classes.divider} />
 
-        <Box
+        <Box 
           sx={{
             flexGrow: 1,
             maxWidth: { xs: 320, sm: 480, md: "100%" },
             bgcolor: "background.paper",
             padding: "1px",
+			width: '100%'
           }}
         >
-          <Box sx={{ mt: 3 }} className={classes.flexItem}>
-            <Grid item>
-              <AppBar position="static" color="inherit">
+          {/* <Box sx={{ mt: 3 }} className={classes.flexItem}> */}
+            <Grid item sx={{ mt: 3 }} md="12" >
+              <AppBar position="static" color="inherit"  sx={{width:"100%"}}>
                 <Tabs
                   variant="scrollable"
                   allowScrollButtonsMobile
                   value={value}
+				  centered
                   onChange={handleChange}
                   classes={classes}
                   aria-label="simple tabs example"
+				 
                 >
                   <Tab label="Frontend" {...a11yProps(0)} />
                   <Tab label="Backend" {...a11yProps(1)} />
@@ -119,7 +120,7 @@ export default function BasicTabs() {
                 </Tabs>
               </AppBar>
             </Grid>
-          </Box>
+          {/* </Box> */}
           <Grid sx={{ padding: { xs: 2, md: 0 } }}>
             <TabPanel value={value} index={0}>
               <TaskData stack="1" />
@@ -138,7 +139,7 @@ export default function BasicTabs() {
             </TabPanel>
           </Grid>
         </Box>
-      </Grid>
+      {/* </Grid> */}
     </Card>
   );
 }

@@ -99,7 +99,7 @@ function ResponsiveDrawer(props) {
                 cursor: "pointer",
               }}
             >
-              <ChevronRightIcon />
+              <ChevronRightIcon sx={{ color: "#8985f2" }} />
             </Grid>
             {narrowDrawer}
           </Drawer>
@@ -126,8 +126,8 @@ function ResponsiveDrawer(props) {
                 cursor: "pointer",
               }}
             >
-              <ChevronLeftIcon />
-              <p>Minimize</p>
+              <ChevronLeftIcon sx={{ color: "#8985f2", padding:"5%", }} />
+              {/* <p ></p> */}
             </Grid>
             {drawer}
           </Drawer>
