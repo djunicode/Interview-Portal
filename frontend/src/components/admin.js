@@ -11,12 +11,12 @@ import { useEffect, useState } from "react";
 import { Button, Grid } from "@mui/material";
 import Interviewers from "./Interviewers";
 import Row from "./Row";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
-import questions from "../utils/questions";
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import PanelName from "./PanelName";
 
 function createData(name, stacks, history) {
   return {
@@ -85,7 +85,7 @@ export default function CollapsibleTable() {
       <Grid item sm="12">
         <div style={{ clear: "both" }}>
           <h3 style={{ float: "left", margin: "10px" }}>
-            <u>Panel Alpha </u>
+             <PanelName /> 
           </h3>
           <Button
             size="large"
