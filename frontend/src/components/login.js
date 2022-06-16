@@ -50,13 +50,20 @@ const Login = () => {
           console.log(response.data);
           if (response.data.token) {
             console.log(response.data.token);
-            navigate("/dashboard");
+            if (response.data.is_interviewer) {
+              navigate('/admin')
+            }
+            else {
+              navigate('/dashboard')
+            }
           } else {
             navigate("/signup");
             alert("Invalid cred");
           }
           localStorage.setItem("token", response.data.token);
-          navigate("/dashboard");
+          localStorage.setItem("is_interviewer", response.data.is_interviewer);
+
+          // navigate("/dashboard");
         })
         .catch(function (error) {
           console.log(error);
