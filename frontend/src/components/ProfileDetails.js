@@ -52,25 +52,25 @@ const ProfileDetails = () => {
           <Typography>Name:</Typography>
         </Grid>
         <Grid item sm={6} xs={12} className={classes.gridRow}>
-          {userData && userData.user.name}
+          <Typography>{userData && userData.user.name}</Typography>
         </Grid>
         <Grid item sm={6} xs={12} className={classes.gridRow}>
           <Typography>Email:</Typography>
         </Grid>
         <Grid item sm={6} xs={12} className={classes.gridRow}>
-          {userData && userData.user.email}
+          <Typography> {userData && userData.user.email}</Typography>
         </Grid>
         <Grid item sm={6} xs={12} className={classes.gridRow}>
           <Typography>SAP ID:</Typography>
         </Grid>
         <Grid item sm={6} xs={12} className={classes.gridRow}>
-          {userData && userData.user.sapid}
+          <Typography> {userData && userData.user.sapid}</Typography>
         </Grid>
         <Grid item sm={6} xs={12} className={classes.gridRow}>
           <Typography>Graduation Year:</Typography>
         </Grid>
         <Grid item sm={6} xs={12} className={classes.gridRow}>
-          {userData && userData.user.grad_year}
+          <Typography> {userData && userData.user.grad_year}</Typography>
         </Grid>
         <Grid item xs={12} className={classes.edit}>
           <Button variant="outlined" onClick={() => navigate("/profile")}>

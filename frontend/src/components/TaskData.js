@@ -11,6 +11,8 @@ const TaskData = (props) => {
   const theme = useTheme();
   const style = {
     position: "absolute",
+    width: "80%",
+    height: "80%",
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
@@ -31,6 +33,7 @@ const TaskData = (props) => {
     },
   ]);
   const [open, setOpen] = useState(false);
+  const [resource, setResource] = useState("");
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
@@ -65,15 +68,19 @@ const TaskData = (props) => {
               sx={{
                 display: "flex",
                 mb: 5,
+
                 boxShadow:
                   " inset 0 -3em 3em rgba(0,0,0,0.1), 0 0  0 2px rgb(255,255,255), 0.3em 0.3em 1em rgba(0,0,0,0.3)",
               }}
-              onClick={handleOpen}
+              onClick={() => {
+                setResource(item.task_resources);
+                handleOpen();
+              }}
             >
               <Box
                 sx={{
-                  width: 81,
-                  height: 80,
+                  width: { xs: 31, md: 80 },
+                  height: { xs: 31, md: 80 },
                   borderRadius: 50,
                   backgroundColor: "#8985f2",
                   textAlign: "center",
@@ -87,16 +94,22 @@ const TaskData = (props) => {
                   variant="h2"
                   sx={{
                     color: "white",
-                    width: 80,
-                    height: 80,
+                    width: { xs: 31, md: 80 },
+                    height: { xs: 31, md: 80 },
                     borderRadius: 50,
-                    mt: 2,
+                    mt: { xs: 1, md: 2 },
                   }}
                 >
-                  {item.stack === props.stack ? item.id : "01"}
+                  {item.stack == props.stack ? item.id : "01"}
                 </Typography>
               </Box>
-              <Box sx={{ display: "flex", flexDirection: "column" }}>
+              <Box
+                sx={{
+                  display: "flex",
+
+                  flexDirection: "column",
+                }}
+              >
                 <CardContent sx={{ flex: "1 0 auto" }}>
                   <Typography variant="h5" sx={{ textAlign: "left" }}>
                     {item.stack == props.stack
@@ -107,55 +120,31 @@ const TaskData = (props) => {
                     variant="subtitle1"
                     color="text.secondary"
                     component="div"
-                    sx={{ textAlign: "left" }}
+                    sx={{
+                      textAlign: "left",
+                      display: { xs: "none", sm: "block" },
+                    }}
                   >
-                    {item.stack === props.stack
-                      ? item.task_description
-                      : "Desc"}
-                  </Typography>
-                  <Typography
-                    variant="subtitle1"
-                    color="text.secondary"
-                    component="div"
-                    sx={{ textAlign: "left" }}
-                  >
-                    <a href={item.task_resources} target="_blank">
-                      {item.stack == props.stack
-                        ? item.task_resources
-                        : "Resources"}{" "}
-                    </a>
+                    {item.stack == props.stack ? item.task_description : "Desc"}
                   </Typography>
                 </CardContent>
               </Box>
             </Card>
-            <Modal
-              key={index}
-              open={open}
-              onClose={handleClose}
-              aria-labelledby="modal-modal-title"
-              aria-describedby="modal-modal-description"
-            >
-              <Box sx={style}>
-                <Typography id="modal-modal-title" variant="h4" component="h2">
-                  {item.stack == props.stack ? item.task_question : "Question"}
-                </Typography>
-                <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                  {item.stack == props.stack ? item.task_description : "Desc"}
-                </Typography>
-                <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                  <a href={item.task_resources} target="_blank">
-                    {item.stack == props.stack
-                      ? item.task_resources
-                      : "Resources"}{" "}
-                  </a>
-                </Typography>
-              </Box>
-            </Modal>
           </>
         ))}
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <iframe src={resource} width="100%" height="100%" />
+          </Box>
+        </Modal>
       </Grid>
     </div>
   );
 };
 
-export default TaskData;
+export default TaskData
