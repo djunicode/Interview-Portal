@@ -167,15 +167,15 @@ const Details = () => {
 					},
 
 					{
-						name: "Fullstack Django",
+						name: "FullstackDjango",
 						repo_link: values.fullStackDjango,
 					},
 					{
-						name: "React Native",
+						name: "ReactNative",
 						repo_link: values.reactNative,
 					},
 					{
-						name: "Fullstack Node",
+						name: "FullstackNode",
 						repo_link: values.fullStackNode,
 					},
 				],
