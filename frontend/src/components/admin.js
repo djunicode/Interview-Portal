@@ -17,6 +17,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import PanelName from "./PanelName";
+import DialogQuestions from "./DialogQuestions";
 
 function createData(name, stacks, history) {
   return {
@@ -137,12 +138,13 @@ export default function CollapsibleTable() {
                             aria-labelledby="alert-dialog-title"
                             aria-describedby="alert-dialog-description"
                           >
-                            <DialogTitle id="alert-dialog-title">
+                              < DialogQuestions />
+                            {/* <DialogTitle id="alert-dialog-title">
                              Questions :
                             </DialogTitle>
                             <DialogContent>
                               <DialogContentText id="alert-dialog-description">
-                                Q1. Knowledge about HTML, CSS and Javascript. Rate it be
+                               < Dialog />
                               </DialogContentText>
                             </DialogContent>
                             <DialogActions>
@@ -150,7 +152,7 @@ export default function CollapsibleTable() {
                               <Button onClick={handleClose} autoFocus>
                                 Agree
                               </Button>
-                            </DialogActions>
+                            </DialogActions> */}
                           </Dialog>
                           </>
                           </>
