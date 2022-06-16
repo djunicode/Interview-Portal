@@ -9,9 +9,14 @@ const useStyles = makeStyles((theme) => ({
   },
   card1: {
     padding: "6%",
-    minHeight: "38vh", 
+
     boxShadow: "1px 1px 6px rgba(0, 0, 0, 0.25)!important",
     borderRadius: "10px!important",
+  },
+  [theme.breakpoints.up("md")]: {
+    card1: {
+      height: "38vh",
+    },
   },
   divider: {
     width: "100%",
