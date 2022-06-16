@@ -100,7 +100,7 @@ export default function BasicTabs() {
           }}
         >
           {/* <Box sx={{ mt: 3 }} className={classes.flexItem}> */}
-            <Grid item sx={{ mt: 3 }} md="12" >
+            <Grid item sx={{ mt: 3, ml:"5%", mr:"5%" }} md="12" >
               <AppBar position="static" color="inherit"  sx={{width:"100%"}}>
                 <Tabs
                   variant="scrollable"
