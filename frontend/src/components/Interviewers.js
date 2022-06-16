@@ -32,7 +32,7 @@ function stringAvatar(name) {
 	};
 }
 
-export default function Interviewers() {
+export default function Interviewers(props) {
 	return (
 		<Grid container>
 			<Grid item sm="12" >
@@ -40,27 +40,22 @@ export default function Interviewers() {
 					<h3 style={{textAlign:"left"}}>TE Mentors: </h3>
 				</Grid>
 				<Stack direction="row" spacing={2}>
-					<div style={{ margin: "10px" }}>
+				{props.data.map((item) => (
+					<>
+					{ item.interviewers.filter((data) => data.role === "TE")
+					.map((interviewer, i) => (
+						<div style={{ margin: "10px" }}>
 						<Avatar
-							{...stringAvatar("Deap Daru")}
+							{...stringAvatar(interviewer.user.name)}
 							style={{ margin: "10px" }}
 						></Avatar>
-						Deap Daru
+						{interviewer.user.name}
 					</div>
-					<div style={{ margin: "10px" }}>
-						<Avatar
-							{...stringAvatar("Shubh Nisar")}
-							style={{ margin: "10px" }}
-						></Avatar>
-						Shubh Nisar
-					</div>
-                    <div style={{ margin: "10px" }}>
-						<Avatar
-							{...stringAvatar("Akshath Mahajan")}
-							style={{ margin: "10px" }}
-						></Avatar>
-						Akshath Mahajan
-					</div>
+					))}
+					</>
+					
+				))}
+					
 				</Stack>
 			</Grid>
 			<Grid>
@@ -68,13 +63,22 @@ export default function Interviewers() {
 					<h3>BE Mentors: </h3>
 				</div>
 				<Stack direction="row" spacing={2}>
-					<div style={{ margin: "10px" }}>
+				{props.data.map((item) => (
+					<>
+					{ item.interviewers.filter((data) => data.role === "BE")
+					.map((interviewer, i) => (
+						<div style={{ margin: "10px" }}>
 						<Avatar
-							{...stringAvatar("Govind Thakur")}
+							{...stringAvatar(interviewer.user.name)}
 							style={{ margin: "10px" }}
 						></Avatar>
-						Govind Thakur
+						{interviewer.user.name}
 					</div>
+					))}
+					</>
+					
+				))}
+					
 				</Stack>
 			</Grid>
 		</Grid>
