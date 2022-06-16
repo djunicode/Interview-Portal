@@ -479,40 +479,6 @@ const Details = () => {
 							/>
 						</Grid>
 
-<<<<<<< HEAD
-            <Grid item xs={12} className={classes.gridRow}>
-              <Button
-                variant="contained"
-                className={classes.bttn}
-                type="submit"
-                onClick={formik.handleSubmit}
-                disabled={submitted}
-              >
-                Confirm Details
-              </Button>
-            </Grid>
-            <Grid item xs={12} className={classes.gridRow}>
-              <Typography>
-                <Link to="/dashboard" className={classes.skip}>
-                  Skip for now {">"}
-                </Link>
-              </Typography>
-            </Grid>
-          </Grid>
-        </Card>
-        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-          <Alert
-            severity="success"
-            onClose={handleClose}
-            sx={{ width: "100%" }}
-          >
-            Form submitted successfully!
-          </Alert>
-        </Snackbar>
-      </Box>
-    </>
-  );
-=======
 						<Grid item xs={12} className={classes.gridRow}>
 							<Button
 								variant="contained"
@@ -541,7 +507,6 @@ const Details = () => {
 			</Box>
 		</>
 	);
->>>>>>> a5cd4dd70f463ee6b0e81935c91f1e7eb011d583
 };
 
 export default Details;

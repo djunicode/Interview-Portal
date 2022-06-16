@@ -141,15 +141,13 @@ export default function CollapsibleTable() {
                             </DialogTitle>
                             <DialogContent>
                               <DialogContentText id="alert-dialog-description">
-                                Q1. Knowledge about HTML, CSS and Javascript. Rate it below
-                              </DialogContentText>
-                              <DialogContentText id="alert-dialog-description">
-                               Option 1   Option 2     Option 3
+                                Q1. Knowledge about HTML, CSS and Javascript. Rate it be
                               </DialogContentText>
                             </DialogContent>
                             <DialogActions>
+                              <Button onClick={handleClose}>Disagree</Button>
                               <Button onClick={handleClose} autoFocus>
-                                Save
+                                Agree
                               </Button>
                             </DialogActions>
                           </Dialog>
