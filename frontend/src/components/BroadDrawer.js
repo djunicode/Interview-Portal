@@ -40,7 +40,7 @@ function BroadDrawer() {
                 </ListItem>
             </List>
             <List>
-                <ListItem button onClick={() => navigate('/faqs')} >
+                <ListItem button onClick={() => navigate('/faq')} >
                     <ListItemIcon>
                         <QuizIcon />
                     </ListItemIcon>

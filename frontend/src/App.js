@@ -11,9 +11,9 @@ import DashboardPage from "./pages/DashboardPage";
 import TabPanel from "./components/TasksSection";
 import Profile from "./pages/Profile";
 import ResourcePage from "./pages/ResourcePage";
-import CollapsibleTable from "./pages/admin";
-
 import ApplicationForm from "./pages/ApplicationForm";
+import AdminPanel from "./pages/AdminPanel";
+import FaqPage from "./pages/FaqPage";
 
 function App() {
   const PrivateRoute = () => {
@@ -25,7 +25,7 @@ function App() {
       <div className="App">
         <Routes>
           // open routes
-          <Route path="/admin" element={<CollapsibleTable />} />
+          <Route path="/admin" element={<AdminPanel />} />
           <Route path="/login" element={<Login_signup />} />
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/timeline" element={<TimeLine />} />
@@ -34,6 +34,7 @@ function App() {
           <Route path="/tasks" element={<TabPanel />} />
           <Route path="/resources" element={<ResourcePage />} />
           <Route path="/apply" element={<ApplyForIntreview />} />
+          <Route path="/faq" element={<FaqPage />} />
           <Route path="/" element={<PrivateRoute />}>
             <Route path="/" element={<Login_signup />} />
           </Route>
