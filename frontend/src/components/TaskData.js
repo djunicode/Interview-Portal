@@ -16,6 +16,8 @@ const TaskData = (props) => {
   const theme = useTheme();
   const style = {
     position: "absolute",
+    width: "80%",
+    height: "80%",
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
@@ -71,6 +73,7 @@ const TaskData = (props) => {
               sx={{
                 display: "flex",
                 mb: 5,
+
                 boxShadow:
                   " inset 0 -3em 3em rgba(0,0,0,0.1), 0 0  0 2px rgb(255,255,255), 0.3em 0.3em 1em rgba(0,0,0,0.3)",
               }}
@@ -81,8 +84,8 @@ const TaskData = (props) => {
             >
               <Box
                 sx={{
-                  width: 81,
-                  height: 80,
+                  width: { xs: 31, md: 80 },
+                  height: { xs: 31, md: 80 },
                   borderRadius: 50,
                   backgroundColor: "#8985f2",
                   textAlign: "center",
@@ -96,16 +99,22 @@ const TaskData = (props) => {
                   variant="h2"
                   sx={{
                     color: "white",
-                    width: 80,
-                    height: 80,
+                    width: { xs: 31, md: 80 },
+                    height: { xs: 31, md: 80 },
                     borderRadius: 50,
-                    mt: 2,
+                    mt: { xs: 1, md: 2 },
                   }}
                 >
                   {item.stack == props.stack ? item.id : "01"}
                 </Typography>
               </Box>
-              <Box sx={{ display: "flex", flexDirection: "column" }}>
+              <Box
+                sx={{
+                  display: "flex",
+
+                  flexDirection: "column",
+                }}
+              >
                 <CardContent sx={{ flex: "1 0 auto" }}>
                   <Typography variant="h5" sx={{ textAlign: "left" }}>
                     {item.stack == props.stack
@@ -116,7 +125,10 @@ const TaskData = (props) => {
                     variant="subtitle1"
                     color="text.secondary"
                     component="div"
-                    sx={{ textAlign: "left" }}
+                    sx={{
+                      textAlign: "left",
+                      display: { xs: "none", sm: "block" },
+                    }}
                   >
                     {item.stack == props.stack ? item.task_description : "Desc"}
                   </Typography>
@@ -132,7 +144,7 @@ const TaskData = (props) => {
           aria-describedby="modal-modal-description"
         >
           <Box sx={style}>
-            <iframe src={resource} width="1000px" height="600px" />
+            <iframe src={resource} width="100%" height="100%" />
           </Box>
         </Modal>
       </Grid>

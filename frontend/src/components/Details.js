@@ -32,10 +32,19 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     alignItems: "center",
   },
+  icon: {
+    [theme.breakpoints.down("sm")]: {
+      height: "30px",
+    },
+  },
   card1: {
     display: "flex",
     // height: "75%",
     width: "110vh",
+    [theme.breakpoints.down("sm")]: {
+      marginLeft: "20%",
+      marginRight: "5%",
+    },
     [theme.breakpoints.up("xs")]: {
       marginTop: "5%",
       marginBottom: "5%",
@@ -89,6 +98,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "20px!important",
     [theme.breakpoints.down("sm")]: {
       marginLeft: "10%!important",
+      fontSize: "16px!important",
     },
   },
   error: {
@@ -106,6 +116,7 @@ const Details = () => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [data, setData] = useState([]);
+
   const [submitted, setSubmitted] = useState(false);
   const formik = useFormik({
     initialValues: {
@@ -150,8 +161,6 @@ const Details = () => {
       }),
     }),
     onSubmit: (values) => {
-      console.log(values);
-
       var data = JSON.stringify({
         stack: [
           {
@@ -223,6 +232,7 @@ const Details = () => {
       setData([...data, e]);
     }
   };
+
   return (
     <>
       <Box
@@ -233,7 +243,7 @@ const Details = () => {
         <Card className={classes.card1}>
           <Grid container className={classes.container}>
             <Grid item xs={12}>
-              <Typography className={classes.header} variant="h2">
+              <Typography className={classes.header} variant="h3">
                 Application Form
               </Typography>
             </Grid>
@@ -242,7 +252,7 @@ const Details = () => {
             </Grid>
             <Grid item xs={12} className={classes.gridRow}>
               <Grid item xs={1}>
-                <img src={resume} />
+                <img src={resume} className={classes.icon} />
               </Grid>
               <Grid item xs={11}>
                 <Typography className={classes.formlabel}>Resume</Typography>
@@ -268,7 +278,7 @@ const Details = () => {
             </Grid>
             <Grid item xs={12} className={classes.gridRow}>
               <Grid item xs={1}>
-                <img src={git} />
+                <img src={git} className={classes.icon} />
               </Grid>
               <Grid item xs={11}>
                 <Typography className={classes.formlabel}>
