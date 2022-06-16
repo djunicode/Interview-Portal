@@ -17,13 +17,13 @@ function BroadDrawer() {
 
     return (
         <>
-            <Box className="logoBox" >
+            <Box className="logoBox"  >
             </Box>
             <Divider />
             <List>
                 <ListItem button onClick={() => navigate('/dashboard')} >
                     <ListItemIcon>
-                        <HomeIcon />
+                        <HomeIcon sx={{ color: "#8985f2" }} />
                     </ListItemIcon>
                     <ListItemText primary="Dashboard" />
                 </ListItem>
@@ -31,7 +31,7 @@ function BroadDrawer() {
             <List>
                 <ListItem button onClick={() => navigate('/profile')}>
                     <ListItemIcon>
-                        <PersonIcon />
+                        <PersonIcon sx={{ color: "#8985f2" }} />
                     </ListItemIcon>
                     <ListItemText
                         sx={{ color: '#000', textDecoration: 'none!important' }}
@@ -42,7 +42,7 @@ function BroadDrawer() {
             <List>
                 <ListItem button onClick={() => navigate('/faq')} >
                     <ListItemIcon>
-                        <QuizIcon />
+                        <QuizIcon sx={{ color: "#8985f2" }} />
                     </ListItemIcon>
                     <ListItemText primary="FAQs" />
                 </ListItem>
@@ -50,7 +50,7 @@ function BroadDrawer() {
             <List>
                 <ListItem button onClick={() => navigate('/ApplicationForm')} >
                     <ListItemIcon>
-                        <AssignmentIcon />
+                        <AssignmentIcon sx={{ color: "#8985f2" }} />
                     </ListItemIcon>
                     <ListItemText primary="Application Form" />
                 </ListItem>
@@ -58,7 +58,7 @@ function BroadDrawer() {
             <List>
                 <ListItem button onClick={() => navigate('/resources')} >
                     <ListItemIcon>
-                        <TaskIcon />
+                        <TaskIcon sx={{ color: "#8985f2" }} />
                     </ListItemIcon>
                     <ListItemText primary="Resources" />
                 </ListItem>

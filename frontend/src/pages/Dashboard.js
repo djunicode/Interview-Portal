@@ -14,8 +14,8 @@ const useStyles = makeStyles((theme) => ({
     height: "100vh",
     backgroundColor: "#F2F3F7",
     justifyContent: "space-around",
-    [theme.breakpoints.down("md")]: {
-      marginLeft: "40px!important",
+    [theme.breakpoints.down("sm")]: {
+      marginLeft: "10px!important",
     },
   },
   // background: {

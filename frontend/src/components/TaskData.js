@@ -59,8 +59,8 @@ const TaskData = (props) => {
 	console.log(data);
 	// console.log(data[0].stack);
 	return (
-		<div>
-			<Grid>
+		
+			<Grid sx={{padding:"100"}}>
 				{data.map((item, index) => (
 					<>
 						<Card
@@ -68,6 +68,7 @@ const TaskData = (props) => {
 							sx={{
 								display: "flex",
 								mb: 5,
+								// mt:5,
 								boxShadow:
 									" inset 0 -3em 3em rgba(0,0,0,0.1), 0 0  0 2px rgb(255,255,255), 0.3em 0.3em 1em rgba(0,0,0,0.3)",
 							}}
@@ -147,7 +148,7 @@ const TaskData = (props) => {
 					</>
 				))}
 			</Grid>
-		</div>
+		
 	);
 };
 
