@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import Tabs from "@mui/material/Tabs";
+import Tabs, { tabsClasses } from "@mui/material/Tabs";
+import AppBar from "@material-ui/core/AppBar";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
@@ -32,6 +33,11 @@ const useStyles = makeStyles((theme) => ({
 	text: {
 		fontSize: "14px!important",
 	},
+	scrollButtons: {
+		"&.Mui-disabled": {
+		  opacity: 0.3,
+		},
+	  },
 }));
 
 function TabPanel(props) {
@@ -85,20 +91,30 @@ export default function Resources() {
 					<Divider className={classes.divider} />
 				</Grid>
 
-				<Box sx={{ width: "100%" }}>
+				<Box 
+          sx={{
+            flexGrow: 1,
+            maxWidth: { xs: 320, sm: 480, md: "100%" },
+            bgcolor: "background.paper",
+            padding: "1px",
+			width: '100%'
+          }}
+        >
 					<Box sx={{ mt: 3 }} className={classes.flexItem}>
 						<Grid item>
+						<AppBar position="static" color="inherit"  sx={{width:"100%"}}>
 							<Tabs
 								value={value}
 								onChange={handleChange}
 								aria-label="basic tabs example"
 							>
 								<Tab label="Frontend" {...a11yProps(0)} />
-								<Tab label="Backend" {...a11yProps(1)} />
-								<Tab label="Design" {...a11yProps(2)} />
-								<Tab label="App" {...a11yProps(3)} />
-								<Tab label="Git Basics" {...a11yProps(4)} />
+								<Tab label="Django" {...a11yProps(1)} />
+								<Tab label="Node" {...a11yProps(2)} />
+								<Tab label="Flutter" {...a11yProps(3)} />
+								<Tab label="React Native" {...a11yProps(4)} />
 							</Tabs>
+							</AppBar>
 						</Grid>
 					</Box>
 					<TabPanel value={value} index={0}>
@@ -108,13 +124,13 @@ export default function Resources() {
 						<ResourcesData stack="Django" />
 					</TabPanel>
 					<TabPanel value={value} index={2}>
-						<ResourcesData stack="React Native" />
+						<ResourcesData stack="Node" />
 					</TabPanel>
 					<TabPanel value={value} index={3}>
 						<ResourcesData stack="Flutter" />
 					</TabPanel>
 					<TabPanel value={value} index={4}>
-					<ResourcesData stack="Fullstack Django" />
+					<ResourcesData stack="ReactNative" />
 					</TabPanel>
 				</Box>
 			</Grid>

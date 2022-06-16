@@ -15,6 +15,7 @@ import ApplicationForm from "./pages/ApplicationForm";
 import AdminPanel from "./pages/AdminPanel";
 import FaqPage from "./pages/FaqPage";
 import { useNavigate } from "react-router";
+import PanelName from "./components/PanelName";
 
 function App() {
 
@@ -41,6 +42,7 @@ function App() {
           <Route path="/resources" element={<ResourcePage />} />
           <Route path="/apply" element={<ApplyForIntreview />} />
           <Route path="/faq" element={<FaqPage />} />
+          <Route path="/pn" element={<PanelName />} />
           <Route path="/" element={<PrivateRoute />}>
             <Route path="/" element={<Login_signup />} />
           </Route>
