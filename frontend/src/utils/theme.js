@@ -17,7 +17,10 @@ export const theme = createTheme({
     },
     h3: {
       fontWeight: "700",
-      fontSize: "30px",
+      fontSize: "30px!important",
+      "@media (max-width:600px)": {
+        fontSize: "25px!important",
+      },
     },
     h6: {
       fontWeight: "500",
@@ -33,6 +36,26 @@ export const theme = createTheme({
   },
   components: {
     // Name of the component
+
+    // MuiBox: {
+    //   styleOverrides: {
+    //     root: {
+    //       "@media (max-width:400px)": {
+    //         padding: "0!important",
+    //       },
+    //     },
+    //   },
+    // },
+    MuiTypography: {
+      styleOverrides: {
+        root: {
+          "@media (max-width:600px)": {
+            fontSize: "13px",
+          },
+        },
+      },
+    },
+
     MuiInputBase: {
       styleOverrides: {
         root: {
@@ -43,5 +66,25 @@ export const theme = createTheme({
         // No more ripple, on the whole application 💣!
       },
     },
+    MuiCard: {
+      styleOverrides: {
+        root: {
+          boxShadow: "1px 1px 6px rgba(0, 0, 0, 0.25)!important",
+          borderRadius: "10px!important",
+        },
+        // The props to change the default for.
+        // No more ripple, on the whole application 💣!
+      },
+    },
   },
 });
+
+// [theme.breakpoints.down("xs")]: {
+//   overrides: {
+//     MuiTypography: {
+//       root: {
+//         fontSize: "12px!important",
+//       },
+//     },
+//   },
+// },

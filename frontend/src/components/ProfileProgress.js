@@ -18,9 +18,16 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "flex-start",
+
     color: " #4F4F4F",
     fontSize: "8px!important",
   },
+  [theme.breakpoints.down("sm")]: {
+    entireGrid: {
+      marginLeft: "-10px!important",
+    },
+  },
+
   card1: {
     padding: "1%",
     boxShadow: "1px 1px 6px rgba(0, 0, 0, 0.25)!important",
@@ -34,7 +41,7 @@ const ProfileProgress = (props) => {
   const classes = useStyles();
   return (
     <Card className={classes.card1}>
-      <Grid container spacing={2}>
+      <Grid container className={classes.entireGrid} spacing={2}>
         <Grid item xs={2} className={classes.flexItem}>
           <ProgressCircle />
         </Grid>
