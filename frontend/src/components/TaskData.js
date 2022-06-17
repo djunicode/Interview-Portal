@@ -152,4 +152,4 @@ const TaskData = (props) => {
   );
 };
 
-export default TaskData;
+export default TaskData

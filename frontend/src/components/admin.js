@@ -11,6 +11,11 @@ import { useEffect, useState } from "react";
 import { Button, Grid } from "@mui/material";
 import Interviewers from "./Interviewers";
 import Row from "./Row";
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 
 function createData(name, stacks, history) {
   return {
@@ -27,12 +32,20 @@ const rows = [
       label="Fullstack "
       color="secondary"
       sx={{ margin: "5px" }}
-      onClick={() => {}}
     />
   ),
 ];
 
 export default function CollapsibleTable() {
+    const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
   var myHeaders = new Headers();
 
   myHeaders.append("Authorization", `Token ${localStorage.getItem("token")}`);
@@ -109,12 +122,38 @@ export default function CollapsibleTable() {
                           row={createData(
                             interviewee.user.name,
                             interviewee.application.stack.map((obj)=>
+                            <>
                             <Chip
                               label={obj.name}
                               color="secondary"
                               sx={{ margin: "5px" }}
-                              onClick={() => {}}
-                            />),
+                              onClick={handleClickOpen}
+                            />
+                            <>
+                            <Dialog
+                            open={open}
+                            onClose={handleClose}
+                            aria-labelledby="alert-dialog-title"
+                            aria-describedby="alert-dialog-description"
+                          >
+                            <DialogTitle id="alert-dialog-title">
+                             Questions :
+                            </DialogTitle>
+                            <DialogContent>
+                              <DialogContentText id="alert-dialog-description">
+                                Q1. Knowledge about HTML, CSS and Javascript. Rate it be
+                              </DialogContentText>
+                            </DialogContent>
+                            <DialogActions>
+                              <Button onClick={handleClose}>Disagree</Button>
+                              <Button onClick={handleClose} autoFocus>
+                                Agree
+                              </Button>
+                            </DialogActions>
+                          </Dialog>
+                          </>
+                          </>
+                            ),
                             [
                               {
                                 sapid: interviewee.user.sapid,
