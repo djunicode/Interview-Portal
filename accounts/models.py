@@ -84,7 +84,7 @@ class Application(models.Model):
         return str(self.interviewee)+"'s application"
 
 class ApplicationStack(models.Model):
-    application = models.ForeignKey(Application, on_delete= models.CASCADE,related_name='stack')
+    application = models.ForeignKey(Application, on_delete= models.CASCADE, related_name='stack')
     stacks = (('Frontend', 'Frontend'),
               ('Django', 'Django'),
               ('Node', 'Node'),
@@ -115,15 +115,6 @@ class Interview(models.Model):
     date_time   = models.DateTimeField()
 
 
-class Scorecard(models.Model):
-
-    stack = models.OneToOneField(ApplicationStack, on_delete=models.CASCADE)
-    rating = models.IntegerField(blank=True)
-
-    def __str__(self):
-        return str(self.stack)
-
-
 class Question(models.Model):
 
     stack = models.ForeignKey(Stack, on_delete=models.CASCADE)
@@ -139,6 +130,6 @@ class Question(models.Model):
 
 class Score(models.Model):
 
-    scorecard = models.ForeignKey(Scorecard, on_delete=models.CASCADE)
+    stack = models.OneToOneField(ApplicationStack, on_delete=models.CASCADE)
     question    = models.OneToOneField(Question, on_delete=models.CASCADE)
     rating      = models.IntegerField(blank=True)
