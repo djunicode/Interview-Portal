@@ -9,7 +9,8 @@ import PersonIcon from "@mui/icons-material/Person";
 import QuizIcon from "@mui/icons-material/Quiz";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import TaskIcon from "@mui/icons-material/Task";
-import HomeIcon from '@mui/icons-material/Home';
+import HomeIcon from "@mui/icons-material/Home";
+import LogoutIcon from "@mui/icons-material/Logout";
 import { Home } from "@mui/icons-material";
 
 function NarrowDrawer() {
@@ -30,7 +31,7 @@ function NarrowDrawer() {
       <List>
         <ListItem button onClick={() => navigate("/profile")}>
           <ListItemIcon>
-            <PersonIcon  sx={{ color: "#8985f2" }} />
+            <PersonIcon sx={{ color: "#8985f2" }} />
           </ListItemIcon>
         </ListItem>
       </List>
@@ -52,6 +53,19 @@ function NarrowDrawer() {
         <ListItem button onClick={() => navigate("/resources")}>
           <ListItemIcon>
             <TaskIcon sx={{ color: "#8985f2" }} />
+          </ListItemIcon>
+        </ListItem>
+      </List>
+      <List>
+        <ListItem
+          button
+          onClick={() => {
+            localStorage.clear();
+            navigate("/login");
+          }}
+        >
+          <ListItemIcon>
+            <LogoutIcon sx={{ color: "#8985f2" }} />
           </ListItemIcon>
         </ListItem>
       </List>
