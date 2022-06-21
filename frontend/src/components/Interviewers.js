@@ -35,13 +35,13 @@ function stringAvatar(name) {
 export default function Interviewers(props) {
   return (
     <Grid container>
-      <Grid item sm="12">
+      <Grid item sm={12}>
         <Grid style={{ margin: "10px" }}>
           <h3 style={{ textAlign: "left" }}>TE Mentors: </h3>
         </Grid>
         <Stack direction="row" spacing={2}>
-          {props.data.map((item) => (
-            <>
+          {props.data.map((item, index) => (
+            <div key={index}>
               {item.interviewers
                 .filter((data) => data.role === "TE")
                 .map((interviewer, i) => (
@@ -53,7 +53,7 @@ export default function Interviewers(props) {
                     {interviewer.user.name}
                   </div>
                 ))}
-            </>
+            </div>
           ))}
         </Stack>
       </Grid>
