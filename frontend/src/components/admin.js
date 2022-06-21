@@ -11,11 +11,11 @@ import { useEffect, useState } from "react";
 import { Button, Grid } from "@mui/material";
 import Interviewers from "./Interviewers";
 import Row from "./Row";
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
 import PanelName from "./PanelName";
 
 function createData(name, stacks, history) {
@@ -35,11 +35,8 @@ const rows = [
 
 export default function CollapsibleTable() {
   const [open, setOpen] = React.useState(false);
-  const [stack, setStack] = useState()
 
-  const handleClickOpen = (name) => {
-    console.log(name)
-    setStack(name)
+  const handleClickOpen = () => {
     setOpen(true);
   };
 
@@ -78,14 +75,12 @@ export default function CollapsibleTable() {
       .catch((error) => console.log("error", error));
   }, []);
 
-  questions(stack)
-
   return (
     <Grid container>
       <Grid item sm="12">
         <div style={{ clear: "both" }}>
           <h3 style={{ float: "left", margin: "10px" }}>
-             <PanelName /> 
+            <PanelName />
           </h3>
           <Button
             size="large"
@@ -114,67 +109,69 @@ export default function CollapsibleTable() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {user.map((item, index) => (
-                <React.Fragment key={index}>
-                  {item.interviewees.map((interviewee, i) => (
-                    <React.Fragment key={i}>
-                      {rows.map((i) => (
-                        <Row
-                          key={i}
-                          row={createData(
-                            interviewee.user.name,
-                            interviewee.application.stack.map((obj) => (
-                              <>
-                                <Chip
-                                  label={obj.name}
-                                  color="secondary"
-                                  sx={{ margin: "5px" }}
-                                  onClick={handleClickOpen(obj.name)}
-                                />
+              {user
+                .filter((stack) => stack.name === "Panel A")
+                .map((item, index) => (
+                  <React.Fragment key={index}>
+                    {item.interviewees.map((interviewee, i) => (
+                      <React.Fragment key={i}>
+                        {rows.map((i) => (
+                          <Row
+                            key={i}
+                            row={createData(
+                              interviewee.user.name,
+                              interviewee.application.stack.map((obj) => (
                                 <>
-                                  <Dialog
-                                    open={open}
-                                    onClose={handleClose}
-                                    aria-labelledby="alert-dialog-title"
-                                    aria-describedby="alert-dialog-description"
-                                  >
-                                    <DialogTitle id="alert-dialog-title">
-                                      Questions :
-                                    </DialogTitle>
-                                    <DialogContent>
-                                      <DialogContentText id="alert-dialog-description">
-                                        Q1. Knowledge about HTML, CSS and
-                                        Javascript. Rate it be
-                                      </DialogContentText>
-                                    </DialogContent>
-                                    <DialogActions>
-                                      <Button onClick={handleClose}>
-                                        Disagree
-                                      </Button>
-                                      <Button onClick={handleClose} autoFocus>
-                                        Agree
-                                      </Button>
-                                    </DialogActions>
-                                  </Dialog>
+                                  <Chip
+                                    label={obj.name}
+                                    color="secondary"
+                                    sx={{ margin: "5px" }}
+                                    onClick={handleClickOpen}
+                                  />
+                                  <>
+                                    <Dialog
+                                      open={open}
+                                      onClose={handleClose}
+                                      aria-labelledby="alert-dialog-title"
+                                      aria-describedby="alert-dialog-description"
+                                    >
+                                      <DialogTitle id="alert-dialog-title">
+                                        Questions :
+                                      </DialogTitle>
+                                      <DialogContent>
+                                        <DialogContentText id="alert-dialog-description">
+                                          Q1. Knowledge about HTML, CSS and
+                                          Javascript. Rate it be
+                                        </DialogContentText>
+                                      </DialogContent>
+                                      <DialogActions>
+                                        <Button onClick={handleClose}>
+                                          Disagree
+                                        </Button>
+                                        <Button onClick={handleClose} autoFocus>
+                                          Agree
+                                        </Button>
+                                      </DialogActions>
+                                    </Dialog>
+                                  </>
                                 </>
-                              </>
-                            )),
-                            [
-                              {
-                                sapid: interviewee.user.sapid,
-                                gradyear: interviewee.user.grad_year,
-                                email: interviewee.user.email,
-                                resume: interviewee.application.resume_link,
-                                github: interviewee.application.stack,
-                              },
-                            ]
-                          )}
-                        />
-                      ))}
-                    </React.Fragment>
-                  ))}
-                </React.Fragment>
-              ))}
+                              )),
+                              [
+                                {
+                                  sapid: interviewee.user.sapid,
+                                  gradyear: interviewee.user.grad_year,
+                                  email: interviewee.user.email,
+                                  resume: interviewee.application.resume_link,
+                                  github: interviewee.application.stack,
+                                },
+                              ]
+                            )}
+                          />
+                        ))}
+                      </React.Fragment>
+                    ))}
+                  </React.Fragment>
+                ))}
             </TableBody>
           </Table>
         </TableContainer>
