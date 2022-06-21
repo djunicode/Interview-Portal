@@ -15,6 +15,7 @@ import ApplicationForm from "./pages/ApplicationForm";
 import AdminPanel from "./pages/AdminPanel";
 import FaqPage from "./pages/FaqPage";
 import PanelName from "./components/PanelName";
+import Dialog from "./components/DialogQuestions";
 
 function App() {
   const PrivateRoute = () => {
@@ -36,7 +37,8 @@ function App() {
           <Route path="/resources" element={<ResourcePage />} />
           <Route path="/apply" element={<ApplyForIntreview />} />
           <Route path="/faq" element={<FaqPage />} />
-          <Route path="/pn" element={<PanelName />} />
+          <Route path="/dialog" element={<Dialog />} />
+
           <Route path="/" element={<PrivateRoute />}>
             <Route path="/" element={<Login_signup />} />
           </Route>

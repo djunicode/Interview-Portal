@@ -17,6 +17,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import PanelName from "./PanelName";
+import DialogQuestions from "./DialogQuestions";
 
 function createData(name, stacks, history) {
   return {
@@ -109,69 +110,65 @@ export default function CollapsibleTable() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {user
-                .filter((stack) => stack.name === "Panel A")
-                .map((item, index) => (
-                  <React.Fragment key={index}>
-                    {item.interviewees.map((interviewee, i) => (
-                      <React.Fragment key={i}>
-                        {rows.map((i) => (
-                          <Row
-                            key={i}
-                            row={createData(
-                              interviewee.user.name,
-                              interviewee.application.stack.map((obj) => (
-                                <>
-                                  <Chip
-                                    label={obj.name}
-                                    color="secondary"
-                                    sx={{ margin: "5px" }}
-                                    onClick={handleClickOpen}
-                                  />
-                                  <>
-                                    <Dialog
-                                      open={open}
-                                      onClose={handleClose}
-                                      aria-labelledby="alert-dialog-title"
-                                      aria-describedby="alert-dialog-description"
-                                    >
-                                      <DialogTitle id="alert-dialog-title">
-                                        Questions :
-                                      </DialogTitle>
-                                      <DialogContent>
-                                        <DialogContentText id="alert-dialog-description">
-                                          Q1. Knowledge about HTML, CSS and
-                                          Javascript. Rate it be
-                                        </DialogContentText>
-                                      </DialogContent>
-                                      <DialogActions>
-                                        <Button onClick={handleClose}>
-                                          Disagree
-                                        </Button>
-                                        <Button onClick={handleClose} autoFocus>
-                                          Agree
-                                        </Button>
-                                      </DialogActions>
-                                    </Dialog>
-                                  </>
-                                </>
-                              )),
-                              [
-                                {
-                                  sapid: interviewee.user.sapid,
-                                  gradyear: interviewee.user.grad_year,
-                                  email: interviewee.user.email,
-                                  resume: interviewee.application.resume_link,
-                                  github: interviewee.application.stack,
-                                },
-                              ]
-                            )}
-                          />
-                        ))}
-                      </React.Fragment>
-                    ))}
-                  </React.Fragment>
-                ))}
+              {user.map((item, index) => (
+                <React.Fragment key={index}>
+                  {item.interviewees.map((interviewee, i) => (
+                    <React.Fragment key={i}>
+                      {rows.map((i) => (
+                        <Row
+                          key={i}
+                          row={createData(
+                            interviewee.user.name,
+                            interviewee.application.stack.map((obj)=>
+                            <>
+                            <Chip
+                              label={obj.name}
+                              color="secondary"
+                              sx={{ margin: "5px" }}
+                              onClick={handleClickOpen}
+                            />
+                            <>
+                            <Dialog
+                            open={open}
+                            onClose={handleClose}
+                            aria-labelledby="alert-dialog-title"
+                            aria-describedby="alert-dialog-description"
+                          >
+                              < DialogQuestions />
+                            {/* <DialogTitle id="alert-dialog-title">
+                             Questions :
+                            </DialogTitle>
+                            <DialogContent>
+                              <DialogContentText id="alert-dialog-description">
+                               < Dialog />
+                              </DialogContentText>
+                            </DialogContent>
+                            <DialogActions>
+                              <Button onClick={handleClose}>Disagree</Button>
+                              <Button onClick={handleClose} autoFocus>
+                                Agree
+                              </Button>
+                            </DialogActions> */}
+                          </Dialog>
+                          </>
+                          </>
+                            ),
+                            [
+                              {
+                                sapid: interviewee.user.sapid,
+                                gradyear: interviewee.user.grad_year,
+                                email: interviewee.user.email,
+                                resume: interviewee.application.resume_link,
+                                github: interviewee.application.stack,
+                              },
+                            ]
+                          )}
+                        />
+                      ))}
+                    </React.Fragment>
+                  ))}
+                </React.Fragment>
+              ))}
             </TableBody>
           </Table>
         </TableContainer>
