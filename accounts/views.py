@@ -149,6 +149,32 @@ class CandidateAPI(GenericAPIView):
 		serializer = ApplicationSerializer(application)
 		return Response(serializer.data)
 
+
+class RemarksAPI(GenericAPIView):
+	permission_classes = [permissions.IsAuthenticated]
+	serializer_class = RemarksSerializer
+
+	def post(self, request):
+
+		serializer = self.serializer_class(data=request.data)
+		serializer.is_valid(raise_exception = True)
+		response = serializer.create(request.data)
+
+		return Response(response, status=status.HTTP_202_ACCEPTED)
+
+	
+class ScoreAPI(GenericAPIView):
+	permission_classes = [permissions.IsAuthenticated]
+	serializer_class = ScoreSerializer
+
+	def post(self, request):
+
+		serializer = self.serializer_class(data=request.data)
+		serializer.is_valid(raise_exception = True)
+		response = serializer.create(request.data)
+
+		return Response(response, status=status.HTTP_202_ACCEPTED)
+
 class ScorecardGetAPI(GenericAPIView):
 	permission_classes = [InterviewerPermission]
 	serializer_class = ScoreSerializer

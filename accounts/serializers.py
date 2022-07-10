@@ -178,10 +178,48 @@ class PanelSerializer(serializers.ModelSerializer):
 
 class ScoreSerializer(serializers.ModelSerializer):
     question_no = serializers.IntegerField()
+    sapid = serializers.CharField(max_length = 11, min_length= 11)
+    stack = serializers.CharField(max_length=20)
 
     class Meta:
         model= Score
-        fields= ['question_no', 'rating']
+        fields= ['sapid','stack','question_no', 'rating']
+    
+    def create(self, validated_data):
+
+        sapid = validated_data['sapid']
+        stack = validated_data['stack']
+
+        interviewee = Interviewee.objects.get(user=sapid)
+        app = Application.objects.get(interviewee=interviewee)
+        app_stack = ApplicationStack.objects.filter(application=app).get(name=stack)
+
+        question = Question.objects.get(id=validated_data['question_no'])
+        Score.objects.create(question= question, rating= validated_data['rating'], stack=app_stack)
+
+        return validated_data
+    
+
+class RemarksSerializer(serializers.ModelSerializer):
+    sapid = serializers.CharField(max_length = 11, min_length= 11)
+    stack = serializers.CharField(max_length=20)
+    text = serializers.CharField(max_length=200)
+
+    class Meta:
+        model= ApplicationStack
+        fields= ['sapid', 'stack', 'text']
+
+    def create(self, validated_data):
+        sapid = validated_data['sapid']
+        stack = validated_data['stack']
+
+        interviewee = Interviewee.objects.get(user=sapid)
+        app = Application.objects.get(interviewee=interviewee)
+        app_stack = ApplicationStack.objects.filter(application=app).get(name=stack)
+        app_stack.text = validated_data['text']
+        app_stack.save()
+
+        return validated_data
 
 
 class QuestionSerializer(serializers.ModelSerializer):
