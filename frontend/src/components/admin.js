@@ -11,39 +11,48 @@ import { useEffect, useState } from "react";
 import { Button, Grid } from "@mui/material";
 import Interviewers from "./Interviewers";
 import Row from "./Row";
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
 import PanelName from "./PanelName";
+import { useNavigate } from "react-router-dom";
+import { Route, Routes } from "react-router";
+import { BrowserRouter as Router, Outlet, Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import ScorePage from "../pages/ScorePage";
 
 function createData(name, stacks, history) {
   return {
     name,
     stacks,
-    history
+    history,
   };
 }
 
 const rows = [
   createData(
     "Shrey",
-    <Chip
-      label="Fullstack "
-      color="secondary"
-      sx={{ margin: "5px" }}
-    />
+    <Chip label="Fullstack " color="secondary" sx={{ margin: "5px" }} />
   ),
 ];
 
 export default function CollapsibleTable() {
-    const [open, setOpen] = React.useState(false);
+  const PrivateRoute = () => {
+    const token = localStorage.getItem("token");
+    return token ? <Outlet /> : <Navigate to="/login" />;
+  };
 
+  const [open, setOpen] = React.useState(false);
+  const [userData, setUserData] = useState({});
+  const navigate = useNavigate();
   const handleClickOpen = () => {
     setOpen(true);
   };
-
+  const handleClick1 = () => {
+    console.log("hi");
+  };
   const handleClose = () => {
     setOpen(false);
   };
@@ -78,13 +87,13 @@ export default function CollapsibleTable() {
       })
       .catch((error) => console.log("error", error));
   }, []);
-
+  // console.log(userData);
   return (
     <Grid container>
       <Grid item sm="12">
         <div style={{ clear: "both" }}>
           <h3 style={{ float: "left", margin: "10px" }}>
-             <PanelName /> 
+            <PanelName />
           </h3>
           <Button
             size="large"
@@ -122,39 +131,63 @@ export default function CollapsibleTable() {
                           key={i}
                           row={createData(
                             interviewee.user.name,
-                            interviewee.application.stack.map((obj)=>
-                            <>
-                            <Chip
-                              label={obj.name}
-                              color="secondary"
-                              sx={{ margin: "5px" }}
-                              onClick={handleClickOpen}
-                            />
-                            <>
-                            <Dialog
-                            open={open}
-                            onClose={handleClose}
-                            aria-labelledby="alert-dialog-title"
-                            aria-describedby="alert-dialog-description"
-                          >
-                            <DialogTitle id="alert-dialog-title">
-                             Questions :
-                            </DialogTitle>
-                            <DialogContent>
-                              <DialogContentText id="alert-dialog-description">
-                                Q1. Knowledge about HTML, CSS and Javascript. Rate it be
-                              </DialogContentText>
-                            </DialogContent>
-                            <DialogActions>
-                              <Button onClick={handleClose}>Disagree</Button>
-                              <Button onClick={handleClose} autoFocus>
-                                Agree
-                              </Button>
-                            </DialogActions>
-                          </Dialog>
-                          </>
-                          </>
-                            ),
+                            interviewee.application.stack.map((obj) => (
+                              <>
+                                <Link to="/score">
+                                  <Chip
+                                    label={obj.name}
+                                    color="secondary"
+                                    sx={{ margin: "5px" }}
+                                    // onClick={() => {
+                                    //   setUserData({
+                                    //     name: interviewee.user.name,
+                                    //     stack: interviewee.application.stack,
+                                    //     sapid: interviewee.user.sapid,
+                                    //     gradyear: interviewee.user.grad_year,
+                                    //     email: interviewee.user.email,
+                                    //     resume:
+                                    //       interviewee.application.resume_link,
+                                    //     github: interviewee.application.stack,
+                                    //   });
+                                    //   navigate("/score");
+                                    // }}
+                                  />
+                                </Link>
+                                <Routes>
+                                  <Route
+                                    path="/score"
+                                    element={<ScorePage userData={userData} />}
+                                  />
+                                </Routes>
+
+                                <>
+                                  {/* <Dialog
+                                    open={open}
+                                    onClose={handleClose}
+                                    aria-labelledby="alert-dialog-title"
+                                    aria-describedby="alert-dialog-description"
+                                  >
+                                    <DialogTitle id="alert-dialog-title">
+                                      Questions :
+                                    </DialogTitle>
+                                    <DialogContent>
+                                      <DialogContentText id="alert-dialog-description">
+                                        Q1. Knowledge about HTML, CSS and
+                                        Javascript. Rate it be
+                                      </DialogContentText>
+                                    </DialogContent>
+                                    <DialogActions>
+                                      <Button onClick={handleClose}>
+                                        Disagree
+                                      </Button>
+                                      <Button onClick={handleClose} autoFocus>
+                                        Agree
+                                      </Button>
+                                    </DialogActions>
+                                  </Dialog> */}
+                                </>
+                              </>
+                            )),
                             [
                               {
                                 sapid: interviewee.user.sapid,
