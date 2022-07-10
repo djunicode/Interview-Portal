@@ -55,8 +55,8 @@ export default function FAQ() {
 
     return (
         <div>
-            <Grid container sm="12">
-                <Grid item sm="12" md="12" sx={{
+            <Grid container sm={12}>
+                <Grid item sm={12} md={12} sx={{
                     margin:"15px"
                 }}>
             <Faq

@@ -27,24 +27,12 @@ function App() {
       <div className="App">
         <Routes>
           // open routes
-          <Route path="/admin" element={<AdminPanel />} />
           <Route path="/login" element={<Login_signup />} />
           <Route path="/signup" element={<SignupPage />} />
-          <Route path="/timeline" element={<TimeLine />} />
-          <Route path="/time" element={<Time />} />
-          <Route path="/sidenavbar" element={<SideNavbar />} />
-          <Route path="/tasks" element={<TabPanel />} />
-          <Route path="/resources" element={<ResourcePage />} />
-          <Route path="/apply" element={<ApplyForIntreview />} />
-          <Route path="/faq" element={<FaqPage />} />
-          <Route path="/dialog" element={<Dialog />} />
 
           <Route path="/" element={<PrivateRoute />}>
             <Route path="/" element={<Login_signup />} />
           </Route>
-          {/* <Route path="/signup" element={<PrivateRoute />}>
-						<Route path="/signup" element={<SignupPage />} />
-					</Route> */}
           <Route path="/ApplicationForm" element={<PrivateRoute />}>
             <Route path="/ApplicationForm" element={<ApplicationForm />} />
           </Route>
@@ -53,6 +41,9 @@ function App() {
           </Route>
           <Route path="/profile" element={<PrivateRoute />}>
             <Route path="/profile" element={<Profile />} />
+          </Route>
+          <Route path="/admin" element={<PrivateRoute />}>
+            <Route path="/admin" element={<AdminPanel />} />
           </Route>
         </Routes>
       </div>

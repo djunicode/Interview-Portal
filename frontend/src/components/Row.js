@@ -9,11 +9,11 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import Collapse from "@mui/material/Collapse";
 import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
+import { useState } from "react";
 
 export default function Row(props) {
+  const [open, setOpen] = useState(false);
   const { row } = props;
-  const [open, setOpen] = React.useState(false);
 
   return (
     <React.Fragment>
@@ -64,10 +64,9 @@ export default function Row(props) {
                         </a>
                       </TableCell>
                       <TableCell align="right">
-                        {historyRow.github.map((githubRow, i) => (
-                          <>
+                        {historyRow.github.map((githubRow) => (
+                          <React.Fragment key={index}>
                             <a
-                              key={i}
                               href={githubRow.repo_link}
                               target="_blank"
                               rel="noreferrer"
@@ -75,7 +74,7 @@ export default function Row(props) {
                               {githubRow.name}
                             </a>
                             &nbsp; &nbsp;
-                          </>
+                          </React.Fragment>
                         ))}
                       </TableCell>
                     </TableRow>
