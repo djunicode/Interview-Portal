@@ -7,7 +7,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Chip from "@mui/material/Chip";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { Button, Grid } from "@mui/material";
 import Interviewers from "./Interviewers";
 import Row from "./Row";
@@ -17,7 +17,11 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import PanelName from "./PanelName";
-import DialogQuestions from "./DialogQuestions";
+import { useNavigate } from "react-router-dom";
+import { Route, Routes } from "react-router";
+import { BrowserRouter as Router, Outlet, Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import ScorePage from "../pages/ScorePage";
 
 function createData(name, stacks, history) {
   return {
@@ -34,13 +38,21 @@ const rows = [
   ),
 ];
 
-export default function CollapsibleTable() {
+export default function CollapsibleTable({ userData, setUserData }) {
+  const PrivateRoute = () => {
+    const token = localStorage.getItem("token");
+    return token ? <Outlet /> : <Navigate to="/login" />;
+  };
+
   const [open, setOpen] = React.useState(false);
 
+  const navigate = useNavigate();
   const handleClickOpen = () => {
     setOpen(true);
   };
-
+  const handleClick1 = () => {
+    console.log("hi");
+  };
   const handleClose = () => {
     setOpen(false);
   };
@@ -70,12 +82,13 @@ export default function CollapsibleTable() {
     )
       .then((response) => response.json())
       .then((result) => {
-        console.log(result);
+        //console.log(result);
         setUser(result);
       })
       .catch((error) => console.log("error", error));
   }, []);
 
+  console.log(userData);
   return (
     <Grid container>
       <Grid item sm={12}>
@@ -126,17 +139,49 @@ export default function CollapsibleTable() {
                                   label={obj.name}
                                   color="secondary"
                                   sx={{ margin: "5px" }}
-                                  onClick={handleClickOpen}
+                                  onClick={() => {
+                                    setUserData(interviewee.user.sapid);
+                                    navigate(
+                                      `/admin/scorecard/${interviewee.user.sapid}`
+                                    );
+                                  }}
                                 />
+                                <Routes>
+                                  <Route
+                                    path="scorecard/:id"
+                                    element={<PrivateRoute />}
+                                  >
+                                    <Route
+                                      path="scorecard/:id"
+                                      element={<ScorePage />}
+                                    />
+                                  </Route>
+                                </Routes>
                                 <>
-                                  <Dialog
+                                  {/* <Dialog
                                     open={open}
                                     onClose={handleClose}
                                     aria-labelledby="alert-dialog-title"
                                     aria-describedby="alert-dialog-description"
                                   >
-                                    <DialogQuestions />
-                                  </Dialog>
+                                    <DialogTitle id="alert-dialog-title">
+                                      Questions :
+                                    </DialogTitle>
+                                    <DialogContent>
+                                      <DialogContentText id="alert-dialog-description">
+                                        Q1. Knowledge about HTML, CSS and
+                                        Javascript. Rate it be
+                                      </DialogContentText>
+                                    </DialogContent>
+                                    <DialogActions>
+                                      <Button onClick={handleClose}>
+                                        Disagree
+                                      </Button>
+                                      <Button onClick={handleClose} autoFocus>
+                                        Agree
+                                      </Button>
+                                    </DialogActions>
+                                  </Dialog> */}
                                 </>
                               </>
                             )),

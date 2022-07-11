@@ -1,12 +1,12 @@
-import React from 'react';
-import CollapsibleTable from "../components/admin.js"
+import React from "react";
+import CollapsibleTable from "../components/admin.js";
 
-function AdminPanel() {
+function AdminPanel({ userData, setUserData }) {
   return (
     <div>
-      <CollapsibleTable />
+      <CollapsibleTable userData={userData} setUserData={setUserData} />
     </div>
-  )
+  );
 }
 
-export default AdminPanel
+export default AdminPanel;

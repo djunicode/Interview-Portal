@@ -16,8 +16,10 @@ import AdminPanel from "./pages/AdminPanel";
 import FaqPage from "./pages/FaqPage";
 import PanelName from "./components/PanelName";
 import Dialog from "./components/DialogQuestions";
-
+import ScorePage from "./pages/ScorePage";
+import { useState } from "react";
 function App() {
+  const [userData, setUserData] = useState("");
   const PrivateRoute = () => {
     const token = localStorage.getItem("token");
     return token ? <Outlet /> : <Navigate to="/login" />;
@@ -29,7 +31,6 @@ function App() {
           // open routes
           <Route path="/login" element={<Login_signup />} />
           <Route path="/signup" element={<SignupPage />} />
-
           <Route path="/" element={<PrivateRoute />}>
             <Route path="/" element={<Login_signup />} />
           </Route>
@@ -43,7 +44,18 @@ function App() {
             <Route path="/profile" element={<Profile />} />
           </Route>
           <Route path="/admin" element={<PrivateRoute />}>
-            <Route path="/admin" element={<AdminPanel />} />
+            <Route
+              path="/admin"
+              element={
+                <AdminPanel userData={userData} setUserData={setUserData} />
+              }
+            />
+          </Route>
+          <Route path="/admin/scorecard/:id" element={<PrivateRoute />}>
+            <Route
+              path="/admin/scorecard/:id"
+              element={<ScorePage userData={userData} />}
+            />
           </Route>
         </Routes>
       </div>
