@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
@@ -11,14 +12,37 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import TextField from "@mui/material/TextField";
+import { useParams } from "react-router-dom";
 
 
 export default function Questions_Card() {
-	var myHeaders = new Headers();
-	myHeaders.append(
-		"Authorization",
-		"Token 663964d20c630d677b0076da4a9a396efe878b70"
-	);
+  const { id } = useParams();
+  console.log(id);
+  const [userData, setUserData] = useState([]);
+  const Fetchdata = () => {
+    var config = {
+      method: "get",
+      url: `https://unicodeinterview.pythonanywhere.com/accounts/interviewee_get/${id}`,
+      headers: {
+        Authorization: `token ${localStorage.getItem("token")}`,
+      },
+    };
+
+    axios(config)
+      .then(function (response) {
+        console.log(response.data);
+        setUserData(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  useEffect(() => {
+    Fetchdata();
+  }, []);
+  // console.log(data.user.name);
+  // Fetchdata();
 
   const [data, setData] = useState([
     {
@@ -32,15 +56,24 @@ export default function Questions_Card() {
       option5:"",
     },
   ]);
+  console.log(userData);
+
+  {userData.application && userData.application.stack.map((item) => {
+    var myHeaders = new Headers();
+	myHeaders.append(
+		"Authorization",
+		`token ${localStorage.getItem("token")}`
+	);
 
 	var requestOptions = {
 		method: "GET",
 		headers: myHeaders,
 		redirect: "follow",
 	};
-  useEffect(() => {
+
+
 	fetch(
-		"http://unicodeinterview.pythonanywhere.com/accounts/question/Frontend",
+		`http://unicodeinterview.pythonanywhere.com/accounts/question/${item.name}`,
 		requestOptions
 	)
 		.then((response) => response.json())
@@ -48,10 +81,9 @@ export default function Questions_Card() {
       console.log(result);
       setData(result);
     })
-		.catch((error) => console.log("error", error));
-    
-  },[])
-console.log("hi")
+		.catch((error) => console.log("error", error));   
+
+
 	return (
 		<Box >
 			<Card variant="outlined">
@@ -68,7 +100,6 @@ console.log("hi")
         <FormLabel id="demo-row-radio-buttons-group-label">
         {item.name}
         </FormLabel>
-
         	<RadioGroup
           row
           aria-labelledby="demo-row-radio-buttons-group-label"
@@ -98,4 +129,5 @@ console.log("hi")
       </Card>
 		</Box>
 	);
+      })}
 }

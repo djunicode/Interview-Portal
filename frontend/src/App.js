@@ -28,8 +28,8 @@ function App() {
       <div className="App">
         <Routes>
           // open routes
-          <Route path="/card" element={<Questions_Card />} />
-          [<Route path="/admin" element={<AdminPanel />} />]
+         
+          <Route path="/admin" element={<AdminPanel />} />
           <Route path="/login" element={<Login_signup />} />
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/" element={<PrivateRoute />}>

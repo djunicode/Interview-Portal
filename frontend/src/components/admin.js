@@ -140,7 +140,7 @@ export default function CollapsibleTable({ userData, setUserData }) {
                                   color="secondary"
                                   sx={{ margin: "5px" }}
                                   onClick={() => {
-                                    setUserData(interviewee.user.sapid);
+                                   
                                     navigate(
                                       `/admin/scorecard/${interviewee.user.sapid}`
                                     );
