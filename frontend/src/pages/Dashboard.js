@@ -1,10 +1,7 @@
 import React from "react";
-import SideNavbar from "../components/SideNavbar";
 import ProfileProgress from "../components/ProfileProgress";
 import InterviewScheduleCard from "../components/InterviewScheduleCard";
-import Time from "../components/Time";
 import { makeStyles } from "@mui/styles";
-import ApplyForIntreview from "../components/ApplyForIntreview";
 import { Grid } from "@mui/material";
 import TimeLine from "../components/Timeline";
 import TabPanel from "../components/TasksSection";
@@ -18,13 +15,6 @@ const useStyles = makeStyles((theme) => ({
 			marginLeft: "20px!important",
 		},
 	},
-	// background: {
-	//   height: "120vh",
-	// },
-	// body: {
-	//   backgroundColor: "#F2F3F7",
-	// },
-	// rowone: {},
 }));
 
 const Dashboard = () => {
@@ -32,7 +22,7 @@ const Dashboard = () => {
 
 	return (
 		<>
-		  <Grid container columnSpacing={5} className={classes.flexItem}>
+		  <Grid container columnSpacing={4} className={classes.flexItem}>
 		    <Grid item md={5} xs={10}>
 		      <Grid item xs={10} lg={12} md={12} mt={3}>
 		        <ProfileProgress />
@@ -55,46 +45,6 @@ const Dashboard = () => {
 		    </Grid>
 		  </Grid>
 		</>
-		// <>
-		// 	<div
-		// 		class="grid-container"
-		// 		style={{
-		// 			display: "grid",
-		// 			gap: "10px",
-		// 			backgroundColor: "#2196F3",
-		// 			padding: "10px",
-		// 		}}
-		// 	>
-		// 		<div
-		// 			class="grid-item item1"
-		// 			style={{ gridColumn: " 1 / span 2", gridRow: 1 }}
-		// 		>
-
-    
-		// 			<ProfileProgress />
-    //       <InterviewScheduleCard />
-		// 		</div>
-		// 		<div
-		// 			class="grid-item item2"
-		// 			style={{ gridColumn: 3, gridRow: "1 / span 2" }}
-		// 		>
-		// 			<TimeLine />
-		// 		</div>
-		// 		<div
-		// 			class="grid-item item1"
-		// 			style={{ gridColumn: " 1 / span 2", gridRow: 1 }}
-		// 		>
-		// 			 <ApplyForIntreview />
-		// 		</div>
-		// 		<div
-		// 			class="grid-item item3"
-		// 			style={{ gridColumn: "1 / span 3", gridRow: 3 }}
-		// 		>
-		// 			<TabPanel />
-		// 		</div>
-		// 		{/* <div class="grid-item item5">5</div> */}
-		// 	</div>
-		// </>
 	);
 };
 
