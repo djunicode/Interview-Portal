@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
   },
   [theme.breakpoints.up("md")]: {
     card1: {
-      height: "38vh",
+      height: "24vh",
     },
   },
   divider: {
@@ -34,7 +34,7 @@ const InterviewScheduleCard = () => {
   const classes = useStyles();
   return (
     <Card className={classes.card1}>
-      <Grid container className={classes.flexItem} rowSpacing="20">
+      <Grid container item className={classes.flexItem} rowSpacing="20">
         <Grid item>
           <Typography className={classes.header} variant="h3">
             Interview
