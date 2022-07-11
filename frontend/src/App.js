@@ -16,6 +16,7 @@ import AdminPanel from "./pages/AdminPanel";
 import FaqPage from "./pages/FaqPage";
 import PanelName from "./components/PanelName";
 import Dialog from "./components/DialogQuestions";
+import Questions_Card from "./components/Questions_Card";
 
 function App() {
   const PrivateRoute = () => {
@@ -27,7 +28,8 @@ function App() {
       <div className="App">
         <Routes>
           // open routes
-          <Route path="/admin" element={<AdminPanel />} />
+          <Route path="/card" element={<Questions_Card />} />
+          [<Route path="/admin" element={<AdminPanel />} />]
           <Route path="/login" element={<Login_signup />} />
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/timeline" element={<TimeLine />} />
