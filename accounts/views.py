@@ -56,6 +56,21 @@ class IntervieweeAPI(APIView):
 		serializer.update(request.user, request.data)
 		return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
 
+
+class IntervieweeAPI(APIView):
+	serializer_class = IntervieweeRegisterSerializer
+	permission_classes = [permissions.IsAuthenticated]
+
+	def get(self, request, sapid):
+		try:
+			user = User.objects.get(sapid =sapid)
+			interviewee = Interviewee.objects.get(user = user)
+		except:
+			JsonResponse("interviewee not found", status= status.HTTP_404_NOT_FOUND)
+		serializer = self.serializer_class(interviewee)
+		return JsonResponse(serializer.data, safe=False)
+
+
 class LoginAPI(GenericAPIView):
 	permission_classes = [permissions.AllowAny]
 	serializer_class = LoginSerializer
