@@ -13,9 +13,9 @@ export default function PanelName() {
   return (
     <Box sx={{ width: '100%', bgcolor: 'background.paper' }}>
       <Tabs value={value} onChange={handleChange} centered>
-        <Tab label="Panle Alpha" />
-        {/* <Tab label="Panel Two" />
-        <Tab label="Panel Three" /> */}
+        <Tab label="Panel Alpha" />
+        {/* <Tab label="Panel Beta" > ERFFVV </Tab> */}
+        {/* <Tab label="Panel Three" /> */}
       </Tabs>
     </Box>
   );

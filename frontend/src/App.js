@@ -15,8 +15,11 @@ import ApplicationForm from "./pages/ApplicationForm";
 import AdminPanel from "./pages/AdminPanel";
 import FaqPage from "./pages/FaqPage";
 import PanelName from "./components/PanelName";
-
+import Dialog from "./components/DialogQuestions";
+import ScorePage from "./pages/ScorePage";
+import { useState } from "react";
 function App() {
+  const [userData, setUserData] = useState("");
   const PrivateRoute = () => {
     const token = localStorage.getItem("token");
     return token ? <Outlet /> : <Navigate to="/login" />;
@@ -26,23 +29,11 @@ function App() {
       <div className="App">
         <Routes>
           // open routes
-          <Route path="/admin" element={<AdminPanel />} />
           <Route path="/login" element={<Login_signup />} />
           <Route path="/signup" element={<SignupPage />} />
-          <Route path="/timeline" element={<TimeLine />} />
-          <Route path="/time" element={<Time />} />
-          <Route path="/sidenavbar" element={<SideNavbar />} />
-          <Route path="/tasks" element={<TabPanel />} />
-          <Route path="/resources" element={<ResourcePage />} />
-          <Route path="/apply" element={<ApplyForIntreview />} />
-          <Route path="/faq" element={<FaqPage />} />
-          <Route path="/pn" element={<PanelName />} />
           <Route path="/" element={<PrivateRoute />}>
             <Route path="/" element={<Login_signup />} />
           </Route>
-          {/* <Route path="/signup" element={<PrivateRoute />}>
-						<Route path="/signup" element={<SignupPage />} />
-					</Route> */}
           <Route path="/ApplicationForm" element={<PrivateRoute />}>
             <Route path="/ApplicationForm" element={<ApplicationForm />} />
           </Route>
@@ -51,6 +42,20 @@ function App() {
           </Route>
           <Route path="/profile" element={<PrivateRoute />}>
             <Route path="/profile" element={<Profile />} />
+          </Route>
+          <Route path="/admin" element={<PrivateRoute />}>
+            <Route
+              path="/admin"
+              element={
+                <AdminPanel userData={userData} setUserData={setUserData} />
+              }
+            />
+          </Route>
+          <Route path="/admin/scorecard/:id" element={<PrivateRoute />}>
+            <Route
+              path="/admin/scorecard/:id"
+              element={<ScorePage userData={userData} />}
+            />
           </Route>
         </Routes>
       </div>

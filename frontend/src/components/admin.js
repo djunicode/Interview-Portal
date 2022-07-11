@@ -7,7 +7,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Chip from "@mui/material/Chip";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { Button, Grid } from "@mui/material";
 import Interviewers from "./Interviewers";
 import Row from "./Row";
@@ -38,14 +38,14 @@ const rows = [
   ),
 ];
 
-export default function CollapsibleTable() {
+export default function CollapsibleTable({ userData, setUserData }) {
   const PrivateRoute = () => {
     const token = localStorage.getItem("token");
     return token ? <Outlet /> : <Navigate to="/login" />;
   };
 
   const [open, setOpen] = React.useState(false);
-  const [userData, setUserData] = useState({});
+
   const navigate = useNavigate();
   const handleClickOpen = () => {
     setOpen(true);
@@ -82,15 +82,16 @@ export default function CollapsibleTable() {
     )
       .then((response) => response.json())
       .then((result) => {
-        console.log(result);
+        //console.log(result);
         setUser(result);
       })
       .catch((error) => console.log("error", error));
   }, []);
-  // console.log(userData);
+
+  console.log(userData);
   return (
     <Grid container>
-      <Grid item sm="12">
+      <Grid item sm={12}>
         <div style={{ clear: "both" }}>
           <h3 style={{ float: "left", margin: "10px" }}>
             <PanelName />
@@ -110,7 +111,7 @@ export default function CollapsibleTable() {
         </div>
         <Interviewers data={user} />
       </Grid>
-      <Grid item sm="12">
+      <Grid item sm={12}>
         <TableContainer component={Paper}>
           <Table stickyHeader aria-label="sticky table">
             <TableHead>
@@ -126,40 +127,36 @@ export default function CollapsibleTable() {
                 <React.Fragment key={index}>
                   {item.interviewees.map((interviewee, i) => (
                     <React.Fragment key={i}>
-                      {rows.map((i) => (
+                      {rows.map((_, index) => (
                         <Row
-                          key={i}
+                          key={index}
+                          value={index}
                           row={createData(
                             interviewee.user.name,
                             interviewee.application.stack.map((obj) => (
                               <>
-                                <Link to="/score">
-                                  <Chip
-                                    label={obj.name}
-                                    color="secondary"
-                                    sx={{ margin: "5px" }}
-                                    // onClick={() => {
-                                    //   setUserData({
-                                    //     name: interviewee.user.name,
-                                    //     stack: interviewee.application.stack,
-                                    //     sapid: interviewee.user.sapid,
-                                    //     gradyear: interviewee.user.grad_year,
-                                    //     email: interviewee.user.email,
-                                    //     resume:
-                                    //       interviewee.application.resume_link,
-                                    //     github: interviewee.application.stack,
-                                    //   });
-                                    //   navigate("/score");
-                                    // }}
-                                  />
-                                </Link>
+                                <Chip
+                                  label={obj.name}
+                                  color="secondary"
+                                  sx={{ margin: "5px" }}
+                                  onClick={() => {
+                                    setUserData(interviewee.user.sapid);
+                                    navigate(
+                                      `/admin/scorecard/${interviewee.user.sapid}`
+                                    );
+                                  }}
+                                />
                                 <Routes>
                                   <Route
-                                    path="/score"
-                                    element={<ScorePage userData={userData} />}
-                                  />
+                                    path="scorecard/:id"
+                                    element={<PrivateRoute />}
+                                  >
+                                    <Route
+                                      path="scorecard/:id"
+                                      element={<ScorePage />}
+                                    />
+                                  </Route>
                                 </Routes>
-
                                 <>
                                   {/* <Dialog
                                     open={open}
