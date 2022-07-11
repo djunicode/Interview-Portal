@@ -17,7 +17,7 @@ import FaqPage from "./pages/FaqPage";
 import PanelName from "./components/PanelName";
 import Dialog from "./components/DialogQuestions";
 import Questions_Card from "./components/Questions_Card";
-
+import ScorePage from "./pages/ScorePage";
 function App() {
   const PrivateRoute = () => {
     const token = localStorage.getItem("token");
@@ -32,21 +32,9 @@ function App() {
           [<Route path="/admin" element={<AdminPanel />} />]
           <Route path="/login" element={<Login_signup />} />
           <Route path="/signup" element={<SignupPage />} />
-          <Route path="/timeline" element={<TimeLine />} />
-          <Route path="/time" element={<Time />} />
-          <Route path="/sidenavbar" element={<SideNavbar />} />
-          <Route path="/tasks" element={<TabPanel />} />
-          <Route path="/resources" element={<ResourcePage />} />
-          <Route path="/apply" element={<ApplyForIntreview />} />
-          <Route path="/faq" element={<FaqPage />} />
-          <Route path="/dialog" element={<Dialog />} />
-
           <Route path="/" element={<PrivateRoute />}>
             <Route path="/" element={<Login_signup />} />
           </Route>
-          {/* <Route path="/signup" element={<PrivateRoute />}>
-						<Route path="/signup" element={<SignupPage />} />
-					</Route> */}
           <Route path="/ApplicationForm" element={<PrivateRoute />}>
             <Route path="/ApplicationForm" element={<ApplicationForm />} />
           </Route>
@@ -55,6 +43,20 @@ function App() {
           </Route>
           <Route path="/profile" element={<PrivateRoute />}>
             <Route path="/profile" element={<Profile />} />
+          </Route>
+          <Route path="/admin" element={<PrivateRoute />}>
+            <Route
+              path="/admin"
+              element={
+                <AdminPanel />
+              }
+            />
+          </Route>
+          <Route path="/admin/scorecard/:id" element={<PrivateRoute />}>
+            <Route
+              path="/admin/scorecard/:id"
+              element={<ScorePage />}
+            />
           </Route>
         </Routes>
       </div>

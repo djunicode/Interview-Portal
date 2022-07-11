@@ -4,13 +4,8 @@ import axios from "axios";
 import { useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
-import { classNames } from "muicss/lib/js/lib/util";
-import { width } from "@mui/system";
 
 const TaskData = (props) => {
   const theme = useTheme();

@@ -45,14 +45,16 @@
     );
     width: 100vw;
     /* height: 100vh; */
-    min-height: 100vh;
+    /* min-height: 100vh; */
 
+    height: 100%;
+    overflow: hidden;
     display: flex;
   }
   .outerDiv2ForSignup {
     background-color: white !important;
     padding: 5%;
-    height: 75%;
+    height: 700px !important;
     border-radius: 16px;
   }
 }

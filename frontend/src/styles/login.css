@@ -46,7 +46,8 @@
   .outerDiv2ForLogin {
     background-color: white !important;
     padding: 5%;
+    margin-top: -12%;
     border-radius: 16px;
-    height: 60%;
+    height: 500px;
   }
 }
