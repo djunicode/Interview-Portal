@@ -116,8 +116,8 @@ const Details = () => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [data, setData] = useState([]);
+  const [openError, setOpenError] = React.useState(false);
 
-  const [submitted, setSubmitted] = useState(false);
   const formik = useFormik({
     initialValues: {
       resume: "",
@@ -215,16 +215,19 @@ const Details = () => {
       axios(config)
         .then(function (response) {
           console.log(JSON.stringify(response.data));
+
           setOpen(true);
-          setSubmitted(true);
         })
         .catch(function (error) {
           console.log(error);
+          setOpenError(true);
+          console.log(openError);
         });
     },
   });
   const handleClose = () => {
     setOpen(false);
+    setOpenError(false);
   };
 
   const getValue = (e) => {
@@ -238,7 +241,7 @@ const Details = () => {
       setData([...data, e]);
     }
   };
-
+  console.log(openError);
   return (
     <>
       <Box
@@ -505,7 +508,7 @@ const Details = () => {
                 className={classes.bttn}
                 type="submit"
                 onClick={formik.handleSubmit}
-                disabled={submitted}
+                // disabled={submitted}
               >
                 Confirm Details
               </Button>
@@ -526,6 +529,15 @@ const Details = () => {
             sx={{ width: "100%" }}
           >
             Form submitted successfully!
+          </Alert>
+        </Snackbar>
+        <Snackbar
+          open={openError}
+          autoHideDuration={6000}
+          onClose={handleClose}
+        >
+          <Alert severity="error" onClose={handleClose} sx={{ width: "100%" }}>
+            You can submit the form only once!
           </Alert>
         </Snackbar>
       </Box>
