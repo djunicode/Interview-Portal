@@ -215,7 +215,7 @@ class InterviewAPI(GenericAPIView):
 			return Response(serializer.data)
 
 
-
+# pending
 class Scheduler(GenericAPIView):
 
 	permission_classes = [InterviewerPermission]
