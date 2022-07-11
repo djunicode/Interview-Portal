@@ -84,10 +84,10 @@ class IntervieweeRegisterSerializer(serializers.ModelSerializer):
 
     def update(self, instance, validated_data):
         new_user=validated_data['user']
+        print(new_user)
         instance.name = new_user['name']
         instance.email = new_user['email']
         instance.sapid = instance.sapid
-
         instance.grad_year = new_user['grad_year']
         instance.save()
         return instance
