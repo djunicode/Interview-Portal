@@ -18,7 +18,6 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "flex-start",
-
     color: " #4F4F4F",
     fontSize: "8px!important",
   },
@@ -45,13 +44,10 @@ const ProfileProgress = (props) => {
         <Grid item xs={2} className={classes.flexItem}>
           <ProgressCircle />
         </Grid>
-        <Grid item>
-          <Grid item variant="h6">
-            <Typography> Your profile is still 80% incomplete</Typography>
-          </Grid>
-          <Grid item className={classes.text2}>
-            <Typography> complete your profile now</Typography>
-          </Grid>
+        <Grid item xs={10}>
+          <Typography>
+            Your profile is still 80% incomplete. <br/> Complete your profile now
+          </Typography>
         </Grid>
       </Grid>
     </Card>

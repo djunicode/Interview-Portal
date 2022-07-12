@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import { Typography } from "@mui/material";
-import Questions_Card from "../components/Questions_Card";
+
 import Question_Cards from "../components/Question_Cards";
 import UserDetailsForScorecars from "../components/UserDetailsForScorecars";
 const ScorePage = () => {
@@ -36,14 +35,12 @@ const ScorePage = () => {
   return (
     <div>
       <UserDetailsForScorecars />
-      <Questions_Card />
 
       {userData.application &&
         userData.application.stack.map((item) => {
           console.log(item.name);
           return (
             <>
-              {/* <Typography>{item.name}</Typography> */}
               <Question_Cards name={item.name} />
             </>
           );

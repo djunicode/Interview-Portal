@@ -73,7 +73,7 @@ function a11yProps(index) {
 }
 
 export default function BasicTabs() {
-  const [value, setValue] = useState([]);
+  const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -82,63 +82,60 @@ export default function BasicTabs() {
 
   return (
     <Card className={classes.card1}>
-      {/* <Grid container className={classes.flexItem} > */}
-        <Grid item xs="5" md="6">
-          <Typography className={classes.header} variant="h3">
-            <strong>Tasks</strong>
-          </Typography>
-        </Grid>
-        <Divider className={classes.divider} />
+      <Grid item xs="5" md="6">
+        <Typography className={classes.header} variant="h3">
+          <strong>Tasks</strong>
+        </Typography>
+      </Grid>
+      <Divider className={classes.divider} />
 
-        <Box 
-          sx={{
-            flexGrow: 1,
-            maxWidth: { xs: 320, sm: 480, md: "100%" },
-            bgcolor: "background.paper",
-            padding: "1px",
-			width: '100%'
-          }}
-        >
-          {/* <Box sx={{ mt: 3 }} className={classes.flexItem}> */}
-            <Grid item sx={{ mt: 3, ml:"5%", mr:"5%" }} md="12" >
-              <AppBar position="static" color="inherit"  sx={{width:"100%"}}>
-                <Tabs
-                  variant="scrollable"
-                  allowScrollButtonsMobile
-                  value={value}
-				  centered
-                  onChange={handleChange}
-                  classes={classes}
-                  aria-label="simple tabs example"
-				 
-                >
-                  <Tab label="Frontend" {...a11yProps(0)} />
-                  <Tab label="Backend" {...a11yProps(1)} />
-                  <Tab label="Design" {...a11yProps(2)} />
-                  <Tab label="App" {...a11yProps(3)} />
-                  <Tab label="Git Basics" {...a11yProps(4)} />
-                </Tabs>
-              </AppBar>
-            </Grid>
-          {/* </Box> */}
-          <Grid sx={{ padding: { xs: 2, md: 0 } }}>
-            <TabPanel value={value} index={0}>
-              <TaskData stack="1" />
-            </TabPanel>
-            <TabPanel value={value} index={1}>
-              Item 2
-            </TabPanel>
-            <TabPanel value={value} index={2}>
-              Item 3
-            </TabPanel>
-            <TabPanel value={value} index={3}>
-              Item 4
-            </TabPanel>
-            <TabPanel value={value} index={4}>
-              Item 5
-            </TabPanel>
-          </Grid>
-        </Box>
+      <Box
+        sx={{
+          flexGrow: 1,
+          maxWidth: { xs: 320, sm: 480, md: "100%" },
+          bgcolor: "background.paper",
+          padding: "1px",
+          width: "100%",
+        }}
+      >
+        {/* <Box sx={{ mt: 3 }} className={classes.flexItem}> */}
+        <Grid item sx={{ mt: 3, ml: "5%", mr: "5%" }} md="12">
+          <AppBar position="static" color="inherit" sx={{ width: "100%" }}>
+            <Tabs
+              variant="scrollable"
+              allowScrollButtonsMobile
+              value={value}
+              onChange={handleChange}
+              classes={classes}
+              aria-label="simple tabs example"
+            >
+              <Tab label="Frontend" {...a11yProps(0)} />
+              <Tab label="Backend" {...a11yProps(1)} />
+              <Tab label="Design" {...a11yProps(2)} />
+              <Tab label="App" {...a11yProps(3)} />
+              <Tab label="Git Basics" {...a11yProps(4)} />
+            </Tabs>
+          </AppBar>
+        </Grid>
+        {/* </Box> */}
+        <Grid sx={{ padding: { xs: 2, md: 0 } }}>
+          <TabPanel value={value} index={0}>
+            <TaskData stack={1}/>
+          </TabPanel>
+          <TabPanel value={value} index={1}>
+            Item 2
+          </TabPanel>
+          <TabPanel value={value} index={2}>
+            Item 3
+          </TabPanel>
+          <TabPanel value={value} index={3}>
+            Item 4
+          </TabPanel>
+          <TabPanel value={value} index={4}>
+            Item 5
+          </TabPanel>
+        </Grid>
+      </Box>
       {/* </Grid> */}
     </Card>
   );

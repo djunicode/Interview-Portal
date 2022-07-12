@@ -32,7 +32,6 @@ const Login = () => {
       password: Yup.string().required("Required"),
     }),
     onSubmit: (values) => {
-      console.log(values);
 
       var FormData = require("form-data");
       var data = new FormData();
@@ -53,6 +52,7 @@ const Login = () => {
               navigate('/admin')
             }
             else {
+              localStorage.setItem("sapid", formik.values.username);
               navigate('/dashboard')
             }
           } else {
@@ -66,7 +66,6 @@ const Login = () => {
         });
     },
   });
-  console.log(formik.errors);
 
   return (
     <div className="outerDiv2ForLogin">
