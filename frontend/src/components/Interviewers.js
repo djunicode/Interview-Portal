@@ -33,6 +33,7 @@ function stringAvatar(name) {
 }
 
 export default function Interviewers(props) {
+
   return (
     <Grid container>
       <Grid item sm={12}>
@@ -40,43 +41,35 @@ export default function Interviewers(props) {
           <h3 style={{ textAlign: "left" }}>TE Mentors: </h3>
         </Grid>
         <Stack direction="row" spacing={2}>
-          {props.data.map((item, index) => (
-            <div key={index}>
-              {item.interviewers
-                .filter((data) => data.role === "TE")
-                .map((interviewer, i) => (
-                  <div key={i} style={{ margin: "10px" }}>
-                    <Avatar
-                      {...stringAvatar(interviewer.user.name)}
-                      style={{ margin: "10px" }}
-                    />
-                    {interviewer.user.name}
-                  </div>
-                ))}
-            </div>
-          ))}
+          {props.data.interviewers
+            .filter((data) => data.role === "TE")
+            .map((interviewer, i) => (
+              <div key={i} style={{ margin: "10px" }}>
+                <Avatar
+                  {...stringAvatar(interviewer.user.name)}
+                  style={{ margin: "10px" }}
+                />
+                {interviewer.user.name}
+              </div>
+            ))}
         </Stack>
       </Grid>
       <Grid>
         <div style={{ margin: "10px" }}>
-          <h3>BE Mentors: </h3>
+          <h3> BE Mentors: </h3>
         </div>
         <Stack direction="row" spacing={2}>
-          {props.data.map((item, index) => (
-            <div key={index}>
-              {item.interviewers
-                .filter((data) => data.role === "BE")
-                .map((interviewer, j) => (
-                  <div key={j} style={{ margin: "10px" }}>
-                    <Avatar
-                      {...stringAvatar(interviewer.user.name)}
-                      style={{ margin: "10px" }}
-                    />
-                    {interviewer.user.name}
-                  </div>
-                ))}
-            </div>
-          ))}
+          {props.data.interviewers
+            .filter((data) => data.role === "BE")
+            .map((interviewer, j) => (
+              <div key={j} style={{ margin: "10px" }}>
+                <Avatar
+                  {...stringAvatar(interviewer.user.name)}
+                  style={{ margin: "10px" }}
+                />
+                {interviewer.user.name}
+              </div>
+            ))}
         </Stack>
       </Grid>
     </Grid>
