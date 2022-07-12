@@ -12,17 +12,65 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import TextField from "@mui/material/TextField";
+import { useFormik } from "formik";
+import { useParams } from "react-router-dom";
+import * as Yup from "yup";
 const Question_Cards = ({ name }) => {
-  const [data, setData] = useState({
-    id: "",
-    stack: "",
-    name: "",
-    option1: "",
-    option2: "",
-    option3: "",
-    option4: "",
-    option5: "",
+  const { id } = useParams();
+  const [questionNo, setQuestionNo] = useState("");
+  const formik = useFormik({
+    initialValues: {
+      sapid: id,
+      stack: name,
+      question_no: questionNo,
+      rating: "",
+    },
+    validationSchema: Yup.object({
+      rating: Yup.string().required("Required"),
+    }),
+
+    onSubmit: (values) => {
+      console.log(values);
+      var axios = require("axios");
+      var data = JSON.stringify({
+        sapid: values.sapid,
+        stack: values.stack,
+        question_no: questionNo,
+        rating: values.rating,
+      });
+      console.log(data);
+      var config = {
+        method: "post",
+        url: "https://unicodeinterview.pythonanywhere.com/accounts/score/",
+        headers: {
+          Authorization: `token ${localStorage.getItem("token")}`,
+          "Content-Type": "application/json",
+        },
+        data: data,
+      };
+
+      axios(config)
+        .then(function (response) {
+          console.log(JSON.stringify(response.data));
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    },
   });
+
+  const [data, setData] = useState([
+    {
+      id: "",
+      stack: "",
+      name: "",
+      option1: "",
+      option2: "",
+      option3: "",
+      option4: "",
+      option5: "",
+    },
+  ]);
   const FetchFormDetails = (name) => {
     var axios = require("axios");
 
@@ -47,8 +95,15 @@ const Question_Cards = ({ name }) => {
   useEffect(() => {
     FetchFormDetails(name);
   }, []);
-  console.log(data);
 
+  const updateQID = (qid) => {
+    setQuestionNo(qid);
+    console.log(questionNo);
+  };
+
+  useEffect(() => {
+    updateQID(questionNo);
+  }, [questionNo]);
   return (
     <>
       {data &&
@@ -78,26 +133,41 @@ const Question_Cards = ({ name }) => {
                       >
                         <FormControlLabel
                           value="1"
+                          onBlur={formik.handleBlur}
+                          onChange={formik.handleChange}
+                          name="rating"
                           control={<Radio />}
                           label={item.option1}
                         />
                         <FormControlLabel
                           value="2"
+                          onBlur={formik.handleBlur}
+                          onChange={formik.handleChange}
+                          name="rating"
                           control={<Radio />}
                           label={item.option2}
                         />
                         <FormControlLabel
                           value="3"
+                          onBlur={formik.handleBlur}
+                          onChange={formik.handleChange}
+                          name="rating"
                           control={<Radio />}
                           label={item.option3}
                         />
                         <FormControlLabel
                           value="4"
+                          onBlur={formik.handleBlur}
+                          onChange={formik.handleChange}
+                          name="rating"
                           control={<Radio />}
                           label={item.option4}
                         />
                         <FormControlLabel
                           value="5"
+                          onBlur={formik.handleBlur}
+                          onChange={formik.handleChange}
+                          name="rating"
                           control={<Radio />}
                           label={item.option5}
                         />
@@ -110,7 +180,16 @@ const Question_Cards = ({ name }) => {
                       />
                     </FormControl>
                     <CardActions>
-                      <Button size="small">Submit</Button>
+                      <Button
+                        size="small"
+                        type="submit"
+                        onClick={() => {
+                          updateQID(item.id);
+                          formik.handleSubmit();
+                        }}
+                      >
+                        Submit
+                      </Button>
                     </CardActions>
                   </React.Fragment>
                 </Card>
