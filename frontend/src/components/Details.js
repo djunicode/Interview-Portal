@@ -7,20 +7,14 @@ import "../styles/signupPage.css";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 import { Card } from "@mui/material";
-import { useFormik, yupToFormErrors } from "formik";
+import { useFormik } from "formik";
 import ProfileDetails from "./ProfileDetails";
 import "../styles/login_signup.css";
-// import Panel from "muicss/lib/react/panel";
 
 import { Button } from "@mui/material";
-// import TextField from "@mui/material/TextField";
-import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
-import Chip from "@mui/material/Chip";
-import ChipInput from "material-ui-chip-input";
 import resume from "../assets/resume.svg";
 import git from "../assets/git.svg";
-import stacks from "../assets/stacks.svg";
 import TextField from "@material-ui/core/TextField";
 import { Box } from "@mui/system";
 import axios from "axios";
@@ -206,7 +200,7 @@ const Details = () => {
         method: "post",
         url: "https://unicodeinterview.pythonanywhere.com/accounts/application/",
         headers: {
-          Authorization: `token ${localStorage.getItem("token")}`,
+          "Authorization": `Token ${localStorage.getItem("token")}`,
           "Content-Type": "application/json",
         },
         data: data,
@@ -241,7 +235,6 @@ const Details = () => {
       setData([...data, e]);
     }
   };
-  console.log(openError);
   return (
     <>
       <Box
