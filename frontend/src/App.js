@@ -1,22 +1,14 @@
 import SignupPage from "../src/pages/signupPage";
-import Login_signup from "../src/pages/login_signup";
+import LoginSignup from "../src/pages/login_signup";
 import "./App.css";
 import { Route, Routes } from "react-router";
 import { BrowserRouter as Router, Outlet, Navigate } from "react-router-dom";
-import TimeLine from "./components/Timeline";
-import Time from "./components/Time";
-import ApplyForIntreview from "./components/ApplyForIntreview";
-import SideNavbar from "./components/SideNavbar";
 import DashboardPage from "./pages/DashboardPage";
-import TabPanel from "./components/TasksSection";
 import Profile from "./pages/Profile";
 import ResourcePage from "./pages/ResourcePage";
 import ApplicationForm from "./pages/ApplicationForm";
 import AdminPanel from "./pages/AdminPanel";
 import FaqPage from "./pages/FaqPage";
-import PanelName from "./components/PanelName";
-import Dialog from "./components/DialogQuestions";
-import Questions_Card from "./components/Questions_Card";
 import ScorePage from "./pages/ScorePage";
 function App() {
   const PrivateRoute = () => {
@@ -27,13 +19,10 @@ function App() {
     <Router>
       <div className="App">
         <Routes>
-          // open routes
-          <Route path="/admin" element={<AdminPanel />} />
-          <Route path="/login" element={<Login_signup />} />
+          <Route path="/login" element={<LoginSignup />} />
           <Route path="/signup" element={<SignupPage />} />
-          <Route path="/" element={<PrivateRoute />}>
-            <Route path="/" element={<Login_signup />} />
-          </Route>
+          <Route path="/" element={<LoginSignup />} />
+
           <Route path="/dashboard" element={<PrivateRoute />}>
             <Route path="/dashboard" element={<DashboardPage />} />
           </Route>
