@@ -41,6 +41,11 @@ class IntervieweeAPI(APIView):
 	serializer_class = IntervieweeRegisterSerializer
 	permission_classes = [permissions.IsAuthenticated]
 
+	def get(self, request):
+		serializer = self.serializer_class(request)
+		print(serializer.data)
+		return Response(serializer.data, status=status.HTTP_200_OK)
+
 	def put(self, request):
 		serializer = self.serializer_class(data=request.data)
 		serializer.is_valid(raise_exception=True)
