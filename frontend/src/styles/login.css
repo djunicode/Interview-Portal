@@ -1,5 +1,5 @@
 .loginHeader {
-  color: rgba(81, 84, 206, 1);
+  color: #09c1d7;
   font-size: 150%;
   font-weight: 700;
 }
@@ -28,7 +28,7 @@
 .dhaaText2 {
   font-size: 14px;
   font-weight: 700;
-  color: rgba(81, 84, 206, 1);
+  color: #09c1d7;
   text-decoration: none !important;
 }
 

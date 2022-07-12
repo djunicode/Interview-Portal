@@ -129,13 +129,13 @@ const customTheme = createTheme(themes.default, {
     backgroundColor: "#efefef",
   },
   date: {
-    backgroundColor: "#8985f2",
+    backgroundColor: "#09c1d7",
   },
   marker: {
-    borderColor: "rebeccapurple",
+    borderColor: "#09c1d7",
   },
   timelineTrack: {
-    backgroundColor: "rebeccapurple",
+    backgroundColor: "#09c1d7",
   },
 });
 
