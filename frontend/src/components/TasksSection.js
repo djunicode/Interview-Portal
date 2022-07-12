@@ -73,7 +73,7 @@ function a11yProps(index) {
 }
 
 export default function BasicTabs() {
-  const [value, setValue] = useState([]);
+  const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -82,7 +82,6 @@ export default function BasicTabs() {
 
   return (
     <Card className={classes.card1}>
-      {/* <Grid container className={classes.flexItem} > */}
       <Grid item xs="5" md="6">
         <Typography className={classes.header} variant="h3">
           <strong>Tasks</strong>
@@ -121,7 +120,7 @@ export default function BasicTabs() {
         {/* </Box> */}
         <Grid sx={{ padding: { xs: 2, md: 0 } }}>
           <TabPanel value={value} index={0}>
-            <TaskData stack="1" />
+            <TaskData stack={1}/>
           </TabPanel>
           <TabPanel value={value} index={1}>
             Item 2

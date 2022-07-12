@@ -4,7 +4,7 @@ import React from "react";
 import { makeStyles } from "@mui/styles";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   gridRow: {
     display: "flex",
     padding: "2%",

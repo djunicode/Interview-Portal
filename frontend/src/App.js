@@ -28,15 +28,11 @@ function App() {
       <div className="App">
         <Routes>
           // open routes
-         
           <Route path="/admin" element={<AdminPanel />} />
           <Route path="/login" element={<Login_signup />} />
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/" element={<PrivateRoute />}>
             <Route path="/" element={<Login_signup />} />
-          </Route>
-          <Route path="/ApplicationForm" element={<PrivateRoute />}>
-            <Route path="/ApplicationForm" element={<ApplicationForm />} />
           </Route>
           <Route path="/dashboard" element={<PrivateRoute />}>
             <Route path="/dashboard" element={<DashboardPage />} />
@@ -44,19 +40,20 @@ function App() {
           <Route path="/profile" element={<PrivateRoute />}>
             <Route path="/profile" element={<Profile />} />
           </Route>
+          <Route path="/faq" element={<PrivateRoute />}>
+            <Route path="/faq" element={<FaqPage />} />
+          </Route>
+          <Route path="/ApplicationForm" element={<PrivateRoute />}>
+            <Route path="/ApplicationForm" element={<ApplicationForm />} />
+          </Route>
+          <Route path="/resources" element={<PrivateRoute />}>
+            <Route path="/resources" element={<ResourcePage />} />
+          </Route>
           <Route path="/admin" element={<PrivateRoute />}>
-            <Route
-              path="/admin"
-              element={
-                <AdminPanel />
-              }
-            />
+            <Route path="/admin" element={<AdminPanel />} />
           </Route>
           <Route path="/admin/scorecard/:id" element={<PrivateRoute />}>
-            <Route
-              path="/admin/scorecard/:id"
-              element={<ScorePage />}
-            />
+            <Route path="/admin/scorecard/:id" element={<ScorePage />} />
           </Route>
         </Routes>
       </div>
