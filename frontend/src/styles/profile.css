@@ -1,13 +1,13 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
 
 .MuiChip-colorSecondary {
-    background-color: #5154CE !important;
+  background-color: #09c1d7 !important;
 }
 
 .MuiButton-root {
-    font-family: 'Poppins', sans-serif !important;
+  font-family: "Poppins", sans-serif !important;
 }
 
 .MuiButton-containedSecondary {
-    background-color: #5154CE !important;
+  background-color: #09c1d7 !important;
 }

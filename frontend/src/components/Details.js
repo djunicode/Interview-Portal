@@ -10,7 +10,8 @@ import { Card } from "@mui/material";
 import { useFormik } from "formik";
 import ProfileDetails from "./ProfileDetails";
 import "../styles/login_signup.css";
-
+import GitHubIcon from "@mui/icons-material/GitHub";
+import ContactPageIcon from "@mui/icons-material/ContactPage";
 import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
 import resume from "../assets/resume.svg";
@@ -27,6 +28,8 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
   },
   icon: {
+    fontSize: "50px!important",
+    color: "#09c1d7",
     [theme.breakpoints.down("sm")]: {
       height: "30px",
     },
@@ -65,7 +68,7 @@ const useStyles = makeStyles((theme) => ({
     padding: "2%",
   },
   skip: {
-    color: "rgba(81, 84, 206, 1)",
+    color: "#09c1d7",
     textDecoration: "none!important",
   },
   container: {
@@ -200,7 +203,7 @@ const Details = () => {
         method: "post",
         url: "https://unicodeinterview.pythonanywhere.com/accounts/application/",
         headers: {
-          "Authorization": `Token ${localStorage.getItem("token")}`,
+          Authorization: `Token ${localStorage.getItem("token")}`,
           "Content-Type": "application/json",
         },
         data: data,
@@ -254,7 +257,7 @@ const Details = () => {
             </Grid>
             <Grid item xs={12} className={classes.gridRow}>
               <Grid item xs={1}>
-                <img src={resume} className={classes.icon} />
+                <ContactPageIcon className={classes.icon} />
               </Grid>
               <Grid item xs={11}>
                 <Typography className={classes.formlabel}>Resume</Typography>
@@ -280,7 +283,7 @@ const Details = () => {
             </Grid>
             <Grid item xs={12} className={classes.gridRow}>
               <Grid item xs={1}>
-                <img src={git} className={classes.icon} />
+                <GitHubIcon className={classes.icon} />
               </Grid>
               <Grid item xs={11}>
                 <Typography className={classes.formlabel}>

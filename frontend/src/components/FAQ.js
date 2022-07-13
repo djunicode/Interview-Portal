@@ -40,8 +40,8 @@ const data = {
 };
 
 const styles = {
-  titleTextColor: "rgba(81, 84, 206, 1)",
-  rowTitleColor: "#8985f2",
+  titleTextColor: "#09c1d7",
+  rowTitleColor: "#09c1d7",
 };
 
 export default function FAQ() {

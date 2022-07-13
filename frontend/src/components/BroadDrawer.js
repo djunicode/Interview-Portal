@@ -22,7 +22,7 @@ function BroadDrawer() {
       <List>
         <ListItem button onClick={() => navigate("/dashboard")}>
           <ListItemIcon>
-            <HomeIcon sx={{ color: "#8985f2" }} />
+            <HomeIcon sx={{ color: "#09c1d7" }} />
           </ListItemIcon>
           <ListItemText primary="Dashboard" />
         </ListItem>
@@ -30,7 +30,7 @@ function BroadDrawer() {
       <List>
         <ListItem button onClick={() => navigate("/profile")}>
           <ListItemIcon>
-            <PersonIcon sx={{ color: "#8985f2" }} />
+            <PersonIcon sx={{ color: "#09c1d7" }} />
           </ListItemIcon>
           <ListItemText
             sx={{ color: "#000", textDecoration: "none!important" }}
@@ -41,7 +41,7 @@ function BroadDrawer() {
       <List>
         <ListItem button onClick={() => navigate("/faq")}>
           <ListItemIcon>
-            <QuizIcon sx={{ color: "#8985f2" }} />
+            <QuizIcon sx={{ color: "#09c1d7" }} />
           </ListItemIcon>
           <ListItemText primary="FAQs" />
         </ListItem>
@@ -49,7 +49,7 @@ function BroadDrawer() {
       <List>
         <ListItem button onClick={() => navigate("/ApplicationForm")}>
           <ListItemIcon>
-            <AssignmentIcon sx={{ color: "#8985f2" }} />
+            <AssignmentIcon sx={{ color: "#09c1d7" }} />
           </ListItemIcon>
           <ListItemText primary="Application Form" />
         </ListItem>
@@ -57,7 +57,7 @@ function BroadDrawer() {
       <List>
         <ListItem button onClick={() => navigate("/resources")}>
           <ListItemIcon>
-            <TaskIcon sx={{ color: "#8985f2" }} />
+            <TaskIcon sx={{ color: "#09c1d7" }} />
           </ListItemIcon>
           <ListItemText primary="Resources" />
         </ListItem>
@@ -71,7 +71,7 @@ function BroadDrawer() {
           }}
         >
           <ListItemIcon>
-            <LogoutIcon sx={{ color: "#8985f2" }} />
+            <LogoutIcon sx={{ color: "#09c1d7" }} />
           </ListItemIcon>
           <ListItemText primary="Logout" />
         </ListItem>

@@ -99,7 +99,7 @@ function ResponsiveDrawer(props) {
                 cursor: "pointer",
               }}
             >
-              <ChevronRightIcon sx={{ color: "#8985f2" }} />
+              <ChevronRightIcon sx={{ color: "#09c1d7" }} />
             </Grid>
             {narrowDrawer}
           </Drawer>
@@ -111,7 +111,7 @@ function ResponsiveDrawer(props) {
               display: { xs: 1, sm: "block" },
               "& .MuiDrawer-paper": {
                 boxSizing: "border-box",
-                width: { xs: "240px", sm: {drawerWidth} },
+                width: { xs: "240px", sm: { drawerWidth } },
               },
             }}
             open
@@ -126,7 +126,7 @@ function ResponsiveDrawer(props) {
                 cursor: "pointer",
               }}
             >
-              <ChevronLeftIcon sx={{ color: "#8985f2", padding:"5%", }} />
+              <ChevronLeftIcon sx={{ color: "#09c1d7", padding: "5%" }} />
               {/* <p ></p> */}
             </Grid>
             {drawer}

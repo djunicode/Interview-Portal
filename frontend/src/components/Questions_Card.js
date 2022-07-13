@@ -13,11 +13,11 @@ import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import TextField from "@mui/material/TextField";
 import { useParams } from "react-router-dom";
-
+import Question_Cards from "./Question_Cards";
 
 export default function Questions_Card() {
   const { id } = useParams();
-  console.log(id);
+  // console.log(id);
   const [userData, setUserData] = useState([]);
   const Fetchdata = () => {
     var config = {
@@ -30,7 +30,7 @@ export default function Questions_Card() {
 
     axios(config)
       .then(function (response) {
-        console.log(response.data);
+        // console.log(response.data);
         setUserData(response.data);
       })
       .catch(function (error) {
@@ -48,86 +48,141 @@ export default function Questions_Card() {
     {
       id: "",
       stack: "",
-      name:"",
-      option1:"",
-      option2:"",
-      option3:"",
-      option4:"",
-      option5:"",
+      name: "",
+      option1: "",
+      option2: "",
+      option3: "",
+      option4: "",
+      option5: "",
     },
   ]);
-  console.log(userData);
+  //console.log(userData);
+  var myHeaders = new Headers();
+  myHeaders.append("Authorization", `token ${localStorage.getItem("token")}`);
 
-  {userData.application && userData.application.stack.map((item) => {
-    var myHeaders = new Headers();
-	myHeaders.append(
-		"Authorization",
-		`token ${localStorage.getItem("token")}`
-	);
+  var requestOptions = {
+    method: "GET",
+    headers: myHeaders,
+    redirect: "follow",
+  };
 
-	var requestOptions = {
-		method: "GET",
-		headers: myHeaders,
-		redirect: "follow",
-	};
+  //   const FetchFormDetails = () => {
+  //     console.log();
+  //     fetch(
+  //       userData.application &&
+  //         userData.application.stack.map((item) => {
+  //           `http://unicodeinterview.pythonanywhere.com/accounts/question/${item.name}`,
 
+  //           return;
+  //         })
+  //         requestOptions;
+  //     )
+  //       .then((response) => response.json())
+  //       .then((result) => {
+  //         console.log(result);
+  //         setData(result);
+  //       })
+  //       .catch((error) => console.log("error", error));
+  //   };
 
-	fetch(
-		`http://unicodeinterview.pythonanywhere.com/accounts/question/${item.name}`,
-		requestOptions
-	)
-		.then((response) => response.json())
-    .then((result) => {
-      console.log(result);
-      setData(result);
-    })
-		.catch((error) => console.log("error", error));   
+  //   console.log(data);
+  //   if (userData.application) {
+  //     for (let i in userData.application.stack) {
+  //       //   useEffect(() => {
+  //       //     FetchFormDetails(userData.application.stack[i].name);
+  //       //   }, []);
+  //       //   console.log(userData.application.stack[i].name);
+  //     }
+  //   }
 
+  userData.application &&
+    userData.application.stack.map((item) => {
+      console.log(item.name);
+      return (
+        <>
+          <Typography>{item.name}</Typography>
+          <Question_Cards name={item.name} />
+        </>
+      );
+    });
 
-	return (
-		<Box >
-			<Card variant="outlined">
-      <React.Fragment>
-		<CardContent>
-			<Typography sx={{ fontSize: 24 }} color="text.primary" gutterBottom>
-				Frontend
-			</Typography>
-		</CardContent>
-		<FormControl>
-			
-      {data.map((item, index) => (
-        <div key={index}>
-        <FormLabel id="demo-row-radio-buttons-group-label">
-        {item.name}
-        </FormLabel>
-        	<RadioGroup
-          row
-          aria-labelledby="demo-row-radio-buttons-group-label"
-          name="row-radio-buttons-group"
-        >
-          <FormControlLabel value="1" control={<Radio />} label={item.option1} />
-          <FormControlLabel value="2" control={<Radio />} label={item.option2} />
-          <FormControlLabel value="3" control={<Radio />} label={item.option3} />
-          <FormControlLabel value="4" control={<Radio />} label={item.option4} />
-          <FormControlLabel value="5" control={<Radio />} label={item.option5} />
-        </RadioGroup>
-       
-        </div>
-      ))}
-     
-		 <TextField
-          id="outlined-basic"
-          label="Additional Point"
-          variant="outlined"
-          style={{ margin: "5px" }}
-        />
-		</FormControl>
-		<CardActions>
-			<Button size="small">Submit</Button>
-		</CardActions>
-	</React.Fragment>
-      </Card>
-		</Box>
-	);
-      })}
+  //   {
+  //     userData.application &&
+  //       userData.application.stack.map((item) => {
+  //         // useEffect( async() => {
+  //         // FetchFormDetails({ name });
+  //         // }, []);
+
+  //         return (
+  //             <Box>
+  //               {/* {console.log(item.name)} */}
+  //               <Question_Card2 />
+
+  //     <Card variant="outlined">
+  //       <React.Fragment>
+  //         <CardContent>
+  //           <Typography
+  //             sx={{ fontSize: 24 }}
+  //             color="text.primary"
+  //             gutterBottom
+  //           >
+  //             Frontend
+  //           </Typography>
+  //         </CardContent>
+  //         <FormControl>
+  //           {data.map((item, index) => (
+  //             <div key={index}>
+  //               <FormLabel id="demo-row-radio-buttons-group-label">
+  //                 {item.name}
+  //               </FormLabel>
+  //               <RadioGroup
+  //                 row
+  //                 aria-labelledby="demo-row-radio-buttons-group-label"
+  //                 name="row-radio-buttons-group"
+  //               >
+  //                 <FormControlLabel
+  //                   value="1"
+  //                   control={<Radio />}
+  //                   label={item.option1}
+  //                 />
+  //                 <FormControlLabel
+  //                   value="2"
+  //                   control={<Radio />}
+  //                   label={item.option2}
+  //                 />
+  //                 <FormControlLabel
+  //                   value="3"
+  //                   control={<Radio />}
+  //                   label={item.option3}
+  //                 />
+  //                 <FormControlLabel
+  //                   value="4"
+  //                   control={<Radio />}
+  //                   label={item.option4}
+  //                 />
+  //                 <FormControlLabel
+  //                   value="5"
+  //                   control={<Radio />}
+  //                   label={item.option5}
+  //                 />
+  //               </RadioGroup>
+  //             </div>
+  //           ))}
+
+  //           <TextField
+  //             id="outlined-basic"
+  //             label="Additional Point"
+  //             variant="outlined"
+  //             style={{ margin: "5px" }}
+  //           />
+  //         </FormControl>
+  //         <CardActions>
+  //           <Button size="small">Submit</Button>
+  //         </CardActions>
+  //       </React.Fragment>
+  //     </Card>
+  //   </Box>
+  //         );
+  //       });
+  //   }
 }

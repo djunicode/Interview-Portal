@@ -21,7 +21,7 @@ const Time = () => {
                         <div className="timeline-content">
                           <div
                             className="circle"
-                            style={{ backgroundColor: "#8985f2" }}
+                            style={{ backgroundColor: "#09c1d7" }}
                           >
                             <h1
                               style={{
@@ -43,7 +43,7 @@ const Time = () => {
                         <div className="timeline-content">
                           <div
                             className="circle"
-                            style={{ backgroundColor: "#8985f2" }}
+                            style={{ backgroundColor: "#09c1d7" }}
                           >
                             <h1
                               style={{
@@ -65,7 +65,7 @@ const Time = () => {
                         <div className="timeline-content">
                           <div
                             className="circle"
-                            style={{ backgroundColor: "#8985f2" }}
+                            style={{ backgroundColor: "#09c1d7" }}
                           >
                             <h1
                               style={{
@@ -86,7 +86,7 @@ const Time = () => {
                         <div className="timeline-content">
                           <div
                             className="circle"
-                            style={{ backgroundColor: "#8985f2" }}
+                            style={{ backgroundColor: "#09c1d7" }}
                           >
                             <h1
                               style={{
@@ -107,7 +107,7 @@ const Time = () => {
                         <div className="timeline-content">
                           <div
                             className="circle"
-                            style={{ backgroundColor: "#8985f2" }}
+                            style={{ backgroundColor: "#09c1d7" }}
                           >
                             <h1
                               style={{
