@@ -1,12 +1,12 @@
 import { createTheme } from "@mui/material";
 export const theme = createTheme({
   palette: {
-    primary: { main: "rgba(81, 84, 206, 1)" },
+    primary: { main: "#09C1D7" },
     error: { main: "#d32f2f" },
   },
   background: "#F2F3F7",
-  text: { primary: "#7E7E7E" },
-  gradient: "linear-gradient(138.72deg, #5154CE -0.66%, #7B5BBC 86.47%)",
+  text: { primary: "#09C1D7" },
+  gradient: "linear-gradient(138.72deg, #09C1D7 -0.66%, #77CE90 86.47%)",
   heading2: "#333333",
   heading1: "#000000",
 
@@ -46,6 +46,13 @@ export const theme = createTheme({
     //     },
     //   },
     // },
+    MuiButton: {
+      styleOverrides: {
+        containedPrimary: {
+          color: "white",
+        },
+      },
+    },
     MuiTypography: {
       styleOverrides: {
         root: {

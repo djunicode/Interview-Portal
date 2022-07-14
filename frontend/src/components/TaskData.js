@@ -80,7 +80,7 @@ const TaskData = (props) => {
                   width: { xs: 31, md: 80 },
                   height: { xs: 31, md: 80 },
                   borderRadius: 50,
-                  backgroundColor: "#8985f2",
+                  backgroundColor: "#09c1d7",
                   textAlign: "center",
                   verticalAlign: "center",
                   mt: 2,
@@ -145,4 +145,4 @@ const TaskData = (props) => {
   );
 };
 
-export default TaskData
+export default TaskData;

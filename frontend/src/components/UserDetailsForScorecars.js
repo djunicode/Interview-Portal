@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
 const UserDetailsForScorecars = () => {
   const classes = useStyles();
   const { id } = useParams();
-  console.log(id);
+  // console.log(id);
   const [data, setData] = useState([]);
   const Fetchdata = () => {
     var config = {
@@ -39,7 +39,7 @@ const UserDetailsForScorecars = () => {
 
     axios(config)
       .then(function (response) {
-        console.log(response.data);
+        //console.log(response.data);
         setData(response.data);
       })
       .catch(function (error) {
