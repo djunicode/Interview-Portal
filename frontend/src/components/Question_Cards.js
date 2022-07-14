@@ -15,7 +15,44 @@ import TextField from "@mui/material/TextField";
 import { useFormik } from "formik";
 import { useParams } from "react-router-dom";
 import * as Yup from "yup";
+import { Grid } from "@mui/material";
+import { ClassNames } from "@emotion/react";
+import { makeStyles } from "@mui/styles";
+const useStyles = makeStyles((theme) => ({
+  submitbttn: {
+    display: "flex",
+    justifyContent: "center",
+  },
+  questioncard: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "80%",
+
+    margin: "5%",
+  },
+  gridcontainer: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    padding: "3%",
+    width: "75%",
+  },
+  outerdiv: {
+    display: "flex",
+    justifyContent: "center",
+    backgroundColor: theme.background,
+  },
+  field: {
+    width: "60%",
+  },
+  gridRow: {
+    justifyContent: "center",
+    display: "flex",
+  },
+}));
 const Question_Cards = ({ name }) => {
+  const classes = useStyles();
   const { id } = useParams();
   const [questionNo, setQuestionNo] = useState("");
   const formik = useFormik({
@@ -106,97 +143,114 @@ const Question_Cards = ({ name }) => {
   }, [questionNo]);
   return (
     <>
-      {data &&
-        data.map((item) => {
-          return (
-            <>
-              <Box>
-                <Card variant="outlined">
-                  <React.Fragment>
-                    <CardContent>
-                      <Typography
-                        sx={{ fontSize: 24 }}
-                        color="text.primary"
-                        gutterBottom
-                      >
-                        {item.stack}
-                      </Typography>
-                    </CardContent>
+      <Box className={classes.outerdiv}>
+        <Card variant="outlined" className={classes.questioncard}>
+          <Grid container className={classes.gridcontainer}>
+            <Grid item xs={12} className={classes.titleGridRow}>
+              <CardContent>
+                <Typography sx={{ fontSize: 24 }} color="text.primary">
+                  {name}
+                </Typography>
+              </CardContent>
+            </Grid>
+            {data &&
+              data.map((item, index) => {
+                return (
+                  <>
                     <FormControl>
-                      <FormLabel id="demo-row-radio-buttons-group-label">
-                        {item.name}
-                      </FormLabel>
-                      <RadioGroup
-                        row
-                        aria-labelledby="demo-row-radio-buttons-group-label"
-                        name="row-radio-buttons-group"
-                      >
-                        <FormControlLabel
-                          value="1"
-                          onBlur={formik.handleBlur}
-                          onChange={formik.handleChange}
-                          name="rating"
-                          control={<Radio />}
-                          label={item.option1}
-                        />
-                        <FormControlLabel
-                          value="2"
-                          onBlur={formik.handleBlur}
-                          onChange={formik.handleChange}
-                          name="rating"
-                          control={<Radio />}
-                          label={item.option2}
-                        />
-                        <FormControlLabel
-                          value="3"
-                          onBlur={formik.handleBlur}
-                          onChange={formik.handleChange}
-                          name="rating"
-                          control={<Radio />}
-                          label={item.option3}
-                        />
-                        <FormControlLabel
-                          value="4"
-                          onBlur={formik.handleBlur}
-                          onChange={formik.handleChange}
-                          name="rating"
-                          control={<Radio />}
-                          label={item.option4}
-                        />
-                        <FormControlLabel
-                          value="5"
-                          onBlur={formik.handleBlur}
-                          onChange={formik.handleChange}
-                          name="rating"
-                          control={<Radio />}
-                          label={item.option5}
-                        />
-                      </RadioGroup>
-                      <TextField
-                        id="outlined-basic"
-                        label="Additional Point"
-                        variant="outlined"
-                        style={{ margin: "5px" }}
-                      />
+                      <Grid item xs={12} className={classes.gridRow}>
+                        <RadioGroup
+                          row
+                          aria-labelledby="demo-row-radio-buttons-group-label"
+                          name="row-radio-buttons-group"
+                        >
+                          <FormControlLabel
+                            value="1"
+                            onBlur={formik.handleBlur}
+                            onChange={formik.handleChange}
+                            name="rating"
+                            control={<Radio />}
+                            label={item.option1}
+                          />
+                          <FormControlLabel
+                            value="2"
+                            onBlur={formik.handleBlur}
+                            onChange={formik.handleChange}
+                            name="rating"
+                            control={<Radio />}
+                            label={item.option2}
+                          />
+                          <FormControlLabel
+                            value="3"
+                            onBlur={formik.handleBlur}
+                            onChange={formik.handleChange}
+                            name="rating"
+                            control={<Radio />}
+                            label={item.option3}
+                          />
+                          <FormControlLabel
+                            value="4"
+                            onBlur={formik.handleBlur}
+                            onChange={formik.handleChange}
+                            name="rating"
+                            control={<Radio />}
+                            label={item.option4}
+                          />
+                          <FormControlLabel
+                            value="5"
+                            onBlur={formik.handleBlur}
+                            onChange={formik.handleChange}
+                            name="rating"
+                            control={<Radio />}
+                            label={item.option5}
+                          />
+                        </RadioGroup>
+                      </Grid>
                     </FormControl>
-                    <CardActions>
-                      <Button
-                        size="small"
-                        type="submit"
-                        onClick={() => {
-                          updateQID(item.id);
-                          formik.handleSubmit();
-                        }}
-                      >
-                        Submit
-                      </Button>
-                    </CardActions>
-                  </React.Fragment>
-                </Card>
-              </Box>
-            </>
-          );
-        })}
+                    <Grid item xs={12} className={classes.gridRow}>
+                      <CardActions>
+                        <Button
+                          size="small"
+                          className={classes.submitbttn}
+                          type="submit"
+                          onClick={() => {
+                            updateQID(item.id);
+                            formik.handleSubmit();
+                          }}
+                        >
+                          Submit
+                        </Button>
+                      </CardActions>
+                    </Grid>
+                  </>
+                );
+              })}
+            <Grid item xs={12} className={classes.textfileddiv}>
+              <TextField
+                label="Additional Point"
+                variant="outlined"
+                multiline={true}
+                rows={4}
+                className={classes.field}
+              />
+            </Grid>
+            <Grid item xs={12} className={classes.gridRow}>
+              <CardActions>
+                <Button
+                  size="small"
+                  className={classes.submitbttn}
+                  type="submit"
+                  onClick={() => {
+                    formik.handleSubmit();
+                  }}
+                >
+                  Submit
+                </Button>
+              </CardActions>
+            </Grid>
+          </Grid>
+        </Card>
+      </Box>
     </>
   );
 };
