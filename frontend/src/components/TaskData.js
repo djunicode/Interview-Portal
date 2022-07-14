@@ -48,7 +48,6 @@ const TaskData = (props) => {
     console.log(localStorage.getItem("token"));
     axios(config)
       .then(function (response) {
-        console.log(response.data[0].stack);
         setData(response.data);
       })
       .catch(function (error) {
@@ -57,7 +56,6 @@ const TaskData = (props) => {
   }, []);
   console.log(props.stack);
   console.log(data);
-  // console.log(data[0].stack);
   return (
     <div>
       <Grid>
