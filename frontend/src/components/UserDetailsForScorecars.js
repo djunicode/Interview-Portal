@@ -1,11 +1,11 @@
 import React from "react";
 import axios from "axios";
-import { Button, Grid, Typography } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import { Card } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   gridRow: {
     display: "flex",
     padding: "2%",
@@ -18,10 +18,7 @@ const useStyles = makeStyles((theme) => ({
   edit: {
     display: "flex",
     justifyContent: "center",
-  },
-  //   userCard: {
-  //     width: "80%",
-  //   },
+  }
 }));
 const UserDetailsForScorecars = () => {
   const classes = useStyles();
@@ -49,8 +46,9 @@ const UserDetailsForScorecars = () => {
 
   useEffect(() => {
     Fetchdata();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  // console.log(data.user.name);
+
   return (
     <>
       <Card className={classes.userCard}>

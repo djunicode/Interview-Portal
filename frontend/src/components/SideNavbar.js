@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
-import { useTheme } from "@mui/material/styles";
-import { useNavigate } from "react-router";
 import NarrowDrawer from "./NarrowDrawer";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
@@ -14,28 +12,10 @@ const drawerWidth = 240;
 const narrowDrawerWidth = 60;
 
 function ResponsiveDrawer(props) {
-  let navigate = useNavigate();
-
   const { windows } = props;
   const [mobileOpen, setMobileOpen] = useState(false);
   const { children } = props;
-  const [value, setValue] = useState(0);
   const [openDrawer, setOpenDrawer] = useState(true);
-
-  const theme = useTheme();
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
-
-  const transitionDuration = {
-    enter: theme.transitions.duration.enteringScreen,
-    exit: theme.transitions.duration.leavingScreen,
-  };
-
-  const [anchorEl, setAnchorEl] = React.useState(null);
-
-  const open = Boolean(anchorEl);
-  const id = open ? "simple-popover" : undefined;
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -127,7 +107,6 @@ function ResponsiveDrawer(props) {
               }}
             >
               <ChevronLeftIcon sx={{ color: "#09c1d7", padding: "5%" }} />
-              {/* <p ></p> */}
             </Grid>
             {drawer}
           </Drawer>

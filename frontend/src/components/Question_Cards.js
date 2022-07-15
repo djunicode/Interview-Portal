@@ -94,11 +94,11 @@ const Question_Cards = ({ name }) => {
   };
   useEffect(() => {
     FetchFormDetails(name);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const updateQID = (qid) => {
     setQuestionNo(qid);
-    console.log(questionNo);
   };
 
   useEffect(() => {

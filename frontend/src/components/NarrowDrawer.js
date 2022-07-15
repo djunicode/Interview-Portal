@@ -11,7 +11,6 @@ import AssignmentIcon from "@mui/icons-material/Assignment";
 import TaskIcon from "@mui/icons-material/Task";
 import HomeIcon from "@mui/icons-material/Home";
 import LogoutIcon from "@mui/icons-material/Logout";
-import { Home } from "@mui/icons-material";
 
 function NarrowDrawer() {
   const navigate = useNavigate();

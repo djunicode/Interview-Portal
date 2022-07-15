@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { Card, Divider, Grid } from "@mui/material";
+import { Card, Grid } from "@mui/material";
 import axios from "axios";
-import { useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 
 const TaskData = (props) => {
-  const theme = useTheme();
+
   const style = {
     position: "absolute",
     width: "80%",
@@ -98,7 +97,7 @@ const TaskData = (props) => {
                     mt: { xs: 1, md: 2 },
                   }}
                 >
-                  {item.stack == props.stack ? item.id : "01"}
+                  {item.stack === props.stack ? item.id : "01"}
                 </Typography>
               </Box>
               <Box
@@ -110,7 +109,7 @@ const TaskData = (props) => {
               >
                 <CardContent sx={{ flex: "1 0 auto" }}>
                   <Typography variant="h5" sx={{ textAlign: "left" }}>
-                    {item.stack == props.stack
+                    {item.stack === props.stack
                       ? item.task_question
                       : "Question"}
                   </Typography>
@@ -123,7 +122,7 @@ const TaskData = (props) => {
                       display: { xs: "none", sm: "block" },
                     }}
                   >
-                    {item.stack == props.stack ? item.task_description : "Desc"}
+                    {item.stack === props.stack ? item.task_description : "Desc"}
                   </Typography>
                 </CardContent>
               </Box>
@@ -137,7 +136,7 @@ const TaskData = (props) => {
           aria-describedby="modal-modal-description"
         >
           <Box sx={style}>
-            <iframe src={resource} width="100%" height="100%" />
+            <iframe src={resource} title="resource" width="100%" height="100%" />
           </Box>
         </Modal>
       </Grid>

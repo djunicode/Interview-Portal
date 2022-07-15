@@ -2,10 +2,9 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 
-import Question_Cards from "../components/Question_Cards";
+import QuestionCards from "../components/Question_Cards";
 import UserDetailsForScorecars from "../components/UserDetailsForScorecars";
 const ScorePage = () => {
-  // console.log(userData);
 
   const { id } = useParams();
   const [userData, setUserData] = useState([]);
@@ -20,7 +19,6 @@ const ScorePage = () => {
 
     axios(config)
       .then(function (response) {
-        // console.log(response.data);
         setUserData(response.data);
       })
       .catch(function (error) {
@@ -30,8 +28,9 @@ const ScorePage = () => {
 
   useEffect(() => {
     Fetchdata();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  // console.log(id);
+
   return (
     <div>
       <UserDetailsForScorecars />
@@ -41,7 +40,7 @@ const ScorePage = () => {
           console.log(item.name);
           return (
             <>
-              <Question_Cards name={item.name} />
+              <QuestionCards name={item.name} />
             </>
           );
         })}

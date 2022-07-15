@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import React from "react";
 import * as Yup from "yup";
 import { makeStyles } from "@mui/styles";
-import { Checkbox, Grid, Input, Typography } from "@mui/material";
+import { Checkbox, Grid, Typography } from "@mui/material";
 import "../styles/signupPage.css";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
@@ -14,8 +14,6 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 import ContactPageIcon from "@mui/icons-material/ContactPage";
 import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
-import resume from "../assets/resume.svg";
-import git from "../assets/git.svg";
 import TextField from "@material-ui/core/TextField";
 import { Box } from "@mui/system";
 import axios from "axios";
@@ -36,7 +34,6 @@ const useStyles = makeStyles((theme) => ({
   },
   card1: {
     display: "flex",
-    // height: "75%",
     width: "110vh",
     [theme.breakpoints.down("sm")]: {
       marginLeft: "20%",
@@ -46,7 +43,6 @@ const useStyles = makeStyles((theme) => ({
       marginTop: "5%",
       marginBottom: "5%",
     },
-    display: "flex",
     justifyContent: "center",
 
     padding: "3%",
