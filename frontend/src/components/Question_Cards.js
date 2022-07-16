@@ -1,27 +1,25 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
-import { CardContent } from "@mui/material";
+import { CardContent, IconButton } from "@mui/material";
 import Button from "@mui/material/Button";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import Typography from "@mui/material/Typography";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
-import FormLabel from "@mui/material/FormLabel";
 import TextField from "@mui/material/TextField";
 import { useFormik } from "formik";
 import { useParams } from "react-router-dom";
 import * as Yup from "yup";
 import { Grid } from "@mui/material";
-import { ClassNames } from "@emotion/react";
 import { makeStyles } from "@mui/styles";
 const useStyles = makeStyles((theme) => ({
   submitbttn: {
-    display: "flex",
-    justifyContent: "center",
+    backgroundColor: "#09C1D7"
   },
   questioncard: {
     display: "flex",
@@ -116,13 +114,12 @@ const Question_Cards = ({ name }) => {
       url: `http://unicodeinterview.pythonanywhere.com/accounts/question/${name}`,
 
       headers: {
-        Authorization: "Token 326df56cc1dead3780f266523cccc60071096f48",
+        Authorization: `Token ${localStorage.getItem("token")}`,
       },
     };
 
     axios(config)
       .then(function (response) {
-        console.log(JSON.stringify(response.data));
         setData(response.data);
       })
       .catch(function (error) {
@@ -155,9 +152,11 @@ const Question_Cards = ({ name }) => {
             </Grid>
             {data &&
               data.map((item, index) => {
+                console.log(item);
                 return (
-                  <>
+                  <Fragment key={index}>
                     <FormControl>
+                      <Typography>{item.name}</Typography>
                       <Grid item xs={12} className={classes.gridRow}>
                         <RadioGroup
                           row
@@ -205,11 +204,24 @@ const Question_Cards = ({ name }) => {
                             label={item.option5}
                           />
                         </RadioGroup>
+                        <IconButton
+                          size="small"
+                          type="submit"
+                          sx={{
+                            color: "#09C1D7",
+                          }}
+                          onClick={() => {
+                            updateQID(item.id);
+                            formik.handleSubmit();
+                          }}
+                        >
+                          <CheckCircleIcon />
+                        </IconButton>
                       </Grid>
                     </FormControl>
                     <Grid item xs={12} className={classes.gridRow}>
                       <CardActions>
-                        <Button
+                        {/* <Button
                           size="small"
                           className={classes.submitbttn}
                           type="submit"
@@ -219,10 +231,11 @@ const Question_Cards = ({ name }) => {
                           }}
                         >
                           Submit
-                        </Button>
+                        </Button> */}
+                        
                       </CardActions>
                     </Grid>
-                  </>
+                  </Fragment>
                 );
               })}
             <Grid item xs={12} className={classes.textfileddiv}>
@@ -237,8 +250,8 @@ const Question_Cards = ({ name }) => {
             <Grid item xs={12} className={classes.gridRow}>
               <CardActions>
                 <Button
-                  size="small"
-                  className={classes.submitbttn}
+                  size="large"
+                  // className={classes.submitbttn}
                   type="submit"
                   onClick={() => {
                     formik.handleSubmit();

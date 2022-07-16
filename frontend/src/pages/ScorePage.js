@@ -5,7 +5,6 @@ import { useParams } from "react-router-dom";
 import QuestionCards from "../components/Question_Cards";
 import UserDetailsForScorecars from "../components/UserDetailsForScorecars";
 const ScorePage = () => {
-
   const { id } = useParams();
   const [userData, setUserData] = useState([]);
   const Fetchdata = () => {
@@ -36,13 +35,8 @@ const ScorePage = () => {
       <UserDetailsForScorecars />
 
       {userData.application &&
-        userData.application.stack.map((item) => {
-          console.log(item.name);
-          return (
-            <>
-              <QuestionCards name={item.name} />
-            </>
-          );
+        userData.application.stack.map((item, index) => {
+          return <QuestionCards key={index} name={item.name} />;
         })}
     </div>
   );
