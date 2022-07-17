@@ -25,7 +25,7 @@ const ProfileDetails = () => {
       method: "get",
       url: "https://unicodeinterview.pythonanywhere.com/accounts/interviewee_update/",
       headers: {
-        Authorization: `token ${localStorage.getItem("token")}`,
+        Authorization: `Token ${localStorage.getItem("token")}`,
       },
       data: data,
     };

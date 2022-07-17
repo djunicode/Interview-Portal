@@ -5,6 +5,7 @@ import Interviewers from "./Interviewers";
 import PanelDetails from "./PanelDetails";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
+import {Button} from "@mui/material";
 
 export default function CollapsibleTable() {
 
@@ -88,6 +89,21 @@ export default function CollapsibleTable() {
               <Tab label={item} key={index} />
             ))}
           </Tabs>
+          <Button
+            size="large"
+            variant="contained"
+            sx={{
+              textTransform: "none",
+              padding: "5px",
+              float: "right",
+              margin: "10px",
+            }}
+            onClick={() => {
+              
+            }}
+          >
+            Schedule Interview
+          </Button>
           {user
             .filter((item) => item.name === stackName[value])
             .map((item, i) => (

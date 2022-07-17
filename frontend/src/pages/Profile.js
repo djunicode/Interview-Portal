@@ -59,7 +59,10 @@ export default function Profile() {
       requestOptions2
     )
       .then((response) => response.json())
-      .then((result) => console.log(result))
+      .then((result) => {
+        console.log(result)
+        window.location.reload()
+      })
       .catch((error) => console.log("error", error));
   }
 
