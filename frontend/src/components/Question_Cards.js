@@ -111,7 +111,7 @@ const Question_Cards = ({ name }) => {
 
     var config = {
       method: "get",
-      url: `http://unicodeinterview.pythonanywhere.com/accounts/question/${name}`,
+      url: `https://unicodeinterview.pythonanywhere.com/accounts/question/${name}`,
 
       headers: {
         Authorization: `Token ${localStorage.getItem("token")}`,
